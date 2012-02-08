@@ -1,0 +1,71 @@
+---
+layout : post
+category : articles 
+title : Automated Control of an Android Device with Python
+description : Using Android's Simple Protocol for Automated Network Control to send touch events to a physical device using Python and a TCP socket.
+tags : [python, android, automation, adb]
+---
+{% include JB/setup %}
+
+## Intro
+As mentioned in my previous article, [Device Screenshots with the Android Debug Bridge](/articles/2010/07/21/device-screenshots-with-the-android-debug-bridge), I'm currently working on an application which required the ability to get a live screenshot of my physical Android device. The second component to that problem, however, involved processing that image, and then automating a UI/Application response exactly like an actual user is (read: automatically touch the screen).
+
+Again, like the ability to grab the device's current display, I figured this would be simple to do through the Android Debug Bridge. However, as it turned out, this was much simpler than I expected, and unlike the screenshot tool, I could avoid using Java for this.
+
+### References
+The first hint that I could send various UI events to the device came from the documentation for the [Android UI/Application Exerciser Monkey](http://developer.android.com/guide/developing/tools/monkey.html), although being able to send completely random events proved pretty useless. However, it led me to the [Git Repository](http://android.git.kernel.org/?p=platform/development.git;a=tree;f=cmds/monkey) for the tool, which in turn had a [README file](http://android.git.kernel.org/?p=platform/development.git;a=blob;f=cmds/monkey/README.NETWORK.txt) which described the Simple Protocol for Automated Network Control.
+
+## Using the Network Control Protocol
+From the README:
+
+    The Simple Protocol for Automated Network Control was designed to be a
+    low-level way to programmability inject KeyEvents and MotionEvents
+    into the input system.  The idea is that a process will run on a host
+    computer that will support higher-level operations (like conditionals,
+    etc.) and will talk (via TCP over ADB) to the device in Simple
+    Protocol for Automated Network Control.  For security reasons, the
+    Monkey only binds to localhost, so you will need to use adb to setup
+    port forwarding to actually talk to the device.
+
+What this means, in a nutshell, is that a developer can use any language to command an ADB device (on loopback) using a simple TCP message.
+
+The first step is to make the ADB forward TCP traffic on the localhost to the device, in this case, port `1080`:
+
+    $ ./adb forward tcp:1080 tcp:1080
+
+Simple! At this point, the README attempts to discuss all the possible commands. I was purely interested in a `touch` command (which is, in fact, two commands), so if you're looking for something else, look at the [README file](http://android.git.kernel.org/?p=platform/development.git;a=blob;f=cmds/monkey/README.NETWORK.txt).
+
+If touch is what you want, though, here's what you need to know:
+
+    Note that sending a full button press requires sending both the down
+    and the up event for that key
+
+This means we need a `touch down` command followed by a `touch up` command, separated by a newline, as follows (which touches point `(x=30,y=60)`:
+
+    "touch down 30 60\ntouch up 30 60"
+
+**Important:** In practice, though, this won't work every single time. It seems that the device may get confused by a series of strung-together commands in quick succession, especially a pair of `touch` events. In most practical applications, it would make sense send commands individually, and sleep in between -- after all, real users don't move that fast!
+
+## A Sample Python Script
+Using our new knowledge of Android's Simple Protocol for Automated Network Control, here's a very simple Python script to send a single pair of `touch` events, using the `socket` module:
+
+{% highlight python %}
+
+    #!/usr/bin/python
+    import socket
+    
+    TCP_IP = '127.0.0.1'
+    TCP_PORT = 1080
+    BUFFER_SIZE = 1024
+    
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect((TCP_IP, TCP_PORT))
+    s.send("touch down 30 60\ntouch up 30 60")
+    data = s.recv(BUFFER_SIZE)
+    s.close()
+    
+    print "Received: ", data
+
+{% endhighlight %}
+
+And that's it!

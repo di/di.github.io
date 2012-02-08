@@ -1,0 +1,126 @@
+---
+layout : post
+category : articles 
+title : Ubuntu LiveCD Kernel Patching 
+description : A step-by-step tutorial on building a custom kernel and, subsequently, a custom Ubuntu LiveCD.
+tags : [ubuntu, livecd, kernel patching]
+---
+{% include JB/setup %}
+
+## Introduction
+I recently (as recent as this post) acquired a Macbook Pro 7,1. Unfortunately, [this bug](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/576601) in Ubuntu, involving the latest (2.6.32-22) Linux kernel's inability to handle the new MCP89 chipset--specifically, the SATA drivers--has prevented me from immediately installing Linux.
+
+While the bug hasn't been fixed yet, I received [this notification](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/576601/comments/13) from a developer asking users who had the correct hardware to test out a patched kernel with some debugging added.
+
+Since this process involved a number of tasks I had no previous experience with, and because I couldn't find any comprehensive documentation for what I needed to do, I'll outline the process here for my own sanity, as well as for other's benefit.
+
+### The Process
+To generalize, the process for patching a LiveCD's kernel is essentially this:
+
+1. Write/acquire the patches (`*.patch` files) 
+2. Create a binary package(s) to install (`*.deb` files)
+3. Create the LiveCD (`*.iso` file)
+
+Since the developer already had created the `*.debs` for me, I didn't delve into #2, however if you need to, I'd recommend taking a look at [this How-To Forge tutorial](http://www.howtoforge.com/kernel_compilation_ubuntu).
+
+### References
+[This guide](http://www.debuntu.org/book/export/html/216) lends heavily on this how-to for building a custom LiveCD. I also used [this Ubuntu how-to](https://help.ubuntu.com/community/LiveCDCustomization) for a few other things.
+
+## Preparing the Host
+We need the squashfs tools to rebuild the LiveCD's filesystem:
+
+    $ sudo apt-get install squashfs-tools
+
+Assuming you've already downloaded the default LiveCD .iso and it's on your desktop:
+
+    $ mkdir /tmp/livecd
+    $ sudo mount -o loop ~/Desktop/ubuntu-10.04-desktop-amd64.iso /tmp/livecd
+
+Sync the .iso locally, but exclude the squasfs:
+
+    $ mkdir -p ~/livecd/{cd,squashfs,custom}
+    $ rsync --exclude=/casper/filesystem.squashfs -a /tmp/livecd/ ~/livecd/cd
+
+Copy over some networking preferences so we can use the network within the image:
+
+    $ mkdir ~/livecd/custom/etc
+    $ sudo cp /etc/resolv.conf /etc/hosts ~/livecd/custom/etc/
+
+Finally, mount and copy the squashfs:
+
+    $ sudo modprobe squashfs
+    $ sudo mount -t squashfs -o loop /tmp/livecd/casper/filesystem.squashfs ~/livecd/squashfs/
+    $ sudo cp -a ~/livecd/squashfs/* ~/livecd/custom
+
+Go get a cup of coffee, that'll take a bit.
+
+## Customizing the LiveCD
+Now we'll make some changes from within the custom image. To get in, we'll use `chroot`:
+
+    $ sudo chroot ~/livecd/custom
+
+The first time we access the image, we'll want to set up the following:
+
+    $ mount -t proc none /proc/
+    $ mount -t sysfs none /sys/
+    $ export HOME=/root
+
+To make sure we have room for the image to fit on a CD, it's a good idea to remove some unnecessary packages:
+
+    $ apt-get remove --purge gnome-games*
+    $ apt-get remove --purge `dpkg-query -W --showformat='${Package}\n' | grep language-pack | egrep -v '\-en'` 
+    $ apt-get clean
+
+## Patching the Kernel
+As I said before, in my case the developer had provided the .deb files, so all I needed to do was to download them within the image:
+
+    $ cd /tmp
+    $ wget http://some.example.com/.../files.deb
+
+Install them:
+
+    $ dpkg -i *.deb
+
+And clean up the .debs when dpkg is done:
+
+    $ rm -rf /tmp/*
+
+## Getting Back to the Host
+Getting back to the host is as simple as unmounting and exiting the shell:
+
+    $ umount /proc/
+    $ umount /sys/
+    $ exit
+
+## Building the Image
+The first thing I needed to do, since I had patched the kernel, was copy the affected files from the custom CD to the final image, overwriting the existing files
+
+    $ sudo cp ~/livecd/custom/boot/vmlinuz-2.6.32-22-generic ~/livecd/cd/casper/vmlinuz
+    $ sudo cp ~/livecd/custom/boot/initrd.img-2.6.32-22-generic ~/livecd/cd/casper/initrd.gz
+
+Then, recreate the system's manifest:
+
+    $ chmod +w ~/livecd/cd/casper/filesystem.manifest
+    $ sudo chroot ~/livecd/custom dpkg-query -W --showformat='${Package} ${Version}\n' > ~/livecd/cd/casper/filesystem.manifest
+    $ sudo cp ~/livecd/cd/casper/filesystem.manifest ~/livecd/cd/casper/filesystem.manifest-desktop
+
+Next, recreate the squashfs file:
+
+    $ sudo mksquashfs ~/livecd/custom ~/livecd/cd/casper/filesystem.squashfs
+
+And recreate the md5sums:
+
+    $ sudo rm ~/livecd/cd/md5sum.txt
+    $ sudo -s
+    $ (cd ~/livecd/cd && find . -type f -print0 | xargs -0 md5sum > md5sum.txt)
+    $ exit
+
+Finally, you can create the .iso file:
+
+    $ cd ~/livecd/cd
+    $ sudo mkisofs -r -V "Ubuntu-Custom-LiveCD" -b isolinux/isolinux.bin -c isolinux/boot.cat -cache-inodes -J -l -no-emul-boot -boot-load-size 4 -boot-info-table -o ~/Desktop/Ubuntu-Custom-LiveCD.iso .
+
+Burn that sucker to a CD and you're done!
+
+## Conclusion
+For me, the goal of this was to be able to get some additional information off of a laptop that wouldn't boot, so the next step was getting output from the `initramfs` early userspace.

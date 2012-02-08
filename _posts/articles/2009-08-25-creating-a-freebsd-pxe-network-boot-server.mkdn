@@ -1,0 +1,204 @@
+---
+layout : post
+category : articles 
+title : Creating a FreeBSD PXE Network Boot Server 
+description : A guide including custom images and install scripts.
+tags : [freebsd, pxe, network boot]
+---
+{% include JB/setup %}
+
+### Requirements
+1. DHCP/TFTP/NFS server. Ideally this is a FreeBSD box with the same architecture as the booting machines have. This box should ideally have two NIC's--one for access from the outside network, and one to act as the server to the boot network.
+2. A node to image
+
+## Process
+### Out-of-the-box edits
+When installing FreeBSD to the PXE server, you can generally accept the default settings. However, be sure to:
+
+1. Create a second user (root/a)
+2. Enable sshd
+
+All of which you will be prompted for in the install process
+
+### SSH in and Switch to the Root User
+All tasks from here on require superuser privileges, and can be done through ssh, so ssh in and switch to the root user.
+
+### Configuring DHCP
+Give the interface you want to hand out addresses an address of it's own. In this case, we'll use the secondary NIC, `fxp0` and give it an IP such as 10.0.0.1, which is within the subnet we'll configure DHCP to serve out, but not in the defined range:
+
+    $ ifconfig fxp0 10.0.0.1
+
+There are several ports to choose from--the best choice for FreeBSD 7.1 would likely be `isc-dhcp3o-server`. <b>Note:</b> When the Makefile configuration tool asks for your confirmation, be sure to <b>deselect</b> the `-JAIL` option. It is broken and will prevent the port from compiling. Install it:
+
+    $ cd /usr/ports/net/dhcp30-server && make install clean
+
+Once DHCP is installed, you will likely need to create a new dhcp configuration file at `/usr/local/etc/dhcpd.conf`:
+
+Required configurations are as follows:
+
+    allow booting;
+    allow bootp;
+    authoritative;
+    
+    option domain-name "pxe.research.acincenter.org";
+    option subnet-mask 255.255.255.0;
+    default-lease-time 600;
+    max-lease-time 7200;
+    ddns-update-style ad-hoc;
+    log-facility local7;
+    
+    subnet 10.0.0.0 netmask 255.255.255.0 {
+      range 10.0.0.2 10.0.0.254;
+      next-server 10.0.0.1;
+      filename "freebsd7/boot/pxeboot";
+      option root-path "/usr/local/freebsd7";
+    }
+
+> *A brief explanation:*
+>
+> The configuration above creates a subnet in the range 10.0.0.2 to 10.0.0.254 with default characteristics, such as default lease time, max lease time, etc.
+>
+> When a DHCP request is made from the Intel PXE boot ROM on the NIC, there are additional parameters you can tell it besides just an IP number. The argument `filename "freebsd7/boot/pxeboot";` tells the PXE boot ROM what filename to do a TFTP request for now that it has an IP address. It's the first piece of code which gets run after the initial DHCP IP negotiation is completed, and the corresponding file is what enables a node to boot.
+>
+> The argument `option root-path "/usr/local/freebsd7";` is for FreeBSD, after it has booted. It tells `pxeboot(8)` where the root filesystem should be mounted from, using NFS. Thus, the kernel will mount that filesystem in an attempt to get a working root filesystem, and then start `init(8)`.
+
+Finally, we must add the following lines to the `/etc/rc.conf` (Here, the "fxp0" interface is our secondary interface, the same one which we manually assigned an IP address to above:
+
+    dhcpd_enable="YES"
+    dhcpd_ifaces="fxp0"
+
+And start DHCPD:
+
+    $ /usr/local/etc/rc.d/isc-dhcpd start
+
+At this point, you should be able to plug any node into the internal LAN and receive an IP address in the subnet.
+
+### Configuring TFTP
+Install TFTP:
+
+    $ cd /usr/ports/net/freebsd-tftp/ && make install clean
+
+This will create a long file at `/etc/inetd.conf`. Append the following line to it:
+
+    tftp    dgram   udp     wait    root    /usr/libexec/tftpd      tftpd -l -s /usr/local
+
+Add the following to `/etc/rc.conf` (assuming it's not already there):
+
+    inetd_enable="YES"
+
+And start the inetd service (thus starting tftpd):
+
+    $ /etc/rc.d/inetd start
+
+### Configuring NFS
+Add the following to `/etc/rc.conf`:
+
+    rpcbind_enable="yes"
+    mountd_enable="yes"
+    nfs_server_enable="yes"
+
+Add the exports by adding the following lines to `/etc/exports`:
+
+    /usr/local/freebsd7 -network 10.0.0 -mask 255.255.255.0
+
+Where this corresponds to the subnet we created in `/usr/local/etc/dhcpd.conf`. The last octet of the `-network` IP address is intentionally left out.
+
+Finally, we can create the exported directory with correct permissions:
+
+    $ mkdir /usr/local/freebsd7
+    $ chmod 755 /usr/local/freebsd7
+
+And start all of the above services:
+
+    $ /etc/rc.d/rpcbind start
+    $ /etc/rc.d/mountd start
+    $ /etc/rc.d/nfsd start
+
+If necessary, you can verify that the added NFS mount is being exported:
+
+    $ showmount -e
+
+### Copying the FreeBSD CD contents to the exported NFS mount
+This is the quickest way to get booting. You'll need to download and untar the FreeBSD image into the correct folder, and you're done. 
+
+    $ cd /usr
+    $ fetch ftp://ftp.freebsd.org/pub/FreeBSD/releases/i386/ISO-IMAGES/7.2/7.2-RELEASE-i386-disc1.iso
+    $ tar -C /usr/local/freebsd7 -pxvf 7.2-RELEASE-i386-disc1.iso
+
+**NOTE:** This may or may not actually work. A better bet is to rebuild the pxeboot loader and recompile the kernel with TFTP support, as described in the next section.
+
+### Rebuilding the pxeboot loader
+First we build the pxeboot loader with support for TFTP, so that the kernel will be fetched with TFTP before the root filesystem is mounted with NFS. Build it from our existing bootloader:
+
+    $ cd /usr/src/sys/boot
+    $ make -DLOADER_TFTP_SUPPORT=YES
+
+Install it into the root directory we specified above, `/usr/local/freebsd7`:
+
+    $ mkdir /usr/local/freebsd7/boot
+    $ cp i386/pxeldr/pxeboot /usr/local/freebsd7/boot/
+    $ cp i386/boot0/boot0 /usr/local/freebsd7/boot/
+    $ cp i386/boot2/boot1 /usr/local/freebsd7/boot/
+    $ cp i386/boot2/boot2 /usr/local/freebsd7/boot/
+    $ cp i386/mbr/mbr /usr/local/freebsd7/boot/
+
+### Building the kernel
+Compile the kernel with support for TFTP:
+
+    $ cd /usr/src
+    $ make -DLOADER_TFTP_SUPPORT=YES buildkernel
+
+The compiler may complain about non-existing directories. If so, you can simply create them.
+
+We don't want to overwrite our system kernel, so instead we install directly into the mount directory `/usr/local/freebsd7`. However, we first need to install a few files by hand:
+
+    $ mkdir -p /usr/local/freebsd7/boot/defaults
+    $ cp /usr/src/sys/i386/conf/GENERIC.hints /usr/local/freebsd7/boot/device.hints
+    $ cp /usr/src/sys/boot/forth/loader.conf /usr/local/freebsd7/boot/defaults/
+    $ cp /usr/src/sys/boot/forth/loader.4th /usr/local/freebsd7/boot/defaults/
+    $ cp /usr/src/sys/boot/forth/support.4th /usr/local/freebsd7/boot/defaults/
+
+Then install the kernel:
+
+    $ make DESTDIR=/usr/local/freebsd7 installkernel
+
+### Final Configurations
+Make sure the file `/usr/local/freebsd7/boot/loader.rc` has the following lines in it:
+
+    include /boot/loader.4th
+    start
+
+Also, make sure the file `/usr/local/freebsd7/boot/loader.conf` contains ONLY the following lines:
+
+    mfsroot_load="YES"
+    mfsroot_type="mfs_root"
+    mfsroot_name="/boot/mfsroot"
+    vfs.root.mountfrom="ufs:/dev/md0c"
+
+I have no explanation for these configuration options, but they are pretty important.
+
+## Errors
+A series of errors. These are rough and are not really word for word at all, I need to reproduce them again.
+
+### Media Test Failure
+
+    "Media Test Failure"
+
+The NIC found no network connection.
+
+### 0ffffffffffff
+
+    "whatever the 0fffffff error says"
+
+This is native to 7.0. Unpack mfsroot.gz file:
+
+    $ cd /usr/local/freebsd70/boot/
+    $ gzip -d mfsroot.gz
+
+### Cannot Dump
+
+    "cannot dump. no dump device defined"
+
+Add the following line:
+
+    $ echo "vfs.root.mountfrom=\"ufs:/dev/md0c\"" >> /usr/local/freebsd70/boot/loader.conf
