@@ -4,7 +4,7 @@ permalink: /:categories/:year/:month/:day/:title
 
 exclude: [".rbenv-version", "README.md", "Rakefile"]
 auto: true
-pygments: true
+pygments: true 
 
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
@@ -65,13 +65,13 @@ JB :
   comments :
     provider : disqus
     disqus :
-      short_name : jekyllbootstrap
-    livefyre :
-      site_id : 123
-    intensedebate :
-      account : 123abc
-    facebook :
-      apikey : 123
+      short_name : dustingram 
+  #  livefyre :
+  #    site_id : 123
+  #  intensedebate :
+  #    account : 123abc
+  #  facebook :
+  #    apikey : 123
    
   # Settings for analytics helper
   # Set 'provider' to the analytics provider you want to use.
@@ -80,9 +80,9 @@ JB :
   analytics :
     provider : google
     google : 
-        tracking_id : 'UA-123-12'
-    getclicky :
-      site_id : 
+        tracking_id : 'UA-2445654-1'
+  #  getclicky :
+  #    site_id : 
 
   # Settings for sharing helper. 
   # Sharing is for things like tweet, plusone, like, reddit buttons etc.
