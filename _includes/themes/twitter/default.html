@@ -24,6 +24,15 @@
     <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
   -->
+    {% if page.title == 404 %}
+    <!-- A little ditty to redirect 404s from my old misc pages -->
+    <script type="text/javascript">
+        var spl = document.URL.split("dustingram.com/misc/");
+        if (spl.length > 1) {
+            window.location.href`'http://misc.dustingram.com/' + spl[1];
+        }
+    </script>
+    {% endif %}
     {% include JB/analytics %}
   </head>
 
