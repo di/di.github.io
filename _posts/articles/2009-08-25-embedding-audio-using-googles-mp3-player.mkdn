@@ -8,7 +8,7 @@ tags : [php, audio, mp3, google]
 {% include JB/setup %}
 
 ## Intro
-My friend needed an easy way to upload and embed audio clips to her blog, so I took a little bit of time to write a Simple [PHP File Uploader](/PHP_File_Uploader). To do the actual embedding, you can use Google's existing video/audio player to embed MP3s hosted online.
+My friend needed an easy way to upload and embed audio clips to her blog, so I took a little bit of time to write a Simple [PHP File Uploader](/articles/2009/08/11/php-file-uploader). To do the actual embedding, you can use Google's existing video/audio player to embed MP3s hosted online.
 
 ## The Code
 Here, we're assuming that you have the variable `$file` which contains the external URL of the MP3 file:

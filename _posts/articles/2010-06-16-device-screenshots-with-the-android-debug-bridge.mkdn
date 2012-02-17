@@ -92,4 +92,4 @@ Finally, make the appropriate adjustments to the RawImage's RGB values:
 There are also a number of overrides for our class to fill the requirements of the implementation, for the various changes 
 
 ## All together
-You can download the entire working class [here](http://dustingram.com/Device_Screenshots_with_the_Android_Debug_Bridge/Screenshot.java).
+You can download the entire working class [here](https://gist.github.com/1854611).

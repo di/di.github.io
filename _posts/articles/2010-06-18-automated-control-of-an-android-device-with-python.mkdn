@@ -8,7 +8,7 @@ tags : [python, android, automation, adb]
 {% include JB/setup %}
 
 ## Intro
-As mentioned in my previous article, [Device Screenshots with the Android Debug Bridge](/articles/2010/07/21/device-screenshots-with-the-android-debug-bridge), I'm currently working on an application which required the ability to get a live screenshot of my physical Android device. The second component to that problem, however, involved processing that image, and then automating a UI/Application response exactly like an actual user is (read: automatically touch the screen).
+As mentioned in my previous article, [Device Screenshots with the Android Debug Bridge](/articles/2010/06/16/device-screenshots-with-the-android-debug-bridge), I'm currently working on an application which required the ability to get a live screenshot of my physical Android device. The second component to that problem, however, involved processing that image, and then automating a UI/Application response exactly like an actual user is (read: automatically touch the screen).
 
 Again, like the ability to grab the device's current display, I figured this would be simple to do through the Android Debug Bridge. However, as it turned out, this was much simpler than I expected, and unlike the screenshot tool, I could avoid using Java for this.
 
