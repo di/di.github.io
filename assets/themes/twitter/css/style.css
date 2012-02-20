@@ -15,6 +15,18 @@ html, body, p, ul, ol, li {
     line-height: 1.3em;
 }
 
+.posts li {
+    list-style-type: none;
+}
+
+.posts {
+    margin: 0;
+}
+
+li + li {
+    padding-top:1em;
+}
+
 p, ul {
     text-align: justify;
     text-justify: newspaper;
