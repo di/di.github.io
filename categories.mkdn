@@ -1,0 +1,22 @@
+---
+layout: page
+title : All Posts 
+---
+{% include JB/setup %}
+
+## All categories
+<ul class="tag_box inline">
+    {% assign categories_list = site.categories %}
+    {% include JB/categories_list %}
+</ul>
+
+<ul class="posts">
+  {% for category in site.categories %} 
+  <h2 id="{{ category[0] }}-ref">{{ category[0] | join: "/" }}</h2>
+  {% for post in category[1] %}
+    <li><a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a> <span class="post-date">({{ post.date | date_to_string }})</span></li>
+    {{ post.description }}
+  {% endfor %}
+  {% endfor %}
+</ul>
+
