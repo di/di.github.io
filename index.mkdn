@@ -12,8 +12,11 @@ In his free time, he works for the non-profit [Neighborhood Bike Works](http://w
 ## Most recently created articles 
 
 <ul class="posts">
-  {% for post in site.posts %}
+  {% for post in site.posts limit:5 %}
     <li><a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a> <span class="post-date">({{ post.date | date_to_string }})</span></li>
     {{ post.description }}
   {% endfor %}
 </ul>
+
+
+[See all posts in all categories...](/categories.html)

@@ -23,6 +23,10 @@ html, body, p, ul, ol, li {
     margin: 0;
 }
 
+.catname {
+    text-transform:capitalize;
+}
+
 li + li {
     padding-top:1em;
 }
@@ -86,6 +90,7 @@ h2 {
     margin-bottom: 0.83em;
     line-height: 1em;
     font-weight: bold;
+    text-transform:capitalize;
 }
 
 h3 {
