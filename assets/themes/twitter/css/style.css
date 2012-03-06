@@ -104,8 +104,12 @@ div.date {
     text-align: center;
 }
 
-body {
+footer p {
+    font-size:10pt;
+    color: gray;
+    margin-bottom: 1em;
 }
+
 .container > footer p {
   text-align: center; /* center align it with the container */
 }
