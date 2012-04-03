@@ -1,5 +1,6 @@
 ---
 title : PHP File Uploader 
+layout: simple
 ---
 
 {% highlight ruby %}
