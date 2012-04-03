@@ -2,9 +2,10 @@
 title : PHP File Uploader 
 layout: simple
 ---
-
+Here is some text
 {% highlight ruby %}
 def foo
   puts 'foo'
 end
 {% endhighlight %}
+Some more text!
