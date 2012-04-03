@@ -7,7 +7,7 @@ title : Dustin Ingram
 ## About 
 Dustin Ingram is a graduate student at [Drexel University](http://drexel.edu), pursuing a M.S. degree in Computer Science. Currently, he is working as a research assistant at the Applied Informatics Group in Camden, NJ. 
 
-In his free time, he works for the non-profit [Neighborhood Bike Works](http://www.neighborhoodbikeworks.org), which seeks to increase opportunites for urban youth through bicycling!
+In his free time, he works for the non-profit [Neighborhood Bike Works](http://www.neighborhoodbikeworks.org), which seeks to increase opportunities for urban youth through bicycling!
 
 ## Most recently created articles 
 
