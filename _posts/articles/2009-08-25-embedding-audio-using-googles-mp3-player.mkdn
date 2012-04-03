@@ -14,7 +14,6 @@ My friend needed an easy way to upload and embed audio clips to her blog, so I t
 Here, we're assuming that you have the variable `$file` which contains the external URL of the MP3 file:
 
 {% highlight php %}
-
     <?php
     $embed = '
        <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
@@ -46,7 +45,6 @@ Here, we're assuming that you have the variable `$file` which contains the exter
           </embed>
        </object>';
     ?>
-
 {% endhighlight %}
 
 You can see it in action at [http://earwaxing.blogspot.com/](http://earwaxing.blogspot.com/).
