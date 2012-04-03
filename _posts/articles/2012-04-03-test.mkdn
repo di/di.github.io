@@ -1,9 +1,6 @@
 ---
-layout : post
-category : articles 
+layout : default 
 title : PHP File Uploader 
-description : My friend needed an easy way to upload and embed audio clips to her blog, so I wrote my Simple PHP File Uploader.
-tags : [PHP, file upload]
 ---
 {% include JB/setup %}
 
