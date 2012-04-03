@@ -2,7 +2,6 @@
 layout : default 
 title : PHP File Uploader 
 ---
-{% include JB/setup %}
 
 ## Intro
 My friend needed an easy way to upload and embed audio clips to her blog, so I took a little bit of time to write a Simple PHP File Uploader. It's surprisingly easy to do if you've got access to a webserver and some PHP knowledge, so I'll attempt to outline some basic steps below.
