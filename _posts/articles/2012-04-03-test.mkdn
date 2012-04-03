@@ -9,3 +9,4 @@ def foo
 end
 {% endhighlight %}
 Some more text!
+{{ site | debug }}
