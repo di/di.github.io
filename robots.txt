@@ -2,3 +2,4 @@ User-Agent: *
 Disallow: /misc/
 Disallow: /wiki/
 Disallow: /images/
+Disallow: /index.php
