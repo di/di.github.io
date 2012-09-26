@@ -55,11 +55,12 @@
 -->
 
     <div class="container">
-
       <div class="content">
         {{ content }}
       </div>
-
+      {% if page.url == "/index.html" %}
+      <a class="hideme" href="https://plus.google.com/106639242959203436498?rel=author">Google</a>
+      {% endif %}
       <footer>
         <p>&copy; {{ site.author.name }} {{ 'now' | date: "%Y" }} -- Made with <a href="http://github.com/dustingram/dustingram.github.com">Github</a>, <a href="http://github.com/mojombo/jekyll">Jekyll</a>, <a href="http://github.com/Shopify/liquid">Liquid</a>, <a href="http://daringfireball.net/projects/markdown/">Markdown</a>, <a href="http://github.com/twitter/bootstrap">Bootstrap</a>, and <a href="http://en.wikipedia.org/wiki/Computer_Modern">Computer Modern</a>.</p>
       </footer>
