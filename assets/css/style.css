@@ -17,6 +17,7 @@ html, body, p, ul, ol, li {
 
 .posts li {
     list-style-type: none;
+    color: #404040;
 }
 
 .posts {
@@ -144,7 +145,10 @@ footer p {
   border: 0;
 }
 
-.post-date{float:right;}
+.post-date{
+    float:right;
+    color:#808080;
+}
 .hideme{visibility:hidden;}
 
 /* minimalist disqus */

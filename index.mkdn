@@ -13,8 +13,8 @@ In his free time, he works for the non-profit [Neighborhood Bike Works](http://w
 
 <ul class="posts">
   {% for post in site.posts limit:5 %}
-    <li><a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a> <span class="post-date">({{ post.date | date_to_string }})</span></li>
-    {{ post.description }}
+    <li><a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a> <span class="post-date">({{ post.date | date_to_string }})</span>
+    <div>{{ post.description }}</div></li>
   {% endfor %}
 </ul>
 
