@@ -111,4 +111,4 @@ A nice one-liner to note here is how we get and parse the date for the files:
 
 {% endhighlight %}
 
-And those are all the pieces you need! Be sure to check out [Embedding Audio using Google's MP3 Player](/Embedding_Audio_using_Google's_MP3_Player) if you're interested in how I actually did the embedding.
+And those are all the pieces you need! Be sure to check out [Embedding Audio using Google's MP3 Player](/articles/2009/08/25/embedding-audio-using-googles-mp3-player) if you're interested in how I actually did the embedding.
