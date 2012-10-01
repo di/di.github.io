@@ -28,6 +28,11 @@ html, body, p, ul, ol, li {
     text-transform:capitalize;
 }
 
+ul, ol {
+    margin-left: 3em;
+    margin-top: 1em;
+}
+
 li + li {
     padding-top:1em;
 }
@@ -69,6 +74,10 @@ p tt, p code {
 pre, pre code {
     color: #c6c6c6;
     background-color: #252525;
+}
+
+pre code {
+    padding: 0;
 }
 
 h1, h2, h3 {
