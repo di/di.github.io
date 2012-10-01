@@ -20,11 +20,19 @@ My goal is to be able to run the interactive `mit-scheme` shell directly from th
 This is the standard install. From here, you can run MIT/GNU Scheme as if it were any other application, but we don't want that.
 
 ### 2.2 &nbsp; Symlink 
-Next, symlink the binary to in your `/usr/bin`:
+Next, symlink the binary to `scheme` in your `/usr/bin`:
 
     $ sudo ln -s /Applications/MIT\:GNU\ Scheme.app/Contents/Resources/mit-scheme /usr/bin/scheme
 
 ### 2.3 &nbsp; Export 
+**NOTE**: Depending on how you've already configured Bash, you'll want to set this variable in one of three places:
+
+1. `~/.bash_profile`
+2. `~/.bash_login`
+3. `~/.profile`
+
+On load, Bash tries to find your local profiles in that order. If it finds a file, it won't load any following profiles. Therefore, you're going to want to check to see which, if any, of these files already exist, and append to that file. For me, this was `~/.profile`. 
+
 Add the library path to your profile:
 
     $ echo "export MITSCHEME_LIBRARY_PATH=\"/Applications/MIT\:GNU\ Scheme.app/Contents/Resources\"" >> ~/.profile
@@ -52,3 +60,18 @@ You should now be able to run the MIT/GNU Scheme shell directly from the command
     1 ]=> 
 
 And that's it!
+
+## 4 &nbsp; Troubleshooting
+## 4.1 &nbsp; "Can't find a readable default"
+If you're getting the following error:
+
+    $ scheme
+    scheme: can't find a readable default for option --band.
+            searched for file all.com in these directories:
+            /usr/local/lib/mit-scheme-x86-64
+    
+    Inconsistency detected.
+
+Chances are that you skipped over my note in the "Export" section above. Running `scheme` probably ran great for you the first time, but now that some time has passed and you've reloaded your terminal, it doesn't work!
+
+The problem likely is that the environmental variable linking to scheme's library is not being loaded because you have multiple Bash profile files. Consolidate your profiles and you should be good to go.
