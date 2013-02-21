@@ -1,0 +1,27 @@
+---
+layout : post
+category : articles
+title : On Doing It Yourself
+description : A short essay on the value of doing things the hard way.
+tags : [diy, lessons]
+---
+{% include JB/setup %}
+
+## 1 &nbsp; Introduction
+I spent the other night talking with a
+
+The programmer in me had an immediate knee-jerk reaction to this. Why re-invent
+the wheel when plenty of other people have done it before you? Creating charts
+and graphs with Javascript and HTML5 is a solved problem: it's been done. Why
+waste your time 
+
+My attempt to solve this problem would be this:
+
+1. Find a couple existing libraries that were created to solve this problem;
+2. Check out a few examples, read some documentation for each, and generally get
+a feel for how each is implemented;
+3. Maybe try a proof-of-concept for one or two, and then settle on one.
+
+To me, the amount of time I would need to invest to create something even
+remotely comparable would outweigh the 
+
