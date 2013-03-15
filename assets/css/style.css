@@ -162,7 +162,7 @@ footer p {
 
 /* minimalist disqus */
 
-#dsq-global-toolbar, #dsq-pagination, #dsq-account-dropdown, .dsq-brlink, div#dsq-content h3, #dsq-sort-by {
+#global-nav, #main-nav, #community, #discovery, #footer {
     visibility:hidden;
     height: 0;
     padding: 0;
