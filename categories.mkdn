@@ -14,7 +14,7 @@ title : All Posts
   {% for category in site.categories %} 
   <h2 id="{{ category[0] }}-ref">{{ category[0] | join: "/" }}</h2>
   {% for post in category[1] %}
-    <li><a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a> <span class="post-date">({{ post.date | date_to_string }})</span></li>
+    <li><a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></li>
     {{ post.description }}
   {% endfor %}
   {% endfor %}
