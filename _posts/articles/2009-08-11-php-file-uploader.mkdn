@@ -8,12 +8,18 @@ tags : [PHP, file upload]
 {% include JB/setup %}
 
 ## Intro
-My friend needed an easy way to upload and embed audio clips to her blog, so I took a little bit of time to write a Simple PHP File Uploader. It's surprisingly easy to do if you've got access to a webserver and some PHP knowledge, so I'll attempt to outline some basic steps below.
+My friend needed an easy way to upload and embed audio clips to her blog, so I
+took a little bit of time to write a Simple PHP File Uploader. It's surprisingly
+easy to do if you've got access to a webserver and some PHP knowledge, so I'll
+attempt to outline some basic steps below.
 
-If you're interested in how I actually did the embedding, you should check out [Embedding Audio using Google's MP3 Player](/articles/2009/08/25/embedding-audio-using-googles-mp3-player).
+If you're interested in how I actually did the embedding, you should check out
+[Embedding Audio using Google's MP3
+Player](/articles/2009/08/25/embedding-audio-using-googles-mp3-player).
 
 ## The HTML form
-We need a basic HTML form to accept our file to upload and pass it off to the PHP script:
+We need a basic HTML form to accept our file to upload and pass it off to the
+PHP script:
 
 {% highlight html %}
 
@@ -26,7 +32,9 @@ We need a basic HTML form to accept our file to upload and pass it off to the PH
 {% endhighlight %}
 
 ### The PHP magic
-Now for the PHP script. The code below checks the filetype of the uploaded file (in the `$_FILES[]` array). I've included a few for gif, jpeg, and png, but most audio will fall under x-mp3 and mpeg:
+Now for the PHP script. The code below checks the filetype of the uploaded file
+(in the `$_FILES[]` array). I've included a few for gif, jpeg, and png, but most
+audio will fall under x-mp3 and mpeg:
 
 {% highlight php %}
 
@@ -79,7 +87,9 @@ To put the uploaded file in your `$upload` folder:
 
 {% endhighlight %}
 
-Of course, once you've got a big upload directory of random files, it's useless unless you're able to click on them to download later. This is assuming you've got the default directory `$dir`:
+Of course, once you've got a big upload directory of random files, it's useless
+unless you're able to click on them to download later. This is assuming you've
+got the default directory `$dir`:
 
 {% highlight php %}
 
@@ -89,8 +99,8 @@ Of course, once you've got a big upload directory of random files, it's useless 
           while (($file = readdir($dh)) !== false) {
              if($file!="." && $file!="..")
              {
-                echo "<a href=\"$dir$file\"><b>$file</b></a> [<a href=\"./$file\">Download</a>] [" . 
-                   date(DATE_RFC822,filemtime("$dir$file")) . 
+                echo "<a href=\"$dir$file\"><b>$file</b></a> [<a href=\"./$file\">Download</a>] [" .
+                   date(DATE_RFC822,filemtime("$dir$file")) .
                    "]<br />";
              }
           }
@@ -111,4 +121,7 @@ A nice one-liner to note here is how we get and parse the date for the files:
 
 {% endhighlight %}
 
-And those are all the pieces you need! Be sure to check out [Embedding Audio using Google's MP3 Player](/articles/2009/08/25/embedding-audio-using-googles-mp3-player) if you're interested in how I actually did the embedding.
+And those are all the pieces you need! Be sure to check out [Embedding Audio
+using Google's MP3
+Player](/articles/2009/08/25/embedding-audio-using-googles-mp3-player) if you're
+interested in how I actually did the embedding.

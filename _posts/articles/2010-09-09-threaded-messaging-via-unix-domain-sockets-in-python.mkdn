@@ -7,14 +7,24 @@ tags : [python, threading, unix]
 ---
 {% include JB/setup %}
 
-## 1 &nbsp; Introduction
-As part of a recent project, I experimented for the first time with Unix Domain Sockets. If you're unfamiliar, it's probably because there's relatively little documentation or examples available online. I won't go into detail, but two good sources to read are Wikipedia's [&ldquo;Unix Domain Socket&rdquo;](http://en.wikipedia.org/wiki/Unix_domain_socket) page as well as Thomas Stover's [&ldquo;Demystifying Unix Domain Sockets&rdquo;](http://www.wsinnovations.com/softeng/articles/uds.html) article. Although the latter's examples are in C (and that's not what you're here for!) he does a great job of, well, demystifying Unix Domain Sockets.
+## Introduction
+As part of a recent project, I experimented for the first time with Unix Domain
+Sockets. If you're unfamiliar, it's probably because there's relatively little
+documentation or examples available online. I won't go into detail, but two good
+sources to read are Wikipedia's [&ldquo;Unix Domain
+Socket&rdquo;](http://en.wikipedia.org/wiki/Unix_domain_socket) page as well as
+Thomas Stover's [&ldquo;Demystifying Unix Domain
+Sockets&rdquo;](http://www.wsinnovations.com/softeng/articles/uds.html) article.
+Although the latter's examples are in C (and that's not what you're here for!)
+he does a great job of, well, demystifying Unix Domain Sockets.
 
-My goal was to create a basic Threaded example class which could be used as a server or client. 
+My goal was to create a basic Threaded example class which could be used as a
+server or client. 
 
-## 2  &nbsp; A Brief Example: The &lsquo;piper&rsquo; Class
-### 2.1 &nbsp; Imports
-We'll be using the `threading` module as well as the `socket` module (where the Unix Domain Sockets reside):
+## A Brief Example: The &lsquo;piper&rsquo; Class
+### Imports
+We'll be using the `threading` module as well as the `socket` module (where the
+Unix Domain Sockets reside):
 
 {% highlight python %}
 
@@ -25,7 +35,7 @@ We'll be using the `threading` module as well as the `socket` module (where the 
 
 {% endhighlight %}
 
-###2.2 &nbsp;  Initialization
+### Initialization
 Here's the `__init__` def for the  class:
 
 {% highlight python %}
@@ -40,16 +50,27 @@ Here's the `__init__` def for the  class:
 
 {% endhighlight %}
 
-As the above articles mention, you can think of Domain Sockets as local pipes, or even as files on the local domain. Therefore, for each client that is created, I give it a unique name, create and bind to a Unix socket, and set up and start the Thread. 
+As the above articles mention, you can think of Domain Sockets as local pipes,
+or even as files on the local domain. Therefore, for each client that is
+created, I give it a unique name, create and bind to a Unix socket, and set up
+and start the Thread.
 
-Note the `setDaemon(isDaemon)` method call there. It's important, when we go to create a bunch of individual nodes, that *one* of them is not daemonized, for reasons specified by the `daemon` documentation:
+Note the `setDaemon(isDaemon)` method call there. It's important, when we go to
+create a bunch of individual nodes, that *one* of them is not daemonized, for
+reasons specified by the `daemon` documentation:
 
     The entire Python program exits when no alive non-daemon threads are left.
 
-This will allow us to run `n-1` threads in the background, and only get output from one, as well as  being able to kill the non-daemonized thread to stop the entire application.
+This will allow us to run `n-1` threads in the background, and only get output
+from one, as well as being able to kill the non-daemonized thread to stop the
+entire application.
 
-### 2.3 &nbsp; Receiving Data - The Thread Target Method
-As specified above, the thread for the class has a target method, `_listener`. For the purposes of the example, this thread will contain a loop which waits for data on it's own socket, prints to the command line on receipt, and then sends a response back to the original sender (in this case, it sends it's own name). Here's the method:
+### Receiving Data - The Thread Target Method
+As specified above, the thread for the class has a target method, `_listener`.
+For the purposes of the example, this thread will contain a loop which waits for
+data on it's own socket, prints to the command line on receipt, and then sends a
+response back to the original sender (in this case, it sends it's own name).
+Here's the method:
 
 {% highlight python %}
 
@@ -63,8 +84,9 @@ As specified above, the thread for the class has a target method, `_listener`. F
 
 This is pretty self-explanatory. The value `1024` is the message buffer size, etc.
 
-### 2.4 &nbsp; Sending Data
-The `_send` method simply sends on a specified socket. In this demo, it's used to push data on to the socket of another class, so it looks like this:
+### Sending Data
+The `_send` method simply sends on a specified socket. In this demo, it's used
+to push data on to the socket of another class, so it looks like this:
 
 {% highlight python %}
 
@@ -74,8 +96,12 @@ The `_send` method simply sends on a specified socket. In this demo, it's used t
 
 {% endhighlight %}
 
-### 2.5 &nbsp; Using The &lsquo;piper&rsquo; Class
-Here's the `main()` method I used. Remembering some of the baby steps I first took when learning about Threads, I wanted to make two clients named &lsquo;ping&rsquo; and &lsquo;pong&rsquo; which simply chats back and forth, ad infinitum. Note that one is non-daemonic, and that the last line simply exists to set off the chain reaction:
+### Using The &lsquo;piper&rsquo; Class
+Here's the `main()` method I used. Remembering some of the baby steps I first
+took when learning about Threads, I wanted to make two clients named
+&lsquo;ping&rsquo; and &lsquo;pong&rsquo; which simply chats back and forth, ad
+infinitum. Note that one is non-daemonic, and that the last line simply exists
+to set off the chain reaction:
 
 {% highlight python %}
 
@@ -86,20 +112,23 @@ Here's the `main()` method I used. Remembering some of the baby steps I first to
 
 {% endhighlight %}
 
-### 2.6 &nbsp; Cleaning Up
-You probably won't be able to kill the threaded process by `^C`-ing at the command line, instead:
+### Cleaning Up
+You probably won't be able to kill the threaded process by `^C`-ing at the
+command line, instead:
 
     $ pkill python
 
-Furthermore, this example doesn't clean up after itself at all. If you try to run it twice in a row, you'll get the error: 
+Furthermore, this example doesn't clean up after itself at all. If you try to
+run it twice in a row, you'll get the error:
 
     socket.error: [Errno 98] Address already in use
 
-This means that the Domain Sockets we created in `/tmp` (`/tmp/piper-ping` and `/tmp/piper-pong`) still exist! Get rid of them with:
+This means that the Domain Sockets we created in `/tmp` (`/tmp/piper-ping` and
+`/tmp/piper-pong`) still exist! Get rid of them with:
 
     $ rm -rf /tmp/piper-*
 
-### 2.7 &nbsp; Putting It All Together
+### Putting It All Together
 Here's the entire, continuous example class:
 
 {% highlight python %}

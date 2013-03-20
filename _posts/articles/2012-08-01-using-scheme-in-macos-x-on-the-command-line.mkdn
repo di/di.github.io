@@ -7,62 +7,76 @@ tags : [osx, scheme]
 ---
 {% include JB/setup %}
 
-## 1 &nbsp; Introduction
-[MIT/GNU Scheme](http://www.gnu.org/software/mit-scheme/) is great, but if you're an OSX user, and have a comfortable terminal environment set up, you might prefer to use `mit-scheme` directly from the command line instead of as a separate OSX application. Since it always takes me a minute to remember the steps, I figured I'd write it up.
+## Introduction
+[MIT/GNU Scheme](http://www.gnu.org/software/mit-scheme/) is great, but if
+you're an OSX user, and have a comfortable terminal environment set up, you
+might prefer to use `mit-scheme` directly from the command line instead of as a
+separate OSX application. Since it always takes me a minute to remember the
+steps, I figured I'd write it up.
 
-My goal is to be able to run the interactive `mit-scheme` shell directly from the command line in OSX.
+My goal is to be able to run the interactive `mit-scheme` shell directly from
+the command line in OSX.
 
-## 2  &nbsp; Necessary Steps 
-### 2.1 &nbsp; Download 
+## Necessary Steps
+### Download 
 
-[Download the MacOS X binary](http://www.gnu.org/software/mit-scheme/), either i386 or x86-64 depending on your machine. Mount the `.dmg`, and drag the "MIT/GNU Scheme" icon into the "Applications" folder. 
+[Download the MacOS X binary](http://www.gnu.org/software/mit-scheme/), either
+i386 or x86-64 depending on your machine. Mount the `.dmg`, and drag the
+"MIT/GNU Scheme" icon into the "Applications" folder. 
 
-This is the standard install. From here, you can run MIT/GNU Scheme as if it were any other application, but we don't want that.
+This is the standard install. From here, you can run MIT/GNU Scheme as if it
+were any other application, but we don't want that.
 
-### 2.2 &nbsp; Symlink 
+### Symlink 
 Next, symlink the binary to `scheme` in your `/usr/bin`:
 
     $ sudo ln -s /Applications/MIT\:GNU\ Scheme.app/Contents/Resources/mit-scheme /usr/bin/scheme
 
-### 2.3 &nbsp; Export 
-**NOTE**: Depending on how you've already configured Bash, you'll want to set this variable in one of three places:
+### Export
+**NOTE**: Depending on how you've already configured Bash, you'll want to set
+this variable in one of three places:
 
 1. `~/.bash_profile`
 2. `~/.bash_login`
 3. `~/.profile`
 
-On load, Bash tries to find your local profiles in that order. If it finds a file, it won't load any following profiles. Therefore, you're going to want to check to see which, if any, of these files already exist, and append to that file. For me, this was `~/.profile`. 
+On load, Bash tries to find your local profiles in that order. If it finds a
+file, it won't load any following profiles. Therefore, you're going to want to
+check to see which, if any, of these files already exist, and append to that
+file. For me, this was `~/.profile`.
 
 Add the library path to your profile:
 
     $ echo "export MITSCHEME_LIBRARY_PATH=\"/Applications/MIT\:GNU\ Scheme.app/Contents/Resources\"" >> ~/.profile
 
-### 2.3 &nbsp; Reload 
+### Reload
 Restart your terminal somehow, or simply reload your bash profile:
 
     $ source ~/.profile
 
-## 3 &nbsp; Finished 
-You should now be able to run the MIT/GNU Scheme shell directly from the command line:
+## Finished
+You should now be able to run the MIT/GNU Scheme shell directly from the command
+line:
 
     $ scheme
     MIT/GNU Scheme running under MacOSX
-    Type `^C' (control-C) followed by `H' to obtain information about interrupts.
+    Type `^C' (control-C) followed by `H' to obtain information about
+    interrupts.
 
-    Copyright (C) 2011 Massachusetts Institute of Technology
-    This is free software; see the source for copying conditions. There is NO warranty;
-    not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    Copyright (C) 2011 Massachusetts Institute of Technology This is free
+    software; see the source for copying conditions. There is NO warranty; not
+    even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
     Image saved on Tuesday November 8, 2011 at 10:45:46 PM
       Release 9.1.1 || Microcode 15.3 || Runtime 15.7 || SF 4.41 || LIAR/x86-64 4.118
       Edwin 3.116
 
-    1 ]=> 
+    1 ]=>
 
 And that's it!
 
-## 4 &nbsp; Troubleshooting
-## 4.1 &nbsp; "Can't find a readable default"
+## Troubleshooting
+## "Can't find a readable default"
 If you're getting the following error:
 
     $ scheme
@@ -72,6 +86,10 @@ If you're getting the following error:
     
     Inconsistency detected.
 
-Chances are that you skipped over my note in the "Export" section above. Running `scheme` probably ran great for you the first time, but now that some time has passed and you've reloaded your terminal, it doesn't work!
+Chances are that you skipped over my note in the "Export" section above. Running
+`scheme` probably ran great for you the first time, but now that some time has
+passed and you've reloaded your terminal, it doesn't work!
 
-The problem likely is that the environmental variable linking to scheme's library is not being loaded because you have multiple Bash profile files. Consolidate your profiles and you should be good to go.
+The problem likely is that the environmental variable linking to scheme's
+library is not being loaded because you have multiple Bash profile files.
+Consolidate your profiles and you should be good to go.

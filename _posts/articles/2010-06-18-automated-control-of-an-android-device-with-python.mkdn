@@ -8,12 +8,28 @@ tags : [python, android, automation, adb]
 {% include JB/setup %}
 
 ## Intro
-As mentioned in my previous article, [Device Screenshots with the Android Debug Bridge](/articles/2010/06/16/device-screenshots-with-the-android-debug-bridge), I'm currently working on an application which required the ability to get a live screenshot of my physical Android device. The second component to that problem, however, involved processing that image, and then automating a UI/Application response exactly like an actual user is (read: automatically touch the screen).
+As mentioned in my previous article, [Device Screenshots with the Android Debug
+Bridge](/articles/2010/06/16/device-screenshots-with-the-android-debug-bridge),
+I'm currently working on an application which required the ability to get a live
+screenshot of my physical Android device. The second component to that problem,
+however, involved processing that image, and then automating a UI/Application
+response exactly like an actual user is (read: automatically touch the screen).
 
-Again, like the ability to grab the device's current display, I figured this would be simple to do through the Android Debug Bridge. However, as it turned out, this was much simpler than I expected, and unlike the screenshot tool, I could avoid using Java for this.
+Again, like the ability to grab the device's current display, I figured this
+would be simple to do through the Android Debug Bridge. However, as it turned
+out, this was much simpler than I expected, and unlike the screenshot tool, I
+could avoid using Java for this.
 
 ### References
-The first hint that I could send various UI events to the device came from the documentation for the [Android UI/Application Exerciser Monkey](http://developer.android.com/guide/developing/tools/monkey.html), although being able to send completely random events proved pretty useless. However, it led me to the [Git Repository](http://android.git.kernel.org/?p=platform/development.git;a=tree;f=cmds/monkey) for the tool, which in turn had a [README file](http://android.git.kernel.org/?p=platform/development.git;a=blob;f=cmds/monkey/README.NETWORK.txt) which described the Simple Protocol for Automated Network Control.
+The first hint that I could send various UI events to the device came from the
+documentation for the [Android UI/Application Exerciser
+Monkey](http://developer.android.com/guide/developing/tools/monkey.html),
+although being able to send completely random events proved pretty useless.
+However, it led me to the [Git
+Repository](http://android.git.kernel.org/?p=platform/development.git;a=tree;f=cmds/monkey)
+for the tool, which in turn had a [README
+file](http://android.git.kernel.org/?p=platform/development.git;a=blob;f=cmds/monkey/README.NETWORK.txt)
+which described the Simple Protocol for Automated Network Control.
 
 ## Using the Network Control Protocol
 From the README:
@@ -27,27 +43,39 @@ From the README:
     Monkey only binds to localhost, so you will need to use adb to setup
     port forwarding to actually talk to the device.
 
-What this means, in a nutshell, is that a developer can use any language to command an ADB device (on loopback) using a simple TCP message.
+What this means, in a nutshell, is that a developer can use any language to
+command an ADB device (on loopback) using a simple TCP message.
 
-The first step is to make the ADB forward TCP traffic on the localhost to the device, in this case, port `1080`:
+The first step is to make the ADB forward TCP traffic on the localhost to the
+device, in this case, port `1080`:
 
     $ ./adb forward tcp:1080 tcp:1080
 
-Simple! At this point, the README attempts to discuss all the possible commands. I was purely interested in a `touch` command (which is, in fact, two commands), so if you're looking for something else, look at the [README file](http://android.git.kernel.org/?p=platform/development.git;a=blob;f=cmds/monkey/README.NETWORK.txt).
+Simple! At this point, the README attempts to discuss all the possible commands.
+I was purely interested in a `touch` command (which is, in fact, two commands),
+so if you're looking for something else, look at the [README
+file](http://android.git.kernel.org/?p=platform/development.git;a=blob;f=cmds/monkey/README.NETWORK.txt).
 
 If touch is what you want, though, here's what you need to know:
 
     Note that sending a full button press requires sending both the down
     and the up event for that key
 
-This means we need a `touch down` command followed by a `touch up` command, separated by a newline, as follows (which touches point `(x=30,y=60)`:
+This means we need a `touch down` command followed by a `touch up` command,
+separated by a newline, as follows (which touches point `(x=30,y=60)`:
 
     "touch down 30 60\ntouch up 30 60"
 
-**Important:** In practice, though, this won't work every single time. It seems that the device may get confused by a series of strung-together commands in quick succession, especially a pair of `touch` events. In most practical applications, it would make sense send commands individually, and sleep in between -- after all, real users don't move that fast!
+**Important:** In practice, though, this won't work every single time. It seems
+that the device may get confused by a series of strung-together commands in
+quick succession, especially a pair of `touch` events. In most practical
+applications, it would make sense send commands individually, and sleep in
+between -- after all, real users don't move that fast!
 
 ## A Sample Python Script
-Using our new knowledge of Android's Simple Protocol for Automated Network Control, here's a very simple Python script to send a single pair of `touch` events, using the `socket` module:
+Using our new knowledge of Android's Simple Protocol for Automated Network
+Control, here's a very simple Python script to send a single pair of `touch`
+events, using the `socket` module:
 
 {% highlight python %}
 
