@@ -1,0 +1,74 @@
+---
+layout : post
+category : articles
+title : On Doing It Yourself
+description : A short essay on the value of doing things the hard way.
+tags : [diy, lessons]
+---
+{% include JB/setup %}
+
+## Introduction
+I spent the other night talking with a [close friend](http://ryanhinkel.com/) of
+mine about his new job and some of the work he's been doing. He explained to me
+that a recent project of his was to find a way to plot some data using
+JavaScript and HTML5. Nothing incredibly complex, just simple line graphs with
+some customization. However, as he proudly explained, his solution was to create
+the entire thing from scratch -- every line of code, every piece of CSS.
+
+The programmer in me had an immediate knee-jerk reaction to this. Why re-invent
+the wheel when plenty of other people have done it before you? [Creating charts
+and graphs with JavaScript and HTML5 is a solved
+problem](http://www.chartjs.org/): it's been done before, and many times. Why
+waste your time creating another solution to the problem, especially one that's
+bound to be less flexible or have more flaws than an existing solution?
+
+My initial attempt to solve this problem would be this:
+1. Find a couple existing libraries that were created to solve this problem;
+2. Check out a few examples, read some documentation for each, and generally get
+a feel for how each is implemented;
+3. Maybe try a proof-of-concept for one or two, and then settle on one.
+
+To me, the amount of time I would need to invest to create something even
+remotely comparable would outweigh the amount of time it would take to find an
+existing solution, modify it to suit my needs, or even *scrap an existing
+solution for another one*. It seemed ludicrous to me do anything else.
+
+## A realization
+The more I thought about this, though, the more I realized the value in doing it
+his way. Aside from the intrinsic knowledge gained by re-implementing a system
+(which has been shown over and over again), the real benefit is this:
+
+**If no one ever builds anything new, we never get anything new.**
+
+We see this all the time. Take
+[Bootstrap](https://github.com/twitter/bootstrap), for example. Did we need
+another front-end framework? Most would say we didn't. Is it the best we've got now?
+Definitely -- can you even name any of it's predecessors? What about
+[Netflix](https://github.com/Netflix/)? It seems as if nearly every service they
+create is homebrewed specifically for their purposes. Could they have become
+what they are just by using commercial, off-the-shelf options? Maybe, but I
+would argue probably not.
+
+## The problem
+Here's the problem with all of this. Take a look at [this
+article](https://news.ycombinator.com/) recently
+featured on [HN](https://news.ycombinator.com/) titled &ldquo;The best
+programmers are the quickest to Google&rdquo;. The focus is basically that all
+the relevant, most granular pieces of whatever project you're building have
+already been written, and all you have to do is search Google for it. Here's an
+excerpt:
+
+> If you need to implement something in code and it’s not cutting edge
+> technology, Google it first. If someone else hasn’t already done it yet,
+> you’re either Googling it wrong or way off in what you’re trying to
+> accomplish.
+
+The issue here is the thought that &ldquo;We'll always be good with what we've
+got.&rdquo; If this mindset permeates us as developers (some might say it
+already has), we're just rearranging deck chairs on the Titanic. [Everything is
+a remix](https://vimeo.com/14912890). Nobody will create anything new, ever.
+
+Fortunately, there are some of us that reject this, that realize that the long
+term educational benefit, and net creativity this fosters within our community,
+outweighs the costs of doing it the hard way. These are the people that will
+change the game. These are the people which will create the tools of the future.
