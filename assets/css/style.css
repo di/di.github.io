@@ -24,6 +24,10 @@ html, body, p, ul, ol, li {
     margin: 0;
 }
 
+ul.posts li + li {
+    padding-top:1em;
+}
+
 .catname {
     text-transform:capitalize;
 }
