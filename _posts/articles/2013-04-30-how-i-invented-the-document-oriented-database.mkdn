@@ -1,0 +1,98 @@
+---
+layout : post
+category : articles
+title : How I Invented the Document-Oriented Database
+description : Wherein a younger, dumber version of myself gets by with the tools I'm given to reinvent the wheel without ever having seen the wagon.
+tags : [diy, lessons]
+---
+{% include JB/setup %}
+
+## The backstory
+
+The year is 2005. A friend-of-a-friend's father has heard that I'm "into"
+computers, know a thing or two about the internet, and have written some HTML
+and CSS. He's an ex-Microsoft guy, who retired (read: cashed out) a couple of
+years beforehand at the peak and then started a small business supplying
+alternative energy solutions (solar panels, wind turbines) for use with
+high-end sailboats. The business is doing great, but the business' website...
+not so much.
+
+I get hired to help bring them into the burgeoning world of the World Wide Web
+-- he wants to do keywords, he wants to do Search Engine Optimization, he wants
+to do mailing lists, he wants to do e-commerce, etc.
+
+### Problem number one
+The first real problem though, is that the site is pure static HTML, and as
+such, it's nearly impossible for anyone to edit who doesn't know what they're
+doing or whose hourly rate isn't low enough to merit wading through
+poorly-formatted HTML for an hour just to change a price for a single item.
+Lucky for them, I fell into both categories, but still, it wasn't scalable or
+sustainable to maintain the website this way. As the company inevitable grew
+larger, it would be harder and harder to add new product or modify existing
+ones.
+
+### Problem number two
+The second problem is that even though this guy was a bona-fide "Microsoft
+Millionaire", he was one heck of a cheap-skate. His website was hosted on the
+lowest-tier shared hosting service possible -- it barely had enough allotted
+bandwidth and disk space to serve up the page every month, the only server-side
+scripting it could do was PHP, and had no option to add a database whatsoever.
+Basically, if he had to buy domain names by the letter, he'd probably be
+sitting on "x.com" right now.
+
+I couldn't convince him to upgrade to a database -- their "web budget" was
+capped out having to pay me. It was probably a good thing, because I was
+clueless about MySQL (the only RDB that was available, at all, at the time).
+So, I had to get creative.
+
+## A solution, and more problems
+### AJAX... Stronger than Dirt!
+AJAX was the hot buzzword at the time... I had just gotten my Gmail account and
+everyone was talking about it and how important it would be. I realized that I
+could store their entire product catalog in individual XML documents save them
+as static files on the server, and with a little bit of Javascript, pull them
+down as necessary to create the page.
+
+I quickly wrote a PHP script to handle this "XML database", as I called it,
+which handled simple queries for product IDs, categories, etc by literally
+parsing through every XML file in a organized series of directories,
+accumulating the relevant documents. The XML fields were easy to update by
+hand, or by another home-brewed script, and everything worked well, really
+well. But the performance was bad -- really, really bad.
+
+### Big-oh-no
+As it turns out, doing a linear search across hundreds of XML documents with a
+PHP script and individually parsing each one takes a non-trivial amount of
+time. Looking up individual products and their details was quick -- each
+document essentially had a "key", the file name of that products XML file,
+which corresponded to the unique product ID. But if it was necessary to do any
+other type of query -- grouping by some detail, for example, everything would
+grind to a halt.
+
+Even though I didn't know what a "relational database" was at the time, I
+figured out that my life would be easier if I could somehow relate or
+reverse-correlate details to products. So what did I do?
+
+### ln -s
+Symlink to the rescue! How, you say? Whenever a product's corresponding XML
+would be created in the "database", the db would create the XML file, give it a
+name identical to the product ID, and store it in a directory. Then it would
+create a complex secondary directory structure corresponding to the hierarchy
+of the XML tags, and would place a symlink to the original XML file in
+corresponding places.
+
+This resulted in almost no increase in disk space at all, but a huge speedup in
+performance! Everything was blazing fast, AJAX kept the bandwidth to a minimum,
+and it was incredibly simply to modify details of products and have the changes
+instantly appear!
+
+## And on, and on, and on...
+Amazingly enough, my creation continued chugging along, as efficient as ever,
+through hundreds of products and thousands of edits, for over five years --
+long enough to witness the "birth" of many well-known document-oriented
+databases -- until the company was eventually sold and the website was folded
+into a larger parent company.
+
+I still wonder what some poor, hapless developer must have thought when he
+inherited what I had wrought -- probably: "What the....", and then &ldquo;`rm
+-rf *`".
