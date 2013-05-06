@@ -139,6 +139,8 @@ The resulting output:
     [3, 4, 7, 3, 4, 0, 1, None, None, None]
     3 + 4 = 7
 
+[Here's the whole script as a gist](https://gist.github.com/di/5526527).
+
 ### One-Eyed Robot
 This problem is essentially a sorting problem, with a twist: you can only
 examine an individual value once.
@@ -225,3 +227,4 @@ The resulting output:
     ['r', 'r', 'r', 'r', 'r', 'g', 'g', 'g', 'g', 'g', 'g', 'b', 'b', 'b', 'b']
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
+[Here's the whole script as a gist](https://gist.github.com/di/5526550).
