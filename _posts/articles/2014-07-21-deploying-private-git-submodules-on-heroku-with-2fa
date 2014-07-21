@@ -1,0 +1,53 @@
+---
+layout : post
+category : articles
+title : Deploying Private Git Submodules on Heroku with Two Factor Authentication
+description : Solution to an issue for those of us that are a little more security conscious
+tags : [git, heroku, submodules, 2fa]
+---
+{% include JB/setup %}
+
+## The Problem
+Private submodules don't work as described by Heroku in [their article on the topic](https://devcenter.heroku.com/articles/git-submodules) if you use two-factor authentication (2FA).
+
+## The Solution
+
+First, we hit the GitHub API to get our access token. Enter your username and a fresh OTP code, and do it quickly before it expires:
+
+    $ curl -i -u <YOUR_GITHUB_USERNAME> -H "X-GitHub-OTP: <YOUR_OTP_CODE>" -d '{"scopes": ["repo"], "note": "heroku-submodules"}' https://api.github.com/authorizations
+
+Enter the host password for your username, and you should get back a `HTTP/1.1 201 Created` that looks something like this:
+
+```
+{
+  "id": 10000269,
+  "url": "https://api.github.com/authorizations/10000269",
+  "app": {
+    "name": "heroku-submodules (API)",
+    "url": "https://developer.github.com/v3/oauth_authorizations/",
+    "client_id": "00000000000000000000"
+  },
+  "token": "<YOUR_OAUTH_TOKEN>",
+  "note": "heroku-submodules",
+  "note_url": null,
+  "created_at": "2014-07-21T04:17:15Z",
+  "updated_at": "2014-07-21T04:17:15Z",
+  "scopes": [
+    "repo"
+  ]
+}
+```
+
+In the `.gitmodules` file of your main repo, you can now add references to any private repo that your user has access to using the OAuth token as follows:
+
+```
+[submodule "<YOUR_REPO_NAME>"]
+	path = <YOUR_REPO_NAME>
+	url = https://<YOUR_OAUTH_TOKEN>:x-oauth-basic@github.com/<YOUR_GITHUB_USERNAME>/<YOUR_REPO_NAME>
+```
+
+Then, when you do a
+
+    git push heroku master
+    
+if everything is correct, Heroku will detect, install, initialize and check out the submodule correctly. 
