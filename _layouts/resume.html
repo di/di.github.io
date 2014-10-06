@@ -1,0 +1,15 @@
+---
+layout: default
+---
+<div class="page-header">
+  <h1>{{ page.title }}{% if page.tagline %} <small>{{ page.tagline }}</small>{% endif %}</h1>
+    <h3><a href="/">{{ site.author.name }}</a></h3>
+    <h3>{{ page.date | date : "%B %d %Y"}}</h3>
+</div>
+
+<div class="row">
+  <div class="span10 offset1">
+    {{ content }}
+  </div>
+</div>
+<a class="hideme" href="https://plus.google.com/106639242959203436498?rel=author">Google</a>

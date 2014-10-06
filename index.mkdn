@@ -5,13 +5,16 @@ title : Dustin Ingram
 {% include JB/setup %}
 
 ## About
-Dustin Ingram is a graduate student at [Drexel University](http://drexel.edu),
-pursuing a M.S. degree in [Computer Science](http://cs.drexel.edu) with a focus
-on Artificial Intelligence. Currently, he is building beautiful things as the
-co-founder of [Wiota Co.](http://wiota.co), a design &amp; build firm in
-Philadelphia, PA.
+I'm Dustin (aka [@di](https://github.com/di/)), a full-stack engineer and
+digital nomad currently based in [Philadelphia](http://osm.org/go/ZcjRpKe--)
+at [The Fire Works](http://thefireworksphilly.com/) coworking community. I'm
+the co-founder of the design &amp; build firm [Wiota Co.](http://wiota.co) and
+have a master's degree in [Computer Science](http://cs.drexel.edu) from
+[Drexel University](http://drexel.edu).
 
-## Most recently created articles
+You can see my résumé [here](/resume.html).
+
+## Newest tech articles
 <ul class="posts">
   {% for post in site.posts limit:5 %}
     <li>
@@ -21,4 +24,4 @@ Philadelphia, PA.
   {% endfor %}
 </ul>
 
-[See all posts in all categories...](/categories.html)
+[See all articles...](/categories.html)

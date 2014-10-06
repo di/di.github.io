@@ -166,3 +166,12 @@ footer p {
 }
 
 .hideme{visibility:hidden;}
+
+dl dt, dl dd {
+    font-weight: normal;
+    line-height: 1.3em;
+}
+
+ul + dl, dd + dt{
+    padding-top:1.3em;
+}
