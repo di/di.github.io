@@ -12,7 +12,7 @@ the co-founder of the design &amp; build firm [Wiota Co.](http://wiota.co) and
 have a master's degree in [Computer Science](http://cs.drexel.edu) from
 [Drexel University](http://drexel.edu).
 
-You can see my résumé [here](/resume.html).
+You can see my résumé [here](/resume).
 
 ## Newest tech articles
 <ul class="posts">
