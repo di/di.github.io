@@ -25,7 +25,7 @@ Since September 2013, I have been self-employed as a remote developer and as the
 
 : (*Toolbox: Python, Heroku, Backbone.js, Flask, MongoDB, Github, Git, AWS, JavaScript, jQuery, HipChat*)
 
-From March 2011 to June 2012 (and again from January 2013 to September 2013) I worked as a software engineer at the [Applied Informatics Group](http://drexel.edu/cci/research/centers/AIG/) in Philadelphia, PA, primarily working with distriuted systems, network emulation, information protocols and autonomous agent simulation. I helped build a serverless, cross-platform, asynchronous group messaging framework, and was invited to and presented work on tactical chat at the 2011 Joint Chat Systems Conference.
+From March 2011 to June 2012 (and again from January 2013 to September 2013) I worked as a software engineer at the [Applied Informatics Group](http://drexel.edu/cci/research/centers/AIG/) in Philadelphia, PA, primarily working with distributed systems, network emulation, information protocols and autonomous agent simulation. I helped build a serverless, cross-platform, asynchronous group messaging framework, and was invited to and presented work on tactical chat at the 2011 Joint Chat Systems Conference.
 
 : (*Toolbox: Java, Linux, XMPP, SVN, LaTeX*)
 
