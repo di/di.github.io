@@ -1,0 +1,86 @@
+---
+layout : post
+category : articles
+title : Upgrading OrientDB Community Edition on AWS from 1.7.9 to 2.0.5
+description : Using the latest and greatest version of OrientDB on AWS
+tags : [orientdb, ec2, aws, amazon, python]
+---
+{% include JB/setup %}
+
+## The Problem
+The current version of [OrientDB](http://www.orientechnologies.com/orientdb/) available as an instance on [AWS Marketplace](https://aws.amazon.com/marketplace/pp/B00M07FHAO) is 1.7.9. Unfortunately this version lacks a lot of the niceties and compatabilities available in later versions of OrientDB.
+
+## The Solution
+
+Until the folks at Orient Technologies provide an updated instance, we'll need to do the upgrade by hand. If you haven't already, head to the [AWS Marketplace](https://aws.amazon.com/marketplace/pp/B00M07FHAO) and install an instance of OrientDB.
+
+First, SSH into the EC2 instance. Everything will be done within the instance as the root user:
+
+    sudo su root
+
+Shut down OrientDB as it's probably running:
+
+    /etc/init.d/orientdb.sh stop
+
+Now, from within the `/opt` directory
+
+    cd /opt
+
+Pull down the latest version (currently 2.0.5) from Orient Technologies:
+
+    wget --content-disposition -P orientdb-dist http://www.orientechnologies.com/download.php?file=orientdb-community-2.0.5.tar.gz
+
+Untar:
+
+    tar -xvvf orientdb-dist/orientdb-community-2.0.5.tar.gz
+
+Link to `/opt/orientdb`, overriding the existing link to 1.7.9:
+
+    ln -s orientdb-community-2.0.5 orientdb
+
+Add your existing user accounts to the new config (under `orient-server`, `users`):
+
+    vi -o orientdb/config/orientdb-server-config.xml orientdb-community-1.7.9/config/orientdb-server-config.xml
+
+Set the proper permissions on the config file:
+
+    chmod 644 orientdb/config/orientdb-server-config.xml
+
+And make sure it's owned by the `orientdb` user:
+
+    chown -R orientdb.orientdb orientdb-community-2.0.5
+
+Move the startup script for 2.0.5 into `init.d`:
+
+    cp orientdb/bin/orientdb.sh /etc/init.d/
+
+And update it with the correct installation path and user:
+
+    sed -i "s|YOUR_ORIENTDB_INSTALLATION_PATH|/opt/orientdb|;s|USER_YOU_WANT_ORIENTDB_RUN_WITH|orientdb|" /etc/init.d/orientdb.sh
+
+Finally, start OrientDB back up!
+
+    /etc/init.d/orientdb.sh start
+
+## Connecting with pyorient
+
+You'll need to punch a port out of the EC2 instance to access OrientDB via the
+binary protocol that [pyorient](https://github.com/mogui/pyorient) uses. Go to
+
+    https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#SecurityGroups:sort=groupId
+
+There should be a security group called "OrientDB Community Edition". Select
+"Inbound", then "Edit", and add the following rule:
+
+    Custom TCP Rule     TCP     2424     Anywhere        0.0.0.0/0
+
+Install `pyorient`:
+
+    pip install pyorient
+
+Then you should be able to connect to your instance in Python as follows:
+
+    client = pyorient.OrientDB("ec2-XX-XX-XX-XX.compute-1.amazonaws.com", 2424)
+    session_id = client.connect("root", password)
+    client.db_open("your-database-name", "root", password)
+    client.query("select * from V")
