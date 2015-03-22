@@ -1,8 +1,8 @@
 ---
 layout : post
 category : articles
-title : Upgrading OrientDB Community Edition on AWS from 1.7.9 to 2.0.5
-description : Using the latest and greatest version of OrientDB on AWS
+title : Upgrading OrientDB on Amazon EC2
+description : Using the latest and greatest version of OrientDB on AWS, and connecting with pyorient.
 tags : [orientdb, ec2, aws, amazon, python]
 ---
 {% include JB/setup %}
