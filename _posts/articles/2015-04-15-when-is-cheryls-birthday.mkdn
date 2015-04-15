@@ -15,7 +15,7 @@ A certain viral "math" problem is currently [taking the internet by storm](http:
 > Cheryl thought a second and said, “I’m not going to tell you, but I’ll give you some clues.”
 >
 > She wrote down a list of 10 dates:
-
+>
 >> May 15, May 16, May 19
 >>
 >> June 17, June 18
@@ -23,11 +23,11 @@ A certain viral "math" problem is currently [taking the internet by storm](http:
 >> July 14, July 16
 >>
 >> August 14, August 15, August 17
-
+>
 > “My birthday is one of these,” she said.
 >
 > Then Cheryl whispered in Albert’s ear the month — and only the month — of her birthday.
-
+>
 > To Bernard, she whispered the day, and only the day.
 >
 > “Can you figure it out now?” she asked Albert.
@@ -44,7 +44,7 @@ A certain viral "math" problem is currently [taking the internet by storm](http:
 
 The solution hinges on repeatedly finding unique (or non-unique) days and months from the set of potential dates. While it doesn't require any incredible math skills, it does require some good deductive logic. Once you understand what the trick is, it's easy to arrive at a solution. To verify the solution I came to, I decided to implement the problem in Python (although, really any language would do).
 
-TL;DR: The entire script is available as a gist here: https://gist.github.com/di/56172003bc38f33238ef
+**TL;DR:** The entire script is available as a gist [here](https://gist.github.com/di/56172003bc38f33238ef).
 
 First, let's make a simple class to represent our Date:
 
