@@ -5,12 +5,11 @@ title : Dustin Ingram
 {% include JB/setup %}
 
 ## About
-I'm Dustin (aka [@di](https://github.com/di/)), a full-stack engineer and
-digital nomad currently based in [Philadelphia](http://osm.org/go/ZcjRpKe--)
-at [The Fire Works](http://thefireworksphilly.com/) coworking community. I'm
-the co-founder of the design &amp; build firm [Wiota Co.](http://wiota.co) and
-have a master's degree in [Computer Science](http://cs.drexel.edu) from
-[Drexel University](http://drexel.edu).
+I'm Dustin (aka [@di](https://github.com/di/)), a software engineer at
+[PromptWorks](http://www.promptworks.com/), the premier Philadelphia software
+consulting shop. I'm also the co-founder of the design &amp; build firm [Wiota
+Co.](http://wiota.co) and have a master's degree in [Computer
+Science](http://cs.drexel.edu) from [Drexel University](http://drexel.edu).
 
 You can see my résumé [here](/resume).
 
