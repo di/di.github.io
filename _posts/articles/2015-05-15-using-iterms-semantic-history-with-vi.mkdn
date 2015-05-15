@@ -1,0 +1,43 @@
+---
+layout : post
+category : articles
+title : Using iTerm's Semantic History with vi
+description : A quick tip for getting the most out of one of iTerm's new features with everyone's favorite editor.
+tags : [iterm2, vi, semantic history]
+---
+{% include JB/setup %}
+
+## The Problem
+If you're running the [nightly version of
+iTerm](https://iterm2.com/downloads/nightly/) (which, if you like surprises, I
+suggest you do) you might have noticed a new feature called **Semantic
+History**.
+
+In short, Semantic History allows you to ⌘-click on a filename (in your
+terminal) and perform an action on that file (or rather, with that filename).
+
+Obviously, the ideal action is to open that file in that terminal window, in
+your editor, but if you use `vi`, the default option might not be enough for
+you... mainly because `vi` is probably not listed as an option.
+
+## The Solution
+You can find the "Semantic History" feature under Preferences -> Profiles ->
+Advanced.
+
+You might think that the "Run command" option is what you want, but you'd be
+wrong! This simply runs a new process, separate from your existing session.
+
+What you actually want is the **"Run coprocess"** command. This will run the
+given command in the same session that the filename was clicked in.
+
+Because iTerm is helpful, in addition to filenames, it can also recognize line
+numbers. However, `vi` will jump you to the end of the file if no line number
+is specified (if it's just a regular filename).
+
+Hence, the ideal coprocess to run is as follows:
+
+    [ -z "\2" ] && echo vi \1 || echo vi +\2 \1
+
+This checks if the `\2` param is zero-length or not. If it is, it just calls
+`vi` on the filename. If not, it calls `vi` with `+\2` which makes `vi` jump to
+the line number.
