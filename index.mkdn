@@ -11,8 +11,6 @@ consulting shop. I'm also the co-founder of the design &amp; build firm [Wiota
 Co.](http://wiota.co) and have a master's degree in [Computer
 Science](http://cs.drexel.edu) from [Drexel University](http://drexel.edu).
 
-You can see my résumé [here](/resume).
-
 ## Newest tech articles
 <ul class="posts">
   {% for post in site.posts limit:5 %}
