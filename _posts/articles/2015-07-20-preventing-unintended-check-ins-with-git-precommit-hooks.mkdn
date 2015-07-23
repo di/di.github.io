@@ -1,0 +1,89 @@
+---
+layout : post
+category : articles
+title : Preventing Unintended Check-ins with Git Precommit Hooks
+description : How to use global git hooks to prevent commits which unintentionally contain debug statements or focus marks.
+tags : [python, pytest, git, bash]
+---
+{% include JB/setup %}
+
+## The Problem
+
+When debugging a failing test using [pytest](http://pytest.org/), I often add a
+"focus mark" to tests which I'm currently working on, so that it's easy to run
+them over and over without running all the tests in the suite. Usually, this
+looks like:
+
+{% highlight python %}
+@pytest.mark.focus
+...
+{% endhighlight %}
+
+However, I also have the bad habit of often checking these marks in when I
+commit changes to a test.
+
+## The Solution
+To prevent this, I created the following git pre-commit hook to be run before
+any commit is made:
+
+{% highlight bash %}
+#!/bin/bash
+
+if git rev-parse --verify HEAD >/dev/null 2>&1
+then
+    against=HEAD
+else
+    # Initial commit: diff against an empty tree object
+    against=4b825dc642cb6eb9a060e54bf8d69288fbee4904
+fi
+
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+exitstatus=0
+difffiles=`git diff --cached --name-status | awk '$1 != "R" { print $2 }'`
+while read -r filename
+do
+    diffstr=`grep -nr -e '^@pytest.mark.focus$' $filename`
+    if [[ -n "$diffstr" ]] ; then
+        printf "${RED}Focusmark:${NC} ${diffstr}\n"
+        exitstatus=1
+    fi
+done <<< "$difffiles"
+exit $exitstatus
+{% endhighlight %}
+
+This script looks at all files currently staged to be committed and greps them
+for the offending string. If any match, it prints their filename and the
+matching line number (so that it's easy to use [iTerm's semantic history
+feature](http://dustingram.com/articles/2015/05/15/using-iterms-semantic-history-with-vi/)
+on them and returns a non-zero exit code, which prevents the commit from being
+completed.
+
+### Using the hook:
+
+Since I want this hook to be available in multiple repos, I've set this up as a
+global git hook as follows:
+
+First, Create a directory to hold the global hooks:
+
+    mkdir -p ~/.git-templates/hooks
+
+Next, put the above script in the hook template directory:
+
+    mv pre-commit ~/.git-templates/hooks
+
+The commit hook must be executable:
+
+    chmod 755 ~/.git-templates/hooks/pre-commit
+
+Next, globally configure git to use the created template directory:
+
+    git config --global init.templatedir '~/.git-templates'
+
+Finally, we must re-init any git repo which should use this hook. This copies
+the template hooks into the local `.git/hooks` directory:
+
+    git init
+
+If you want to update or replace a non-global hook, you'll have to remove it
+and re-initialize, as `git init` won't overwrite existing hooks.
