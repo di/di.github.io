@@ -8,70 +8,104 @@ tags : [python, vnc, pyscreenshot, flask]
 {% include JB/setup %}
 
 ## The Problem
-I recently found an interesting implementation of [VNC over GIF in Node](https://github.com/sidorares/vnc-over-gif) and wanted to try to quickly replicate the same thing in Python, using Flask as my web server. I quickly realized two things:
+I recently found an interesting implementation of [VNC over GIF in
+Node](https://github.com/sidorares/vnc-over-gif) and wanted to try to quickly
+replicate the same thing in Python, using Flask as my web server. I quickly
+realized two things:
 
-1. Serving pieces of a GIF incrementally is not something that a micro-server like Flask is designed to handle
-2. While interesting, there are some inherent flaws with using a GIF image as the transport medium, namely that if you leave the screenshare open long enough, you're going to have a massive GIF image in your cache and in memory.
+1. Serving pieces of a GIF incrementally is not something that a micro-server
+like Flask is designed to handle
+2. While interesting, there are some inherent flaws with using a GIF image as
+the transport medium, namely that if you leave the screenshare open long
+enough, you're going to have a massive GIF image in your cache and in memory.
 
-Since I wanted to create something that was more functional than simply a proof-of-concept (how many times have you wanted to do a simple screenshare, but don't want to install any applications, or boot up Skype, or install that Google Hangout plugin?) I decided to move away from a GIF image and instead implement a simple screenshare application in Python.
+Since I wanted to create something that was more functional than simply a
+proof-of-concept (how many times have you wanted to do a simple screenshare,
+but don't want to install any applications, or boot up Skype, or install that
+Google Hangout plugin?) I decided to move away from a GIF image and instead
+implement a simple screenshare application in Python.
 
 ## The script
-We use two important libraries: `flask` for the web application and templating, and `pyscreenshot` as an abstraction to what is necessary to get a screenshot. *Note*: your mileage may vary -- `pyscreenshot` might not work on your machine. It can be installed as usual:
+We use two important libraries: `flask` for the web application and templating,
+and `pyscreenshot` as an abstraction to what is necessary to get a screenshot.
+*Note*: your mileage may vary -- `pyscreenshot` might not work on your machine.
+It can be installed as usual:
 
     $ pip install pyscreenshot
 
-To use `pyscreenshot`, you'll also need to install at least one backend (if they haven't been installed already). This will likely be what limits your usage of `pyscreenshot`, but you should be able to get a backend installed for most systems.
+To use `pyscreenshot`, you'll also need to install at least one backend (if
+they haven't been installed already). This will likely be what limits your
+usage of `pyscreenshot`, but you should be able to get a backend installed for
+most systems.
 
-The general idea here is to create the `flask` app, and produce two routes: one for the HTML of the page, and one for the actual image. The HTML will simply serve up a template with some javascript that we'll define later. The image route gets the screenshot from `pyscreenshot`, performs some manipulations on it in-memory, and uses the Flask `send_file` method to hand it off. Here's the whole application:
+The general idea here is to create the `flask` app, and produce two routes: one
+for the HTML of the page, and one for the actual image. The HTML will simply
+serve up a template with some javascript that we'll define later. The image
+route gets the screenshot from `pyscreenshot`, performs some manipulations on
+it in-memory, and uses the Flask `send_file` method to hand it off. Here's the
+whole application:
 
-    #!/usr/bin/python
-    
-    import pyscreenshot
-    import flask
-    from StringIO import StringIO
-     
-    app = flask.Flask(__name__)
-     
-    @app.route('/screen.png')
-    def serve_pil_image():
-        img_io = StringIO()
-        pyscreenshot.grab().save(img_io, 'PNG', quality=50)
-        img_io.seek(0)
-        return flask.send_file(img_io, mimetype='image/png')
-     
-    @app.route('/')
-    def serve_img():
-        return flask.render_template('screen.html')
-     
-    if __name__ == "__main__":
-        app.run(host= '0.0.0.0', debug=True)
+{% highlight python %}
+
+#!/usr/bin/python
+
+import pyscreenshot
+import flask
+from StringIO import StringIO
+
+app = flask.Flask(__name__)
+
+@app.route('/screen.png')
+def serve_pil_image():
+    img_io = StringIO()
+    pyscreenshot.grab().save(img_io, 'PNG', quality=50)
+    img_io.seek(0)
+    return flask.send_file(img_io, mimetype='image/png')
+
+@app.route('/')
+def serve_img():
+    return flask.render_template('screen.html')
+
+if __name__ == "__main__":
+    app.run(host= '0.0.0.0', debug=True)
+
+{% endhighlight %}
 
 ## The template
-Finally, we need a small HTML template to feed into flask to produce the screenshare page:
+Finally, we need a small HTML template to feed into flask to produce the
+screenshare page:
 
-    <html>
-        <head>
-            <script type="text/javascript">
-                function reloadpic() {
-                    document.images["screen"].src = "screen.png?random=" + new Date().getTime();
-                    setTimeout("reloadpic();", 500);
-                }
-                onload = reloadpic;
-            </script>
-        </head>
-        <body>
-            <img width="100%" id="screen">
-        </body>
-    </html>
+{% highlight html %}
 
-The script here simply refreshes the screen image once every half-second. As a cache-breaker, we append the current time (in milliseond) to the requested URI of the image.
+<html>
+    <head>
+        <script type="text/javascript">
+            function reloadpic() {
+                document.images["screen"].src = "screen.png?random=" + new Date().getTime();
+                setTimeout("reloadpic();", 500);
+            }
+            onload = reloadpic;
+        </script>
+    </head>
+    <body>
+        <img width="100%" id="screen">
+    </body>
+</html>
+
+{% endhighlight %}
+
+The script here simply refreshes the screen image once every half-second. As a
+cache-breaker, we append the current time (in milliseond) to the requested URI
+of the image.
 
 ## Running
 Finally, start up the application:
 
     $ python screen.py
 
-Because we've set the host to `"0.0.0.0"`, the application will be accessible on all hostnames your machine responds to on Flask's default port 5000 -- including an external IP, if you have one -- but it will be available at:
+Because we've set the host to `"0.0.0.0"`, the application will be accessible
+on all hostnames your machine responds to on Flask's default port 5000 --
+including an external IP, if you have one -- but it will be available at:
 
     http://localhost:5000
 

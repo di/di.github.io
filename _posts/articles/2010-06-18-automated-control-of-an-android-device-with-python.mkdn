@@ -1,6 +1,6 @@
 ---
 layout : post
-category : articles 
+category : articles
 title : Automated Control of an Android Device with Python
 description : Using Android's Simple Protocol for Automated Network Control to send touch events to a physical device using Python and a TCP socket.
 tags : [python, android, automation, adb]
@@ -10,10 +10,11 @@ tags : [python, android, automation, adb]
 ## Intro
 As mentioned in my previous article, [Device Screenshots with the Android Debug
 Bridge](/articles/2010/06/16/device-screenshots-with-the-android-debug-bridge),
-I'm currently working on an application which required the ability to get a live
-screenshot of my physical Android device. The second component to that problem,
-however, involved processing that image, and then automating a UI/Application
-response exactly like an actual user is (read: automatically touch the screen).
+I'm currently working on an application which required the ability to get a
+live screenshot of my physical Android device. The second component to that
+problem, however, involved processing that image, and then automating a
+UI/Application response exactly like an actual user is (read: automatically
+touch the screen).
 
 Again, like the ability to grab the device's current display, I figured this
 would be simple to do through the Android Debug Bridge. However, as it turned
@@ -51,9 +52,9 @@ device, in this case, port `1080`:
 
     $ ./adb forward tcp:1080 tcp:1080
 
-Simple! At this point, the README attempts to discuss all the possible commands.
-I was purely interested in a `touch` command (which is, in fact, two commands),
-so if you're looking for something else, look at the [README
+Simple! At this point, the README attempts to discuss all the possible
+commands.  I was purely interested in a `touch` command (which is, in fact, two
+commands), so if you're looking for something else, look at the [README
 file](http://android.git.kernel.org/?p=platform/development.git;a=blob;f=cmds/monkey/README.NETWORK.txt).
 
 If touch is what you want, though, here's what you need to know:
@@ -79,20 +80,20 @@ events, using the `socket` module:
 
 {% highlight python %}
 
-    #!/usr/bin/python
-    import socket
-    
-    TCP_IP = '127.0.0.1'
-    TCP_PORT = 1080
-    BUFFER_SIZE = 1024
-    
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect((TCP_IP, TCP_PORT))
-    s.send("touch down 30 60\ntouch up 30 60")
-    data = s.recv(BUFFER_SIZE)
-    s.close()
-    
-    print "Received: ", data
+#!/usr/bin/python
+import socket
+
+TCP_IP = '127.0.0.1'
+TCP_PORT = 1080
+BUFFER_SIZE = 1024
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect((TCP_IP, TCP_PORT))
+s.send("touch down 30 60\ntouch up 30 60")
+data = s.recv(BUFFER_SIZE)
+s.close()
+
+print "Received: ", data
 
 {% endhighlight %}
 

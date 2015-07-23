@@ -8,7 +8,9 @@ tags : [python]
 {% include JB/setup %}
 
 ## The Problem
-A certain viral "math" problem is currently [taking the internet by storm](http://www.nytimes.com/2015/04/15/science/a-math-problem-from-singapore-goes-viral-when-is-cheryls-birthday.html). It goes as follows:
+A certain viral "math" problem is currently [taking the internet by
+storm](http://www.nytimes.com/2015/04/15/science/a-math-problem-from-singapore-goes-viral-when-is-cheryls-birthday.html).
+It goes as follows:
 
 > Albert and Bernard just met Cheryl. “When’s your birthday?” Albert asked Cheryl.
 >
@@ -42,20 +44,26 @@ A certain viral "math" problem is currently [taking the internet by storm](http:
 
 ## The Solution
 
-The solution hinges on repeatedly finding unique (or non-unique) days and months from the set of potential dates. While it doesn't require any incredible math skills, it does require some good deductive logic. Once you understand what the trick is, it's easy to arrive at a solution. To verify the solution I came to, I decided to implement the problem in Python (although, really any language would do).
+The solution hinges on repeatedly finding unique (or non-unique) days and
+months from the set of potential dates. While it doesn't require any incredible
+math skills, it does require some good deductive logic. Once you understand
+what the trick is, it's easy to arrive at a solution. To verify the solution I
+came to, I decided to implement the problem in Python (although, really any
+language would do).
 
-**TL;DR:** The entire script is available as a gist [here](https://gist.github.com/di/56172003bc38f33238ef).
+**TL;DR:** The entire script is available as a gist
+[here](https://gist.github.com/di/56172003bc38f33238ef).
 
 First, let's make a simple class to represent our Date:
 
 {% highlight python %}
 
-    class Date:
-        def __init__(self, day, month):
-            self.day = day
-            self.month = month
-        def __repr__(self):
-            return "(%d, %s)" % (self.day, self.month)
+class Date:
+    def __init__(self, day, month):
+        self.day = day
+        self.month = month
+    def __repr__(self):
+        return "(%d, %s)" % (self.day, self.month)
 
 {% endhighlight %}
 
@@ -63,43 +71,48 @@ Then we'll add all of the ten dates Cheryl proposed:
 
 {% highlight python %}
 
-    dates = [
-        Date(15, 'may'),
-        Date(16, 'may'),
-        Date(19, 'may'),
-        Date(17, 'jun'),
-        Date(18, 'jun'),
-        Date(14, 'jul'),
-        Date(16, 'jul'),
-        Date(14, 'aug'),
-        Date(15, 'aug'),
-        Date(17, 'aug'),
-    ]
+dates = [
+    Date(15, 'may'),
+    Date(16, 'may'),
+    Date(19, 'may'),
+    Date(17, 'jun'),
+    Date(18, 'jun'),
+    Date(14, 'jul'),
+    Date(16, 'jul'),
+    Date(14, 'aug'),
+    Date(15, 'aug'),
+    Date(17, 'aug'),
+]
 
 {% endhighlight %}
 
-Next, we'll write two utility functions which remove dates with non-unique days (or months) from our list of dates:
+Next, we'll write two utility functions which remove dates with non-unique days
+(or months) from our list of dates:
 
 {% highlight python %}
 
-    def remove_duplicate_days(xs):
-        return [x for x in xs if sum(1 for d in xs if d.day == x.day) == 1]
-     
-    def remove_duplicate_months(xs):
-        return [x for x in xs if sum(1 for d in xs if d.month == x.month) == 1]
+def remove_duplicate_days(xs):
+    return [x for x in xs if sum(1 for d in xs if d.day == x.day) == 1]
+
+def remove_duplicate_months(xs):
+    return [x for x in xs if sum(1 for d in xs if d.month == x.month) == 1]
 
 {% endhighlight %}
 
-*Note: I realize these are inefficienet n^2 algorithms, and that I should be using `collections.Counter`, but I'm just trying to keep it simple and readable.*
+*Note: I realize these are inefficienet n^2 algorithms, and that I should be
+using `collections.Counter`, but I'm just trying to keep it simple and
+readable.*
 
-Albert knows the month, Bernard knows the day. Albert does not know when Cheryl's birthday is, but he knows Bernard doesn't either. This means that the the month of Cheryl's birthday is not a month with a unique day.
+Albert knows the month, Bernard knows the day. Albert does not know when
+Cheryl's birthday is, but he knows Bernard doesn't either. This means that the
+the month of Cheryl's birthday is not a month with a unique day.
 
 Select the months which have a unique day:
 
 {% highlight python %}
 
-    months_with_one_date = [date.month for date in remove_duplicate_days(dates)]
-    # >>> ['may', 'jun']
+months_with_one_date = [date.month for date in remove_duplicate_days(dates)]
+# >>> ['may', 'jun']
 
 {% endhighlight %}
 
@@ -107,19 +120,20 @@ Remove the dates which has a month which has a unique day:
 
 {% highlight python %}
 
-    dates = [date for date in dates if date.month not in months_with_one_date]
-    # >>> [(14, jul), (16, jul), (14, aug), (15, aug), (17, aug)]
+dates = [date for date in dates if date.month not in months_with_one_date]
+# >>> [(14, jul), (16, jul), (14, aug), (15, aug), (17, aug)]
 
 {% endhighlight %}
 
-Now, since Bernard knows the day, if it is unique, he knows the answer. He says he knows the answer, so the day must be unique.
- 
+Now, since Bernard knows the day, if it is unique, he knows the answer. He says
+he knows the answer, so the day must be unique.
+
 Remove the dates which do not have a unique day:
 
 {% highlight python %}
 
-    dates = remove_duplicate_days(dates)
-    # >>> [(16, jul), (15, aug), (17, aug)]
+dates = remove_duplicate_days(dates)
+# >>> [(16, jul), (15, aug), (17, aug)]
 
 {% endhighlight %}
 
@@ -129,8 +143,8 @@ Remove the dates which do not have a unique month:
 
 {% highlight python %}
 
-    dates = remove_duplicate_months(dates)
-    # >>> [(16, jul)]
+dates = remove_duplicate_months(dates)
+# >>> [(16, jul)]
 
 {% endhighlight %}
 

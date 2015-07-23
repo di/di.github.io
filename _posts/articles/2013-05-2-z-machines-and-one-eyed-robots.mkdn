@@ -8,8 +8,8 @@ tags : [challenges, python]
 {% include JB/setup %}
 
 ## The Problems
-Today, John Graham-Cumming posted
-[two problems he had to solve for his interview at
+Today, John Graham-Cumming posted [two problems he had to solve for his
+interview at
 Oxford](http://blog.jgc.org/2013/05/the-two-problems-i-had-to-solve-in-my.html).
 Both were relatively simple, but intriguing, and still stand as relevant
 interview questions thirty years later. I decided to implement the solutions to
@@ -36,15 +36,16 @@ Here was my initial attempt (in the instruction set language):
     7 I2
     8 J1,4 -> 6
 
-This creates two "counter" registers (instructions 1 and 2), and essentially has
-two loops (lines 3-5 and 6-8), which simultaneously increment the sum at
+This creates two "counter" registers (instructions 1 and 2), and essentially
+has two loops (lines 3-5 and 6-8), which simultaneously increment the sum at
 register `2` and the value at the respective "counter" register. When both
 counter registers match the registers of the original terms (`0` and `1`), the
 result can be found in register `2`.
 
-John then asks when this program  would fail. In this case, if either of the two
-initial values are zero, the first loop will continue incrementing the counter,
-but the result will never be zero, and the program will never terminate.
+John then asks when this program  would fail. In this case, if either of the
+two initial values are zero, the first loop will continue incrementing the
+counter, but the result will never be zero, and the program will never
+terminate.
 
 After a little thought, I was able to implement a second solution that can
 support zeros as well:
@@ -66,9 +67,9 @@ support zeros as well:
     14 I2
     15 J1,4 -> 13
 
-This program creates the same counter registers as the original (lines 1 and 2).
-It creates two extra registers, and makes their values 0 and 1 (lines 3-5).
-These will be used to force a jump.
+This program creates the same counter registers as the original (lines 1 and
+2).  It creates two extra registers, and makes their values 0 and 1 (lines
+3-5).  These will be used to force a jump.
 
 Line 6 checks if the first term is zero. If it isn't, it goes into the loop
 which increments the sum (lines 8-10). If it is, the next instruction (line 7)
@@ -79,8 +80,8 @@ loop (lines 13-15), if it is, it forces a jump to line 16, which is the end of
 the program.
 
 Still, the program might fail if the initial terms are negative, or if they are
-floating-point values. Since we only have instructions to increment integers and
-check for equality, I don't see a way to support these.
+floating-point values. Since we only have instructions to increment integers
+and check for equality, I don't see a way to support these.
 
 My thoughts: The tediousness of determining instruction indices for the jumps
 makes me glad I live in the future.
@@ -89,48 +90,48 @@ Here's the whole representation of the problem in Python:
 
 {% highlight python %}
 
-    #!/usr/bin/python
-    
-    def z(a, c):
-        r[a] = 0
-        return c + 1
-    
-    def i(a, c):
-        r[a] += 1
-        return c + 1
-    
-    def j(a, c):
-        if r[a[0]] != r[a[1]]:
-            return a[2]
-        return c + 1
-    
-    # Initialize an empty register
-    r = [None for _ in range(10)]
-    
-    # Set the initial values
-    r[0] = 3
-    r[1] = 4
-    
-    # Instruction set
-    b = [(z,2), (z,3), (z,4), (z,5), (z,6), (i,6),
-         (j,(0,3,8)), (j,(5, 6, 11)),
-         (i, 3), (i, 2), (j,(0,3,8)),
-         (j,(1,4,13)), (j,(5, 6, 17)),
-         (i, 4), (i, 2), (j,(1,4,13))]
-    
-    # Initialize the counter to the first instruction
-    counter = 0
-    
-    # Start through the instruction set
-    while counter < len(b):
-        f, n = b[counter]
-        counter = f(n, counter)
-    
-    # Print the register at the end of the simulation
-    print(r)
-    
-    # Print the resulting computation
-    print("%d + %d = %d" % (r[0], r[1], r[2]))
+#!/usr/bin/python
+
+def z(a, c):
+    r[a] = 0
+    return c + 1
+
+def i(a, c):
+    r[a] += 1
+    return c + 1
+
+def j(a, c):
+    if r[a[0]] != r[a[1]]:
+        return a[2]
+    return c + 1
+
+# Initialize an empty register
+r = [None for _ in range(10)]
+
+# Set the initial values
+r[0] = 3
+r[1] = 4
+
+# Instruction set
+b = [(z,2), (z,3), (z,4), (z,5), (z,6), (i,6),
+        (j,(0,3,8)), (j,(5, 6, 11)),
+        (i, 3), (i, 2), (j,(0,3,8)),
+        (j,(1,4,13)), (j,(5, 6, 17)),
+        (i, 4), (i, 2), (j,(1,4,13))]
+
+# Initialize the counter to the first instruction
+counter = 0
+
+# Start through the instruction set
+while counter < len(b):
+    f, n = b[counter]
+    counter = f(n, counter)
+
+# Print the register at the end of the simulation
+print(r)
+
+# Print the resulting computation
+print("%d + %d = %d" % (r[0], r[1], r[2]))
 
 {% endhighlight %}
 
@@ -150,14 +151,14 @@ blue), we can sort the buckets by always moving one of them to the front of the
 list, one of them to the end, and letting the third end up in the middle.
 
 By maintaining a pointer to the "end" of the red values on the left, and a
-pointer to the "beginning" of the blue values on the right, we always know where
-to put a ball given it's color.
+pointer to the "beginning" of the blue values on the right, we always know
+where to put a ball given it's color.
 
 The main algorithm is as follows, starting at the first bucket:
 
  * If the ball is red, swap it with the first ball we know isn't red, and go to
-   the next bucket. Since we already checked all the balls before this point, we
-   know that we're swapping with a green ball;
+   the next bucket. Since we already checked all the balls before this point,
+   we know that we're swapping with a green ball;
  * If the ball is blue, swap it with the last ball we know isn't blue. Since
    this ball comes from the portion of the list we haven't checked yet, stay at
    the current bucket, and examine the new ball;
@@ -170,54 +171,54 @@ Here's the whole representation of the problem in Python:
 
 {% highlight python %}
 
-    #!/usr/bin/python
-    
-    import random
-    
-    class ball:
-    
-        def __init__(self, color):
-            self.color = color
-            self.examined = 0
-    
-        def look(self):
-            self.examined += 1
-            return self.color
-    
-    class buckets:
-    
-        def __init__(self, size=15):
-            self.line = [ball(random.choice(['r', 'g', 'b'])) for _ in range(size)]
-            self.i = 0
-            self.r = 0
-            self.b = size-1
-    
-        def swap(self, i, j):
-            self.line[i], self.line[j] = self.line[j], self.line[i]
-    
-        def check(self):
-            c = self.line[self.i].look()
-            if c == 'r':
-                self.swap(self.i, self.r)
-                self.r += 1
-                self.i += 1
-            elif c == 'b':
-                self.swap(self.i, self.b)
-                self.b -= 1
-            else:
-                self.i += 1
-    
-        def solve(self):
-            while self.i <= self.b:
-                self.check()
-    
-    b = buckets()
-    print([x.color for x in b.line])
-    
-    b.solve()
-    
-    print([x.color for x in b.line])
-    print([x.examined for x in b.line])
+#!/usr/bin/python
+
+import random
+
+class ball:
+
+    def __init__(self, color):
+        self.color = color
+        self.examined = 0
+
+    def look(self):
+        self.examined += 1
+        return self.color
+
+class buckets:
+
+    def __init__(self, size=15):
+        self.line = [ball(random.choice(['r', 'g', 'b'])) for _ in range(size)]
+        self.i = 0
+        self.r = 0
+        self.b = size-1
+
+    def swap(self, i, j):
+        self.line[i], self.line[j] = self.line[j], self.line[i]
+
+    def check(self):
+        c = self.line[self.i].look()
+        if c == 'r':
+            self.swap(self.i, self.r)
+            self.r += 1
+            self.i += 1
+        elif c == 'b':
+            self.swap(self.i, self.b)
+            self.b -= 1
+        else:
+            self.i += 1
+
+    def solve(self):
+        while self.i <= self.b:
+            self.check()
+
+b = buckets()
+print([x.color for x in b.line])
+
+b.solve()
+
+print([x.color for x in b.line])
+print([x.examined for x in b.line])
 
 {% endhighlight %}
 

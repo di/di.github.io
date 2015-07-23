@@ -1,7 +1,7 @@
 ---
 layout : post
-category : articles 
-title : Threaded Messaging via Unix Domain Sockets in Python 
+category : articles
+title : Threaded Messaging via Unix Domain Sockets in Python
 description : A small example using Unix Domain Sockets to send messages or data between threads on a local domain.
 tags : [python, threading, unix]
 ---
@@ -10,16 +10,16 @@ tags : [python, threading, unix]
 ## Introduction
 As part of a recent project, I experimented for the first time with Unix Domain
 Sockets. If you're unfamiliar, it's probably because there's relatively little
-documentation or examples available online. I won't go into detail, but two good
-sources to read are Wikipedia's [&ldquo;Unix Domain
+documentation or examples available online. I won't go into detail, but two
+good sources to read are Wikipedia's [&ldquo;Unix Domain
 Socket&rdquo;](http://en.wikipedia.org/wiki/Unix_domain_socket) page as well as
 Thomas Stover's [&ldquo;Demystifying Unix Domain
-Sockets&rdquo;](http://www.wsinnovations.com/softeng/articles/uds.html) article.
-Although the latter's examples are in C (and that's not what you're here for!)
-he does a great job of, well, demystifying Unix Domain Sockets.
+Sockets&rdquo;](http://www.wsinnovations.com/softeng/articles/uds.html)
+article.  Although the latter's examples are in C (and that's not what you're
+here for!) he does a great job of, well, demystifying Unix Domain Sockets.
 
 My goal was to create a basic Threaded example class which could be used as a
-server or client. 
+server or client.
 
 ## A Brief Example: The &lsquo;piper&rsquo; Class
 ### Imports
@@ -28,10 +28,10 @@ Unix Domain Sockets reside):
 
 {% highlight python %}
 
-    import socket
-    from threading import Thread
-    
-    class piper :
+import socket
+from threading import Thread
+
+class piper :
 
 {% endhighlight %}
 
@@ -40,13 +40,13 @@ Here's the `__init__` def for the  class:
 
 {% highlight python %}
 
-    def __init__(self, name, isDaemon) :
-        self._name = name
-        self._socket = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
-        self._socket.bind("/tmp/piper-%s" % name)
-        self._thread = Thread(target=self._listener)
-        self._thread.setDaemon(isDaemon)
-        self._thread.start()
+def __init__(self, name, isDaemon) :
+    self._name = name
+    self._socket = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
+    self._socket.bind("/tmp/piper-%s" % name)
+    self._thread = Thread(target=self._listener)
+    self._thread.setDaemon(isDaemon)
+    self._thread.start()
 
 {% endhighlight %}
 
@@ -67,22 +67,23 @@ entire application.
 
 ### Receiving Data - The Thread Target Method
 As specified above, the thread for the class has a target method, `_listener`.
-For the purposes of the example, this thread will contain a loop which waits for
-data on it's own socket, prints to the command line on receipt, and then sends a
-response back to the original sender (in this case, it sends it's own name).
-Here's the method:
+For the purposes of the example, this thread will contain a loop which waits
+for data on it's own socket, prints to the command line on receipt, and then
+sends a response back to the original sender (in this case, it sends it's own
+name).  Here's the method:
 
 {% highlight python %}
 
-    def _listener(self) :
-        while True:
-            data, _ = self._socket.recvfrom(1024)
-            print "%s received: '%s'" % (self._name, data)
-            self._send(data, self._name)
+def _listener(self) :
+    while True:
+        data, _ = self._socket.recvfrom(1024)
+        print "%s received: '%s'" % (self._name, data)
+        self._send(data, self._name)
 
 {% endhighlight %}
 
-This is pretty self-explanatory. The value `1024` is the message buffer size, etc.
+This is pretty self-explanatory. The value `1024` is the message buffer size,
+etc.
 
 ### Sending Data
 The `_send` method simply sends on a specified socket. In this demo, it's used
@@ -90,9 +91,9 @@ to push data on to the socket of another class, so it looks like this:
 
 {% highlight python %}
 
-    def _send(self, recp, data) :
-        _s = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
-        _s.sendto(data, "/tmp/piper-%s" % recp)
+def _send(self, recp, data) :
+    _s = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
+    _s.sendto(data, "/tmp/piper-%s" % recp)
 
 {% endhighlight %}
 
@@ -105,10 +106,10 @@ to set off the chain reaction:
 
 {% highlight python %}
 
-    def main() :
-        ping = piper(name='ping', isDaemon=True)
-        pong = piper(name='pong', isDaemon=False)
-        ping._send(recp=pong._name, data=ping._name)
+def main() :
+    ping = piper(name='ping', isDaemon=True)
+    pong = piper(name='pong', isDaemon=False)
+    ping._send(recp=pong._name, data=ping._name)
 
 {% endhighlight %}
 
@@ -133,36 +134,36 @@ Here's the entire, continuous example class:
 
 {% highlight python %}
 
-    #!/usr/bin/python
-    import socket
-    from threading import Thread
-    
-    class piper:
-    
-        def __init__(self, name, isDaemon) :
-            self._name = name
-            self._socket = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
-            self._socket.bind("/tmp/piper-%s" % name)
-            self._thread = Thread(target=self._listener)
-            self._thread.setDaemon(isDaemon)
-            self._thread.start()
-    
-        def _listener(self) :
-            while True:
-                data, _ = self._socket.recvfrom(1024)
-                print "%s received: '%s'" % (self._name, data)
-                self._send(data, self._name)
-    
-        def _send(self, recp, data) :
-            _s = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
-            _s.sendto(data, "/tmp/piper-%s" % recp)
-    
-    def main() :
-        ping = piper(name='ping', isDaemon=True)
-        pong = piper(name='pong', isDaemon=False)
-        ping._send(recp=pong._name, data=ping._name)
-    
-    if __name__ == "__main__" :
-        main()
+#!/usr/bin/python
+import socket
+from threading import Thread
+
+class piper:
+
+    def __init__(self, name, isDaemon) :
+        self._name = name
+        self._socket = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
+        self._socket.bind("/tmp/piper-%s" % name)
+        self._thread = Thread(target=self._listener)
+        self._thread.setDaemon(isDaemon)
+        self._thread.start()
+
+    def _listener(self) :
+        while True:
+            data, _ = self._socket.recvfrom(1024)
+            print "%s received: '%s'" % (self._name, data)
+            self._send(data, self._name)
+
+    def _send(self, recp, data) :
+        _s = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
+        _s.sendto(data, "/tmp/piper-%s" % recp)
+
+def main() :
+    ping = piper(name='ping', isDaemon=True)
+    pong = piper(name='pong', isDaemon=False)
+    ping._send(recp=pong._name, data=ping._name)
+
+if __name__ == "__main__" :
+    main()
 
 {% endhighlight %}

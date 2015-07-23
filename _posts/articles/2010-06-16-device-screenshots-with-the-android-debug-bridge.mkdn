@@ -9,16 +9,16 @@ tags : [python, android, screenshot, adb]
 
 ## Intro
 Certain recent endeavors have lead me to desire a way to automatically get
-pixel-perfect screenshots of my physical Android device (Motorola Droid). I knew
-it was possible to use the &ldquo;adb&rdquo;, or Android Debug Bridge tool;
-however, the actual tool has a number of features I didn't need, plus I wanted
-to automate the entire process.
+pixel-perfect screenshots of my physical Android device (Motorola Droid). I
+knew it was possible to use the &ldquo;adb&rdquo;, or Android Debug Bridge
+tool; however, the actual tool has a number of features I didn't need, plus I
+wanted to automate the entire process.
 
 ### References
 A number of mailing list posters and/or bloggers, some dating back a couple
 years, have attempted a solution, but almost every one either depended on an
-out-of-date library, or simply didn't work. The majority of my solution is taken
-from [Jon Larimer's
+out-of-date library, or simply didn't work. The majority of my solution is
+taken from [Jon Larimer's
 code](http://blog.codetastrophe.com/2008/12/using-androiddebugbridge-api-to-get.html),
 but I had to make a number of modifications to render the resulting image
 properly.
@@ -32,7 +32,7 @@ The following is an example of what you'll get from a running server without
 enough permissions:
 
     $ ./adb devices
-    List of devices attached 
+    List of devices attached
     ???????????? no permissions
 
 The solution is:
@@ -42,71 +42,89 @@ The solution is:
     * daemon not running. starting it now *
     * daemon started successfully *
     $ ./adb devices
-    List of devices attached 
+    List of devices attached
     04XXXXXXXXXXXX13  device
 
 ## Connecting to the ADB
 Create the DebugBridge as follows:
 
-    /* /usr/bin/java */
-    AndroidDebugBridge.init(false);
-    AndroidDebugBridge adb = AndroidDebugBridge.createBridge();
+{% highlight java %}
+
+AndroidDebugBridge.init(false);
+AndroidDebugBridge adb = AndroidDebugBridge.createBridge();
+
+{% endhighlight %}
 
 We're going to add an instance of our class as a device change listener, so
 we'll know when changes occur, like the connection to a device. This also means
 the class will implement `IDeviceChangeListener`.
 
-    /* /usr/bin/java */
-    Screenshot ss = new Screenshot();
-    AndroidDebugBridge.addDeviceChangeListener(ss);
+{% highlight java %}
+
+Screenshot ss = new Screenshot();
+AndroidDebugBridge.addDeviceChangeListener(ss);
+
+{% endhighlight %}
 
 Use this to collect all attached devices:
 
-    /* /usr/bin/java */
-    IDevice[] devices = adb.getDevices();
+{% highlight java %}
+
+IDevice[] devices = adb.getDevices();
+
+{% endhighlight %}
 
 ## Getting the Raw Screenshot
 Get the RawImage from the device:
 
-    /* /usr/bin/java */
-    RawImage raw = device.getScreenshot();
+{% highlight java %}
+
+RawImage raw = device.getScreenshot();
+
+{% endhighlight %}
 
 Set up the BufferedImage with the appropriate dimensions:
 
-    /* /usr/bin/java */
-    Boolean landscape = false;
-    BufferedImage image = null;
-    Dimension size = new Dimension();
-    int width2 = landscape ? raw.height : raw.width;
-    int height2 = landscape ? raw.width : raw.height;
-    
-    if (image == null) {
+{% highlight java %}
+
+Boolean landscape = false;
+BufferedImage image = null;
+Dimension size = new Dimension();
+int width2 = landscape ? raw.height : raw.width;
+int height2 = landscape ? raw.width : raw.height;
+
+if (image == null) {
+    image = new BufferedImage(width2, height2, BufferedImage.TYPE_INT_RGB);
+        size.setSize(image.getWidth(), image.getHeight());
+} else {
+    if (image.getHeight() != height2 || image.getWidth() != width2) {
         image = new BufferedImage(width2, height2, BufferedImage.TYPE_INT_RGB);
-            size.setSize(image.getWidth(), image.getHeight());
-    } else {
-        if (image.getHeight() != height2 || image.getWidth() != width2) {
-            image = new BufferedImage(width2, height2, BufferedImage.TYPE_INT_RGB);
-            size.setSize(image.getWidth(), image.getHeight());
-        }
+        size.setSize(image.getWidth(), image.getHeight());
     }
+}
+
+{% endhighlight %}
 
 Finally, make the appropriate adjustments to the RawImage's RGB values:
 
-    /* /usr/bin/java */
-    int index = 0;
-    int indexInc = raw.bpp >> 3;
-    for (int y = 0; y < raw.height; y++) {
-        for (int x = 0; x < raw.width; x++, index += indexInc) {
-            int value = raw.getARGB(index);
-            if (landscape)
-                image.setRGB(y, raw.width - x - 1, value);
-            else
-                image.setRGB(x, y, value);
-        }
+{% highlight java %}
+
+int index = 0;
+int indexInc = raw.bpp >> 3;
+for (int y = 0; y < raw.height; y++) {
+    for (int x = 0; x < raw.width; x++, index += indexInc) {
+        int value = raw.getARGB(index);
+        if (landscape)
+            image.setRGB(y, raw.width - x - 1, value);
+        else
+            image.setRGB(x, y, value);
     }
+}
+
+{% endhighlight %}
 
 There are also a number of overrides for our class to fill the requirements of
-the implementation, for the various changes 
+the implementation, for the various changes
 
 ## All together
 You can download the entire working class [here](https://gist.github.com/1854611).

@@ -15,8 +15,10 @@ them over and over without running all the tests in the suite. Usually, this
 looks like:
 
 {% highlight python %}
+
 @pytest.mark.focus
 ...
+
 {% endhighlight %}
 
 However, I also have the bad habit of often checking these marks in when I
@@ -27,6 +29,7 @@ To prevent this, I created the following git pre-commit hook to be run before
 any commit is made:
 
 {% highlight bash %}
+
 #!/bin/bash
 
 if git rev-parse --verify HEAD >/dev/null 2>&1
@@ -50,6 +53,7 @@ do
     fi
 done <<< "$difffiles"
 exit $exitstatus
+
 {% endhighlight %}
 
 This script looks at all files currently staged to be committed and greps them
