@@ -10,7 +10,7 @@ tags : [python, android, screenshot, adb]
 ## Intro
 Certain recent endeavors have lead me to desire a way to automatically get
 pixel-perfect screenshots of my physical Android device (Motorola Droid). I
-knew it was possible to use the &ldquo;adb&rdquo;, or Android Debug Bridge
+knew it was possible to use the "adb", or Android Debug Bridge
 tool; however, the actual tool has a number of features I didn't need, plus I
 wanted to automate the entire process.
 

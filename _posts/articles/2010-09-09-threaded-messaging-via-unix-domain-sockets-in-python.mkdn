@@ -11,17 +11,18 @@ tags : [python, threading, unix]
 As part of a recent project, I experimented for the first time with Unix Domain
 Sockets. If you're unfamiliar, it's probably because there's relatively little
 documentation or examples available online. I won't go into detail, but two
-good sources to read are Wikipedia's [&ldquo;Unix Domain
-Socket&rdquo;](http://en.wikipedia.org/wiki/Unix_domain_socket) page as well as
-Thomas Stover's [&ldquo;Demystifying Unix Domain
-Sockets&rdquo;](http://www.wsinnovations.com/softeng/articles/uds.html)
+good sources to read are Wikipedia's ["Unix Domain
+Socket"](http://en.wikipedia.org/wiki/Unix_domain_socket) page as well as
+Thomas Stover's ["Demystifying Unix Domain
+Sockets"](http://www.wsinnovations.com/softeng/articles/uds.html)
 article.  Although the latter's examples are in C (and that's not what you're
 here for!) he does a great job of, well, demystifying Unix Domain Sockets.
 
 My goal was to create a basic Threaded example class which could be used as a
 server or client.
 
-## A Brief Example: The &lsquo;piper&rsquo; Class
+## A Brief Example: The 'piper' Class
+
 ### Imports
 We'll be using the `threading` module as well as the `socket` module (where the
 Unix Domain Sockets reside):
@@ -97,10 +98,10 @@ def _send(self, recp, data) :
 
 {% endhighlight %}
 
-### Using The &lsquo;piper&rsquo; Class
+### Using The 'piper' Class
 Here's the `main()` method I used. Remembering some of the baby steps I first
 took when learning about Threads, I wanted to make two clients named
-&lsquo;ping&rsquo; and &lsquo;pong&rsquo; which simply chats back and forth, ad
+'ping' and 'pong' which simply chats back and forth, ad
 infinitum. Note that one is non-daemonic, and that the last line simply exists
 to set off the chain reaction:
 

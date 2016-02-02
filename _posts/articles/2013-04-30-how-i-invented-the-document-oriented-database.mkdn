@@ -46,6 +46,7 @@ clueless about MySQL (the only RDB that was available, at all, at the time).
 So, I had to get creative.
 
 ## A solution, and more problems
+
 ### AJAX... Stronger than Dirt!
 AJAX was the hot buzzword at the time... I had just gotten my Gmail account and
 everyone was talking about it and how important it would be. I realized that I
@@ -94,5 +95,5 @@ databases -- until the company was eventually sold and the website was folded
 into a larger parent company.
 
 I still wonder what some poor, hapless developer must have thought when he
-inherited what I had wrought -- probably: "What the....", and then &ldquo;`rm
+inherited what I had wrought -- probably: "What the....", and then "`rm
 -rf *`".

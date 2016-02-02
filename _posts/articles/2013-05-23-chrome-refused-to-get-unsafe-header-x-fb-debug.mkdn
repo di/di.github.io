@@ -1,7 +1,7 @@
 ---
 layout : post
 category : articles
-title : Refused to get unsafe header &ldquo;X-FB-Debug&rdquo;
+title : Refused to get unsafe header "X-FB-Debug"
 description : Solution to an issue that Chrome may present when uploading a photo to a Facebook status post.
 tags : [chrome, facebook, headers]
 ---

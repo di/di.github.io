@@ -52,8 +52,8 @@ would argue probably not.
 ## The problem
 Here's the problem with all of this. Take a look at [this
 article](https://news.ycombinator.com/) recently
-featured on [HN](https://news.ycombinator.com/) titled &ldquo;The best
-programmers are the quickest to Google&rdquo;. The focus is basically that all
+featured on [HN](https://news.ycombinator.com/) titled "The best
+programmers are the quickest to Google". The focus is basically that all
 the relevant, most granular pieces of whatever project you're building have
 already been written, and all you have to do is search Google for it. Here's an
 excerpt:
@@ -63,8 +63,8 @@ excerpt:
 > you’re either Googling it wrong or way off in what you’re trying to
 > accomplish.
 
-The issue here is the thought that &ldquo;We'll always be good with what we've
-got.&rdquo; If this mindset permeates us as developers (some might say it
+The issue here is the thought that "We'll always be good with what we've
+got." If this mindset permeates us as developers (some might say it
 already has), we're just rearranging deck chairs on the Titanic. [Everything is
 a remix](https://vimeo.com/14912890). Nobody will create anything new, ever.
 

@@ -1,6 +1,6 @@
 ---
 layout: page
-title : All Posts 
+title : All Posts
 ---
 {% include JB/setup %}
 
@@ -11,7 +11,7 @@ title : All Posts
 </ul>
 
 <ul class="posts">
-  {% for category in site.categories %} 
+  {% for category in site.categories %}
   <h2 id="{{ category[0] }}-ref">{{ category[0] | join: "/" }}</h2>
   {% for post in category[1] %}
     <li><a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></li>
@@ -19,4 +19,3 @@ title : All Posts
   {% endfor %}
   {% endfor %}
 </ul>
-
