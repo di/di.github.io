@@ -1,0 +1,137 @@
+---
+layout : post
+category : articles
+title: Coded by Kids - The Best PTW Event You Didn't Go To
+date: 2016-05-19 19:00 UTC
+tags: tech literacy, young coders
+author: Dustin Ingram
+description: "A look at how a Philly nonprofit is trying to create a new generation of coders."
+---
+{% include JB/setup %}
+
+This past week I attended two unusual [Philly Tech
+Week](http://phillytechweek.com) events. They were "Introduction to Coding"
+sessions hosted by [Coded by Kids](http://codedbykids.com), an organization
+which provides inner-city kids with tech skills. The events were at rec centers
+in North Philly and West Philly, with kids ranging from 9 to 14.
+
+![](/assets/images/coded_by_kids/photo.jpeg)
+
+## Coding 101
+
+Each session was two parts. In the first part, we tried to introduce some basic
+aspects of Coding 101. We asked the kids a few questions like:
+
+  * What is coding? (_"Hacking!"_)
+  * Why do we need coding? (_"For hacking!"_)
+  * Where do you find code? (_"Microwaves!"_)
+  * Who are coders? (_"Game makers, hackers!"_)
+  * What skills are useful for coding? (_"Math."_)
+  * Q&A (_"Are you a hacker?!"_)
+
+Turns out, they were totally fascinated with games and hacking. They have a
+pretty good idea of where code lives and why we need it, and understand that
+code lives in things like TVs, cellphones, gaming systems, etc. They don't have
+any idea who "stereotypical" coders are -- which is a good thing!
+
+## Hands On
+
+The second, larger, half of the sessions was a hands-on exercise to introduce the kids to some code.
+
+We gave them a pre-made HTML/CSS website via [codepen.io](http://codepen.io),
+and worked with them to make alterations to the site including changing text,
+changing font styling, changing colors, and changing the images.
+
+Here's what the example originally looked like:
+
+![Original, boring twitter page](/assets/images/coded_by_kids/original.png)
+
+
+Here's what it looked like after I worked with Tyriq and his friend Jayden, 9
+and 10 respectively:
+
+![PokeballZ](/assets/images/coded_by_kids/tyriq.png)
+
+## What _They_ Learned
+
+### Messing things up
+
+In the beginning, most of the kids I worked with were relatively worried about
+messing things up. At the very beginning of our hands-on session, Tyriq
+accidentally typed a bunch of gibberish in an HTML comment on the page. He was
+pretty upset at first that he had just messed up all his code. They've
+definitely been taught to be careful with computers, and they have a pretty
+good idea that computers/code can be fragile, and can be broken. However, this
+definitely seems to prevent them from truly experimenting.
+
+### Experimentation
+
+Eventually, I was able to get the kids to experiment. Early in the hands-on
+portion, Tyriq wanted to change one of the images in the "tweet". He
+successfully changed the first one, but then after finding a GIF he wanted to
+use for the second one, he changed his mind.
+
+When I asked him why, he said he didn't think it would work, because it was
+animated and not a still image like the one he used before. I had to push him to try it and see what
+would happen... and it worked!
+
+### Coding?
+
+Coded by Kids hosts weekly sessions teaching coding skills, but
+the main goal of these sessions are to build interest, both for the kids and
+the rec centers. Although the kids might not really learn in-depth coding, the sessions serve as a good introduction to get kids excited about coding and to teach some basic concepts about coding and the web, such as:
+
+  * How images have addresses that can be used on website;
+  * How colors are represented by codes;
+  * How you have to tell a computer exactly what to do (text size,
+    color, underline)
+
+Which is a pretty good start!
+
+## What _I_ Learned
+
+### Inequity
+
+When [Mayor Jim Kenney](https://twitter.com/JimFKenney) came to visit one of
+the sessions, this is what he said:
+
+> "This inequity makes me angry."
+
+What I learned made me angry as well. The computer labs in rec centers are grossly
+underfunded, as one might expect. I saw water leaking from the ceiling onto a
+desk of computers, a quarter of the workstations were not working, and several mice and keyboards were broken.
+
+![](/assets/images/coded_by_kids/packed.jpg)
+
+Not to mention that there just weren't enough computers, with two and sometimes
+three students having to share one computer. One location didn't even have enough chairs.
+
+## Technical Literacy
+
+On a positive note, the kids were far more technically literate than I
+expected. They almost all have cellphones, some iPads, some laptops. They have
+Gmail accounts, and know how to use them. But what they don't have is someone to
+focus that literacy or desire into something worthwile.
+
+## Colors
+
+One last thing I learned, I learned from Tyriq himself.
+
+While we were changing the colors of various things, I told him that instead of
+using hex codes such as `#ffff00` for yellow, we could use the actual names of
+some colors. Expecting him to want to use a color like red, green, or blue, I
+asked him what color we should try.
+
+He said turquoise.
+
+Without an immense knowledge of the HTML specification, I thought that
+turquoise sounded a little too exotic to be an HTML color name, so I told him I
+didn't think it would work. In response, he told _me_ we should try it to see
+what would happen!
+
+And of course, <span style="color:turquoise">it worked!</span>
+
+<br>
+_This post was originally published at [www.promptworks.com](http://www.promptworks.com/blog/2016/05/19/coded-by-kids/)._
+<br>
+_Thanks to Brian Duggan and Patrick Smith for reading drafts of this post._
