@@ -172,6 +172,13 @@ dl dt, dl dd {
     line-height: 1.3em;
 }
 
-ul + dl, dd + dt{
-    padding-top:1.3em;
+ul + dl, dd + dt {
+    padding-top: 1.3em;
+}
+
+.content p img {
+    width: 100%;
+    margin-left: -1.5em;
+    padding-top: 1.3em;
+    padding-bottom: 1.3em;
 }
