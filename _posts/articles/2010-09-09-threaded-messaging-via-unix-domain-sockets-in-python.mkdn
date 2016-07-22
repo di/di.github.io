@@ -27,20 +27,17 @@ server or client.
 We'll be using the `threading` module as well as the `socket` module (where the
 Unix Domain Sockets reside):
 
-{% highlight python %}
-
+```python
 import socket
 from threading import Thread
 
 class piper :
-
-{% endhighlight %}
+```
 
 ### Initialization
 Here's the `__init__` def for the  class:
 
-{% highlight python %}
-
+```python
 def __init__(self, name, isDaemon) :
     self._name = name
     self._socket = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
@@ -48,8 +45,7 @@ def __init__(self, name, isDaemon) :
     self._thread = Thread(target=self._listener)
     self._thread.setDaemon(isDaemon)
     self._thread.start()
-
-{% endhighlight %}
+```
 
 As the above articles mention, you can think of Domain Sockets as local pipes,
 or even as files on the local domain. Therefore, for each client that is
@@ -60,7 +56,9 @@ Note the `setDaemon(isDaemon)` method call there. It's important, when we go to
 create a bunch of individual nodes, that *one* of them is not daemonized, for
 reasons specified by the `daemon` documentation:
 
-    The entire Python program exits when no alive non-daemon threads are left.
+```
+The entire Python program exits when no alive non-daemon threads are left.
+```
 
 This will allow us to run `n-1` threads in the background, and only get output
 from one, as well as being able to kill the non-daemonized thread to stop the
@@ -73,15 +71,13 @@ for data on it's own socket, prints to the command line on receipt, and then
 sends a response back to the original sender (in this case, it sends it's own
 name).  Here's the method:
 
-{% highlight python %}
-
+```python
 def _listener(self) :
     while True:
         data, _ = self._socket.recvfrom(1024)
         print "%s received: '%s'" % (self._name, data)
         self._send(data, self._name)
-
-{% endhighlight %}
+```
 
 This is pretty self-explanatory. The value `1024` is the message buffer size,
 etc.
@@ -90,13 +86,11 @@ etc.
 The `_send` method simply sends on a specified socket. In this demo, it's used
 to push data on to the socket of another class, so it looks like this:
 
-{% highlight python %}
-
+```python
 def _send(self, recp, data) :
     _s = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
     _s.sendto(data, "/tmp/piper-%s" % recp)
-
-{% endhighlight %}
+```
 
 ### Using The 'piper' Class
 Here's the `main()` method I used. Remembering some of the baby steps I first
@@ -105,36 +99,39 @@ took when learning about Threads, I wanted to make two clients named
 infinitum. Note that one is non-daemonic, and that the last line simply exists
 to set off the chain reaction:
 
-{% highlight python %}
-
+```python
 def main() :
     ping = piper(name='ping', isDaemon=True)
     pong = piper(name='pong', isDaemon=False)
     ping._send(recp=pong._name, data=ping._name)
-
-{% endhighlight %}
+```
 
 ### Cleaning Up
 You probably won't be able to kill the threaded process by `^C`-ing at the
 command line, instead:
 
-    $ pkill python
+```
+$ pkill python
+```
 
 Furthermore, this example doesn't clean up after itself at all. If you try to
 run it twice in a row, you'll get the error:
 
-    socket.error: [Errno 98] Address already in use
+```
+socket.error: [Errno 98] Address already in use
+```
 
 This means that the Domain Sockets we created in `/tmp` (`/tmp/piper-ping` and
 `/tmp/piper-pong`) still exist! Get rid of them with:
 
-    $ rm -rf /tmp/piper-*
+```
+$ rm -rf /tmp/piper-*
+```
 
 ### Putting It All Together
 Here's the entire, continuous example class:
 
-{% highlight python %}
-
+```python
 #!/usr/bin/python
 import socket
 from threading import Thread
@@ -166,5 +163,4 @@ def main() :
 
 if __name__ == "__main__" :
     main()
-
-{% endhighlight %}
+```

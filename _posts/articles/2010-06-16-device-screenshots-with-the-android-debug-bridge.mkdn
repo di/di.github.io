@@ -31,62 +31,57 @@ plugins, it'll have started up the ADB server already, with basic permissions.
 The following is an example of what you'll get from a running server without
 enough permissions:
 
-    $ ./adb devices
-    List of devices attached
-    ???????????? no permissions
+```
+$ ./adb devices
+List of devices attached
+???????????? no permissions
+```
 
 The solution is:
 
-    $ ./adb kill-server
-    $ sudo ./adb start-server
-    * daemon not running. starting it now *
-    * daemon started successfully *
-    $ ./adb devices
-    List of devices attached
-    04XXXXXXXXXXXX13  device
+```
+$ ./adb kill-server
+$ sudo ./adb start-server
+* daemon not running. starting it now *
+* daemon started successfully *
+$ ./adb devices
+List of devices attached
+04XXXXXXXXXXXX13  device
+```
 
 ## Connecting to the ADB
 Create the DebugBridge as follows:
 
-{% highlight java %}
-
+```java
 AndroidDebugBridge.init(false);
 AndroidDebugBridge adb = AndroidDebugBridge.createBridge();
-
-{% endhighlight %}
+```
 
 We're going to add an instance of our class as a device change listener, so
 we'll know when changes occur, like the connection to a device. This also means
 the class will implement `IDeviceChangeListener`.
 
-{% highlight java %}
-
+```java
 Screenshot ss = new Screenshot();
 AndroidDebugBridge.addDeviceChangeListener(ss);
-
-{% endhighlight %}
+```
 
 Use this to collect all attached devices:
 
-{% highlight java %}
-
+```java
 IDevice[] devices = adb.getDevices();
-
-{% endhighlight %}
+```
 
 ## Getting the Raw Screenshot
 Get the RawImage from the device:
 
-{% highlight java %}
-
+```java
 RawImage raw = device.getScreenshot();
-
-{% endhighlight %}
+```
 
 Set up the BufferedImage with the appropriate dimensions:
 
-{% highlight java %}
-
+```java
 Boolean landscape = false;
 BufferedImage image = null;
 Dimension size = new Dimension();
@@ -102,13 +97,11 @@ if (image == null) {
         size.setSize(image.getWidth(), image.getHeight());
     }
 }
-
-{% endhighlight %}
+```
 
 Finally, make the appropriate adjustments to the RawImage's RGB values:
 
-{% highlight java %}
-
+```java
 int index = 0;
 int indexInc = raw.bpp >> 3;
 for (int y = 0; y < raw.height; y++) {
@@ -120,8 +113,7 @@ for (int y = 0; y < raw.height; y++) {
             image.setRGB(x, y, value);
     }
 }
-
-{% endhighlight %}
+```
 
 There are also a number of overrides for our class to fill the requirements of
 the implementation, for the various changes

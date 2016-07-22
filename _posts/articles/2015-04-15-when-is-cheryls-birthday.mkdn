@@ -12,35 +12,26 @@ A certain viral "math" problem is currently [taking the internet by
 storm](http://www.nytimes.com/2015/04/15/science/a-math-problem-from-singapore-goes-viral-when-is-cheryls-birthday.html).
 It goes as follows:
 
-> Albert and Bernard just met Cheryl. “When’s your birthday?” Albert asked Cheryl.
+> Albert and Bernard just met Cheryl. “When’s your birthday?” Albert asked
+> Cheryl.
 >
-> Cheryl thought a second and said, “I’m not going to tell you, but I’ll give you some clues.”
+> Cheryl thought a second and said, “I’m not going to tell you, but I’ll give
+> you some clues.” She wrote down a list of 10 dates:
 >
-> She wrote down a list of 10 dates:
+>> May 15, May 16, May 19 June 17, June 18 July 14, July 16 August 14, August
+>> 15, August 17
 >
->> May 15, May 16, May 19
->>
->> June 17, June 18
->>
->> July 14, July 16
->>
->> August 14, August 15, August 17
+> “My birthday is one of these,” she said.  Then Cheryl whispered in Albert’s
+> ear the month — and only the month — of her birthday.  To Bernard, she
+> whispered the day, and only the day.  “Can you figure it out now?” she asked
+> Albert.
 >
-> “My birthday is one of these,” she said.
->
-> Then Cheryl whispered in Albert’s ear the month — and only the month — of her birthday.
->
-> To Bernard, she whispered the day, and only the day.
->
-> “Can you figure it out now?” she asked Albert.
->
-> Albert: I don’t know when your birthday is, but I know Bernard doesn’t know, either.
+> Albert: I don’t know when your birthday is, but I know Bernard
+> doesn’t know, either.
 >
 > Bernard: I didn’t know originally, but now I do.
 >
-> Albert: Well, now I know, too!
->
-> When is Cheryl’s birthday?
+> Albert: Well, now I know, too!  When is Cheryl’s birthday?
 
 ## The Solution
 
@@ -56,21 +47,18 @@ language would do).
 
 First, let's make a simple class to represent our Date:
 
-{% highlight python %}
-
+```python
 class Date:
     def __init__(self, day, month):
         self.day = day
         self.month = month
     def __repr__(self):
         return "(%d, %s)" % (self.day, self.month)
-
-{% endhighlight %}
+```
 
 Then we'll add all of the ten dates Cheryl proposed:
 
-{% highlight python %}
-
+```python
 dates = [
     Date(15, 'may'),
     Date(16, 'may'),
@@ -83,21 +71,18 @@ dates = [
     Date(15, 'aug'),
     Date(17, 'aug'),
 ]
-
-{% endhighlight %}
+```
 
 Next, we'll write two utility functions which remove dates with non-unique days
 (or months) from our list of dates:
 
-{% highlight python %}
-
+```python
 def remove_duplicate_days(xs):
     return [x for x in xs if sum(1 for d in xs if d.day == x.day) == 1]
 
 def remove_duplicate_months(xs):
     return [x for x in xs if sum(1 for d in xs if d.month == x.month) == 1]
-
-{% endhighlight %}
+```
 
 *Note: I realize these are inefficienet n^2 algorithms, and that I should be
 using `collections.Counter`, but I'm just trying to keep it simple and
@@ -109,43 +94,35 @@ the month of Cheryl's birthday is not a month with a unique day.
 
 Select the months which have a unique day:
 
-{% highlight python %}
-
+```python
 months_with_one_date = [date.month for date in remove_duplicate_days(dates)]
 # >>> ['may', 'jun']
-
-{% endhighlight %}
+```
 
 Remove the dates which has a month which has a unique day:
 
-{% highlight python %}
-
+```python
 dates = [date for date in dates if date.month not in months_with_one_date]
 # >>> [(14, jul), (16, jul), (14, aug), (15, aug), (17, aug)]
-
-{% endhighlight %}
+```
 
 Now, since Bernard knows the day, if it is unique, he knows the answer. He says
 he knows the answer, so the day must be unique.
 
 Remove the dates which do not have a unique day:
 
-{% highlight python %}
-
+```python
 dates = remove_duplicate_days(dates)
 # >>> [(16, jul), (15, aug), (17, aug)]
-
-{% endhighlight %}
+```
 
 Now, since Albert says he knows the answer too, so the month must be unique.
 
 Remove the dates which do not have a unique month:
 
-{% highlight python %}
-
+```python
 dates = remove_duplicate_months(dates)
 # >>> [(16, jul)]
-
-{% endhighlight %}
+```
 
 Only one date remains: **July 16th**.

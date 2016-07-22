@@ -1,7 +1,7 @@
 ---
 layout : post
-category : articles 
-title : PHP File Uploader 
+category : articles
+title : PHP File Uploader
 description : My friend needed an easy way to upload and embed audio clips to her blog, so I wrote my Simple PHP File Uploader.
 tags : [PHP, file upload]
 ---
@@ -21,105 +21,92 @@ Player](/articles/2009/08/25/embedding-audio-using-googles-mp3-player).
 We need a basic HTML form to accept our file to upload and pass it off to the
 PHP script:
 
-{% highlight html %}
-
-    <form action="index.php" method="post" enctype="multipart/form-data">
-       <label for="file">File:</label>
-       <input type="file" name="file" id="file" />
-       <input type="submit" name="submit" value="UPLOAD!" />
-    </form>
-
-{% endhighlight %}
+```html
+<form action="index.php" method="post" enctype="multipart/form-data">
+    <label for="file">File:</label>
+    <input type="file" name="file" id="file" />
+    <input type="submit" name="submit" value="UPLOAD!" />
+</form>
+```
 
 ### The PHP magic
 Now for the PHP script. The code below checks the filetype of the uploaded file
 (in the `$_FILES[]` array). I've included a few for gif, jpeg, and png, but most
 audio will fall under x-mp3 and mpeg:
 
-{% highlight php %}
-
-    <?
-    if ($_FILES["file"]["type"] != "")
-    {
-       if (($_FILES["file"]["type"] == "image/gif")
-          || ($_FILES["file"]["type"] == "image/jpeg")
-             || ($_FILES["file"]["type"] == "image/png")
-                || ($_FILES["file"]["type"] == "audio/x-mp3")
-                   || ($_FILES["file"]["type"] == "audio/mpeg")
-                )
-       { ... }
-    }
-    ?>
-
-{% endhighlight %}
+```php
+<?
+if ($_FILES["file"]["type"] != "")
+{
+    if (($_FILES["file"]["type"] == "image/gif")
+        || ($_FILES["file"]["type"] == "image/jpeg")
+            || ($_FILES["file"]["type"] == "image/png")
+            || ($_FILES["file"]["type"] == "audio/x-mp3")
+                || ($_FILES["file"]["type"] == "audio/mpeg")
+            )
+    { ... }
+}
+?>
+```
 
 Some other useful information you can get out of the file:
 
-{% highlight php %}
-
-    <?
-    echo "Upload: " . $_FILES["file"]["name"] . "<br />";
-    echo "Type: " . $_FILES["file"]["type"] . "<br />";
-    echo "Size: " . ($_FILES["file"]["size"] / 1024) . " Kb<br />";
-    ?>
-
-{% endhighlight %}
+```php
+<?
+echo "Upload: " . $_FILES["file"]["name"] . "<br />";
+echo "Type: " . $_FILES["file"]["type"] . "<br />";
+echo "Size: " . ($_FILES["file"]["size"] / 1024) . " Kb<br />";
+?>
+```
 
 To make sure the filename isn't already there:
 
-{% highlight php %}
-
-    <?
-    if (file_exists("upload/" . $_FILES["file"]["name"]))
-    {
-       echo $_FILES["file"]["name"] . " already exists. ";
-    }
-    ?>
-
-{% endhighlight %}
+```php
+<?
+if (file_exists("upload/" . $_FILES["file"]["name"]))
+{
+    echo $_FILES["file"]["name"] . " already exists. ";
+}
+?>
+```
 
 To put the uploaded file in your `$upload` folder:
 
-{% highlight php %}
-
-    <?
-    move_uploaded_file($_FILES["file"]["tmp_name"],$upload . $_FILES["file"]["name"]);
-
-{% endhighlight %}
+```php
+<?
+move_uploaded_file($_FILES["file"]["tmp_name"],$upload . $_FILES["file"]["name"]);
+?>
+```
 
 Of course, once you've got a big upload directory of random files, it's useless
 unless you're able to click on them to download later. This is assuming you've
 got the default directory `$dir`:
 
-{% highlight php %}
-
-    <?
-    if (is_dir($dir)) {
-       if ($dh = opendir($dir)) {
-          while (($file = readdir($dh)) !== false) {
-             if($file!="." && $file!="..")
-             {
-                echo "<a href=\"$dir$file\"><b>$file</b></a> [<a href=\"./$file\">Download</a>] [" .
-                   date(DATE_RFC822,filemtime("$dir$file")) .
-                   "]<br />";
-             }
-          }
-          closedir($dh);
-       }
+```php
+<?
+if (is_dir($dir)) {
+    if ($dh = opendir($dir)) {
+        while (($file = readdir($dh)) !== false) {
+            if($file!="." && $file!="..")
+            {
+            echo "<a href=\"$dir$file\"><b>$file</b></a> [<a href=\"./$file\">Download</a>] [" .
+                date(DATE_RFC822,filemtime("$dir$file")) .
+                "]<br />";
+            }
+        }
+        closedir($dh);
     }
-    ?>
-
-{% endhighlight %}
+}
+?>
+```
 
 A nice one-liner to note here is how we get and parse the date for the files:
 
-{% highlight php %}
-
-    <?
-    date(DATE_RFC822,filemtime("$dir$file"))
-    ?>
-
-{% endhighlight %}
+```php
+<?
+date(DATE_RFC822,filemtime("$dir$file"))
+?>
+```
 
 And those are all the pieces you need! Be sure to check out [Embedding Audio
 using Google's MP3

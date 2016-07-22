@@ -1,7 +1,7 @@
 ---
 layout : post
 category : articles
-title : Embedding Audio Using Google's MP3 Player 
+title : Embedding Audio Using Google's MP3 Player
 description : Using Google's existing video/audio player to embed MP3s hosted online on your blog or website.
 tags : [php, audio, mp3, google]
 ---
@@ -17,38 +17,38 @@ you can use Google's existing video/audio player to embed MP3s hosted online.
 Here, we're assuming that you have the variable `$file` which contains the
 external URL of the MP3 file:
 
-{% highlight php %}
-    <?php
-    $embed = '
-       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-        codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0"
-        align="middle"
+```php
+<?php
+$embed = '
+    <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+    codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0"
+    align="middle"
+    height="27"
+    width="400"
+    >
+        <param name="quality"
+        value="best">
+        <param name="allowScriptAccess"
+        value="never">
+        <param name="wmode"
+        value="window">
+        <param name="movie"
+        value="http://www.google.com/reader/ui/3523697345-audio-player.swf?audioUrl=' . $file . '">
+        <embed classname="audio-player-embed"
+        type="application/x-shockwave-flash"
+        src="http://www.google.com/reader/ui/3523697345-audio-player.swf?audioUrl=' . $file . '"
+        allowscriptaccess="never"
+        quality="best"
+        bgcolor="#ffffff"
+        wmode="window"
+        flashvars="playerMode=embedded"
+        pluginspage="http://www.macromedia.com/go/getflashplayer"
         height="27"
         width="400"
-       >
-          <param name="quality"
-           value="best">
-          <param name="allowScriptAccess"
-            value="never">
-          <param name="wmode"
-            value="window">
-          <param name="movie"
-            value="http://www.google.com/reader/ui/3523697345-audio-player.swf?audioUrl=' . $file . '">
-          <embed classname="audio-player-embed"
-           type="application/x-shockwave-flash"
-           src="http://www.google.com/reader/ui/3523697345-audio-player.swf?audioUrl=' . $file . '"
-           allowscriptaccess="never"
-           quality="best"
-           bgcolor="#ffffff"
-           wmode="window"
-           flashvars="playerMode=embedded"
-           pluginspage="http://www.macromedia.com/go/getflashplayer"
-           height="27"
-           width="400"
-          >
-          </embed>
-       </object>';
-    ?>
-{% endhighlight %}
+        >
+        </embed>
+    </object>';
+?>
+```
 
 You can see it in action at [http://earwaxing.blogspot.com/](http://earwaxing.blogspot.com/).

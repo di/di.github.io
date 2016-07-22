@@ -26,15 +26,17 @@ result in register `2`.
 
 Here was my initial attempt (in the instruction set language):
 
-    0 Z2
-    1 Z3
-    2 Z4
-    3 I3
-    4 I2
-    5 J0,3 -> 3
-    6 I4
-    7 I2
-    8 J1,4 -> 6
+```
+0 Z2
+1 Z3
+2 Z4
+3 I3
+4 I2
+5 J0,3 -> 3
+6 I4
+7 I2
+8 J1,4 -> 6
+```
 
 This creates two "counter" registers (instructions 1 and 2), and essentially
 has two loops (lines 3-5 and 6-8), which simultaneously increment the sum at
@@ -50,22 +52,24 @@ terminate.
 After a little thought, I was able to implement a second solution that can
 support zeros as well:
 
-    0  Z2
-    1  Z3
-    2  Z4
-    3  Z5
-    4  Z6
-    5  I6
-    6  J0,3 -> 8
-    7  J5,6 -> 11
-    8  I3
-    9  I2
-    10 J0,3 -> 8
-    11 J1,4 -> 13
-    12 J5,6 -> 16
-    13 I4
-    14 I2
-    15 J1,4 -> 13
+```
+0  Z2
+1  Z3
+2  Z4
+3  Z5
+4  Z6
+5  I6
+6  J0,3 -> 8
+7  J5,6 -> 11
+8  I3
+9  I2
+10 J0,3 -> 8
+11 J1,4 -> 13
+12 J5,6 -> 16
+13 I4
+14 I2
+15 J1,4 -> 13
+```
 
 This program creates the same counter registers as the original (lines 1 and
 2).  It creates two extra registers, and makes their values 0 and 1 (lines
@@ -88,8 +92,7 @@ makes me glad I live in the future.
 
 Here's the whole representation of the problem in Python:
 
-{% highlight python %}
-
+```python
 #!/usr/bin/python
 
 def z(a, c):
@@ -132,13 +135,14 @@ print(r)
 
 # Print the resulting computation
 print("%d + %d = %d" % (r[0], r[1], r[2]))
-
-{% endhighlight %}
+```
 
 The resulting output:
 
-    [3, 4, 7, 3, 4, 0, 1, None, None, None]
-    3 + 4 = 7
+```
+[3, 4, 7, 3, 4, 0, 1, None, None, None]
+3 + 4 = 7
+```
 
 [Here's the whole script as a gist](https://gist.github.com/di/5526527).
 
@@ -169,8 +173,7 @@ one that we've already put a (blue) ball into.
 
 Here's the whole representation of the problem in Python:
 
-{% highlight python %}
-
+```python
 #!/usr/bin/python
 
 import random
@@ -219,13 +222,14 @@ b.solve()
 
 print([x.color for x in b.line])
 print([x.examined for x in b.line])
-
-{% endhighlight %}
+```
 
 The resulting output:
 
-    ['r', 'r', 'b', 'g', 'b', 'r', 'r', 'g', 'g', 'g', 'b', 'r', 'g', 'g', 'b']
-    ['r', 'r', 'r', 'r', 'r', 'g', 'g', 'g', 'g', 'g', 'g', 'b', 'b', 'b', 'b']
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+```
+['r', 'r', 'b', 'g', 'b', 'r', 'r', 'g', 'g', 'g', 'b', 'r', 'g', 'g', 'b']
+['r', 'r', 'r', 'r', 'r', 'g', 'g', 'g', 'g', 'g', 'g', 'b', 'b', 'b', 'b']
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+```
 
 [Here's the whole script as a gist](https://gist.github.com/di/5526550).
