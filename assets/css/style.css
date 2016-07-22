@@ -1,4 +1,5 @@
-@import url("cm/ComputerModern.css");
+@import url("cm/Serif/cmun-serif.css");
+@import url("cm/Typewriter Variable/cmun-typewriter-variable.css");
 
 /* Override some defaults */
 html, body {
@@ -10,10 +11,14 @@ body {
 }
 
 html, body, p, ul, ol, li {
-    font-family: 'ComputerModern', serif;
+    font-family: 'Computer Modern Serif', serif;
     font-size: 16pt;
     line-height: 1.3em;
     color: #404040;
+}
+
+a code {
+    color: #0069d6;
 }
 
 .posts li {
@@ -73,8 +78,8 @@ blockquote {
     border-left: .5em solid #eee;
 }
 
-pre, pre font, p tt, p code {
-    font-family: 'ComputerModernMono', monospace;
+pre, pre font, p tt, p code, li code {
+    font-family: 'Computer Modern Typewriter Variable', monospace;
 }
 
 pre, pre font {
@@ -85,7 +90,7 @@ pre, pre font {
     margin-top: 1em;
 }
 
-p tt, p code {
+p tt, p code, li code {
     font-size: 16pt;
     line-height: 1.3em;
     background-color: #fff;
@@ -94,9 +99,11 @@ p tt, p code {
 pre, pre code {
     color: #c6c6c6;
     background-color: #252525;
+    font-size: 12pt;
+    line-height: 1.2em;
 }
 
-pre code {
+code {
     padding: 0;
 }
 
