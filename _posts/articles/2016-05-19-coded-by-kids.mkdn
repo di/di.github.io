@@ -132,6 +132,6 @@ what would happen!
 And of course, <span style="color:turquoise">it worked!</span>
 
 <br>
-_This post was originally published at [www.promptworks.com](http://www.promptworks.com/blog/2016/05/19/coded-by-kids/)._
+<i>This post was originally published at <a href="http://www.promptworks.com/blog/2016/05/19/coded-by-kids/" rel="canonical">www.promptworks.com</a>.</i>
 <br>
 _Thanks to Brian Duggan and Patrick Smith for reading drafts of this post._

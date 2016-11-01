@@ -173,6 +173,6 @@ codebase, but even if you're not using Python, you can easily integrate it. Put
 your code to the test!
 
 <br>
-_This post was originally published at [www.promptworks.com](http://www.promptworks.com/blog/2016/06/02/load-testing-with-locust/)._
+<i>This post was originally published at <a href="http://www.promptworks.com/blog/2016/06/02/load-testing-with-locust/" rel="canonical">www.promptworks.com</a>.</i>
 <br>
 _Thanks to Brian Duggan and Patrick Smith for reading drafts of this post._
