@@ -1,0 +1,81 @@
+==================================================================
+https://keybase.io/dustingram
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://dustingram.com
+  * I am dustingram (https://keybase.io/dustingram) on keybase.
+  * I have a public key with fingerprint 321D E2BA 9BA7 5C06 AF95  53F6 93D2 B8D4 930A 5E39
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "0101b62b7bab833c31733397920cc103ac91f9bd3bdc9ce6dc641885a27c7416a1090a",
+            "fingerprint": "321de2ba9ba75c06af9553f693d2b8d4930a5e39",
+            "host": "keybase.io",
+            "key_id": "93d2b8d4930a5e39",
+            "kid": "0101b62b7bab833c31733397920cc103ac91f9bd3bdc9ce6dc641885a27c7416a1090a",
+            "uid": "16f02f0c1e858a4a741cfe9819cc7b19",
+            "username": "dustingram"
+        },
+        "revoke": {
+            "sig_ids": [
+                "432bb2d6418bbbb635f705b4c6bc06b3a2d2d37aa4766e6ae4d43650a2769d290f"
+            ]
+        },
+        "service": {
+            "hostname": "dustingram.com",
+            "protocol": "https:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1478105096,
+    "expire_in": 157680000,
+    "prev": "945571707314230bf369a9df8fc771a389e922e51dd5db5801734b917cd6c3fc",
+    "seqno": 13,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.58
+Comment: https://keybase.io/crypto
+
+yMOBAnicrVJrTBxVGIUWal3AVm0VC41kJBSQLDNz54mmEVtKxGKjVCuKrHNn7sAA
+uwO7C92ChESplmcFSu0rAUG0QhFKKA9BLW3TGuwLikDkpaQNqFiIbYCUQLxD9Jf+
+9Ptzc+893znne1zyWetmcq/o7xioMCWK7j/0LGa6vbnFd30OAXXlABGRQ6Si1QOl
+KcjhtKRqChFBkBRJQY6GPJSgAIAMKB4AIPIiTcoyRQJJFilVhAqAiizKiFNkjqEE
+gZVoXuYZipMoUiQlIoxQNVsSsqfbNZsT0wKaUhANJRFKPCuTnKSKLAtUTgQKDQWF
+EQEpsQiIODFZdxgZ2ByUHMis6fgNXyyr9v4D/z/7zlyloziVpFVSppDAChIjYYis
+IlGgRFnmIWXoZjqQ3SZZEUYrmQ4nLtcuWYncMMKOsvRUZHTWoSVh2w4i4m2CATSE
+tGKIQhwcYFWeZCEjcxC3AwKJVmgF8JLE8ByHOAkxCgM4lsT+OFGhRVIl3sHcWDNL
+k1fJjT79S98s61bsLd2uO3VZT8N/yU5nuiPC8OU8kG6A9yNo+ZvGAjWbghNxRhay
+OzTdRkRQGCk7NYOXYniBIllS5MII5ErX7MiiGQiW5wQSh6GDsoypMCzLUzzJA4qh
+AQlVwImSqKiCKvM8JQFBRCJNI5ZSFFaBrEDi4TBQpHhZ4WSgyoRRWIZNx9wA+5SS
+MCfunU1yZtoRkXuhJ8HDzd3kts5zjbHAbqaHN/6z1ms7Nyz7n2sas5+J/sqX9PtA
+sA2eolF+ybh7w/TLwdVXXEsamHXxu/bW7NHWfJw7dW2wvq761ZiM4xda47pv3d5e
+OXzdo3ya/6ipJPr9+aWy9MYlbyf94Et9aqU34PzguuXbjXNpC8T25ZmolMdf8vPx
+qz06/n3t1+e9rj7X9+esKfaVIKb9xPU0y1i8x5mL8XsrS5OO3GNPVj8/XsKO+XeV
+dyzuKU4Z9cqu+U3Sw4piIl2m6MCo3oJN+545dLpv8+Enahdm9xX/qsOB7se+uTnU
+xhbGr/Q49rOLPRsTbzkafvZeGckbKh2djZs8u6slpDk1IWNn/tNRnaYEW3RxQHdX
+4Nnd00XxO62eH2ZXhZ5Ufho5mrDAVPlPbf3uyr3EoLbWAS7Qp8I8v7nOVUEUhMC8
+Jx96YzJmsSkmsmN+LjYy+fOYRuXZUGv9wFMzWb8kTuYHXqsM8O67OvFugXlH3SP3
+Pxk+ooVUbj1xrOkt18GRuFL/qfc8X59uGvEsHTdbXXLVuU+HUsuSC/19L1Z6dDVf
+atjifdDKZSeYx19LDI/t/fF0ymfbpu4uN/sSN4JR/3BtTfuL7YvjM0Gek8cKzUX3
+RzfxLZX5rb8n14aNOUa/nfO5eWr3jc7knA1e4eVZ83n9f3RPHsqZeCBsW2nRk9YX
+zNcfD+16dM1dKW6HuFx2+YvLbQvzE5bgphdC74Tf+Qv+AeeJ
+=/7/7
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/dustingram
+
+==================================================================
+
