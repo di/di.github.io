@@ -5,7 +5,6 @@ title : Preventing Unintended Check-ins with Git Precommit Hooks
 description : How to use global git hooks to prevent commits which unintentionally contain debug statements or focus marks.
 tags : [python, pytest, git, bash]
 ---
-{% include JB/setup %}
 
 ## The Problem
 

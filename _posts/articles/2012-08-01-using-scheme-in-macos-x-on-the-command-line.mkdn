@@ -5,7 +5,6 @@ title : Using MIT-Scheme in MacOS X on the Command Line
 description : A quick tip on using MIT-Scheme in the terminal on OSX.
 tags : [osx, scheme]
 ---
-{% include JB/setup %}
 
 ## Introduction
 [MIT/GNU Scheme](http://www.gnu.org/software/mit-scheme/) is great, but if

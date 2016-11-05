@@ -7,7 +7,6 @@ tags: python, load testing, locust, distributed systems
 author: Dustin Ingram
 description : An introduction to load-testing a web application with Locust.
 ---
-{% include JB/setup %}
 
 [Locust](http://locust.io/) is an open source load-testing tool written in
 Python. It lets you write tests against your web application which mimic your

@@ -5,7 +5,6 @@ title : Creating a FreeBSD PXE Network Boot Server
 description : A guide including custom images and install scripts.
 tags : [freebsd, pxe, network boot]
 ---
-{% include JB/setup %}
 
 ### Requirements
 1. DHCP/TFTP/NFS server. Ideally this is a FreeBSD box with the same

@@ -5,7 +5,6 @@ title : Deploying Private Git Submodules on Heroku with 2FA
 description : Solution to an issue for those of us that use two-factor authentication, private git submodules, and Heroku.
 tags : [git, heroku, submodules, 2fa]
 ---
-{% include JB/setup %}
 
 ## The Problem
 Private submodules don't work as described by Heroku in [their article on the

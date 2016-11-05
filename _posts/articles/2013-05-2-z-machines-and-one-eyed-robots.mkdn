@@ -5,7 +5,6 @@ title : Z-Machines and One-Eyed Robots
 description : Solutions to two interview questions from the Oxford Programming Research Group (circa 1980) in Python.
 tags : [challenges, python]
 ---
-{% include JB/setup %}
 
 ## The Problems
 Today, John Graham-Cumming posted [two problems he had to solve for his

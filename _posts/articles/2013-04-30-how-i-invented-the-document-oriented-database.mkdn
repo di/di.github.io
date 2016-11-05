@@ -5,7 +5,6 @@ title : How I Invented the Document-Oriented Database
 description : Wherein a younger, dumber version of myself gets by with the tools I'm given to reinvent the wheel without ever having seen the wagon.
 tags : [diy, lessons]
 ---
-{% include JB/setup %}
 
 ## The backstory
 
