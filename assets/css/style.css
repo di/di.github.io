@@ -1,191 +1,198 @@
 @import url("cm/Serif/cmun-serif.css");
 @import url("cm/Typewriter Variable/cmun-typewriter-variable.css");
 
-/* Override some defaults */
-html, body {
-  background-color: #fff;
-}
-
-body {
-  padding-top: 40px;
-}
-
 html, body, p, ul, ol, li {
-    font-family: 'Computer Modern Serif', serif;
-    font-size: 16pt;
-    line-height: 1.3em;
-    color: #404040;
+  font-family: 'Computer Modern Serif', serif;
+  font-size: 16pt;
+  line-height: 1.3em;
+  color: #404040;
 }
 
-a code {
-    color: #0069d6;
+a, a code {
+  color: #0069d6;
+  text-decoration: none;
+  line-height: inherit;
+  font-weight: inherit;
 }
 
 .posts li {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 .posts {
-    margin: 0;
+  margin: 0;
+  padding: 0;
 }
 
 ul.posts li + li {
-    padding-top:1em;
+  padding-top:1em;
 }
 
 .catname {
-    text-transform:capitalize;
+  text-transform:capitalize;
 }
 
 ul, ol {
-    margin-left: 3em;
-    margin-top: 1em;
+  margin-left: 3em;
+  margin-top: 1em;
 }
 
 p, ul {
-    text-align: justify;
-    text-justify: newspaper;
-    margin-bottom: 0;
-    margin-top:1em;
+  text-align: justify;
+  text-justify: newspaper;
+  margin-bottom: 0;
+  margin-top:1em;
 }
 
 p + p {
-    text-indent: 1.5em;
-    margin-top: 0;
+  text-indent: 1.5em;
+  margin-top: 0;
 }
 
 blockquote + p {
-    text-indent: 1.5em;
+  text-indent: 1.5em;
 }
 
 blockquote p {
-    font-size: 16pt;
-    line-height: 1.3em;
-    color: #808080;
-    margin-right: 1.5em;
+  font-size: 16pt;
+  line-height: 1.3em;
+  color: #808080;
+  margin-right: 1.5em;
 }
 
 blockquote p:first-child:before {
-    content:open-quote;
+  content:open-quote;
 }
 
 blockquote p:last-child:after {
-    content:close-quote;
+  content:close-quote;
 }
 
 blockquote {
-    margin-left: 1em;
-    border-left: .5em solid #eee;
+  margin-left: 1em;
+  border-left: .5em solid #eee;
 }
 
-pre, pre font, p tt, p code, li code {
-    font-family: 'Computer Modern Typewriter Variable', monospace;
+code, pre, pre font, p tt, p code, li code {
+  font-family: 'Computer Modern Typewriter Variable', monospace;
 }
 
 pre, pre font {
-    font-size: 12pt;
-    line-height: 1em;
-    text-justify: none;
-    white-space: pre-wrap;
-    margin-top: 1em;
+  font-size: 12pt;
+  line-height: 1em;
+  text-justify: none;
+  white-space: pre-wrap;
+  margin-top: 1em;
 }
 
 p tt, p code, li code {
-    font-size: 16pt;
-    line-height: 1.3em;
-    background-color: #fff;
+  font-size: 16pt;
+  line-height: 1.3em;
+  background-color: #fff;
+}
+
+pre.highlight {
+  padding: 1em;
 }
 
 pre, pre code {
-    color: #c6c6c6;
-    background-color: #252525;
-    font-size: 12pt;
-    line-height: 1.2em;
+  color: #c6c6c6;
+  background-color: #252525;
+  font-size: 12pt;
+  line-height: 1.2em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  white-space: pre-wrap;
 }
 
 code {
-    padding: 0;
+  padding: 0;
 }
 
 h1, h2, h3 {
-    font-weight: normal;
-}
-
-div.page-header {
-    text-align: center;
+  font-weight: normal;
+  line-height: 1em;
 }
 
 h1 {
-    font-size: 30pt;
-    margin-bottom: 1em;
-    line-height: 1em;
+  font-size: 30pt;
+  margin-bottom: 1em;
 }
 
 h2 {
-    font-size: 24pt;
-    margin-top: 1em;
-    margin-bottom: 0.83em;
-    line-height: 1em;
-    font-weight: bold;
-    text-transform:capitalize;
+  font-size: 24pt;
+  margin-top: 1em;
+  margin-bottom: 0.83em;
+  font-weight: bold;
+  text-transform:capitalize;
 }
 
 h3 {
-    font-size: 22pt;
-    margin-top: 1em;
-    margin-bottom: 0.7em;
-    line-height: 1em;
-}
-
-div.date {
-    text-align: center;
+  font-size: 22pt;
+  margin-top: 1em;
+  margin-bottom: 0.7em;
 }
 
 footer p {
-    font-size:10pt;
-    color: gray;
-    margin-bottom: 1em;
+  text-align: center;
+  font-size:10pt;
+  color: gray;
+  margin-bottom: 1em;
+  margin-top: 17px;
+  padding-top: 17px;
+  border-top: 1px solid #eee;
 }
 
-.container > footer p {
-  text-align: center; /* center align it with the container */
-}
-.container {
-  width: 700px; /* 13 columns max */
+div.page-header, footer p {
+  text-align: center;
+  margin-bottom: 3em;
 }
 
-/* The white background content wrapper */
-.content {
-  background-color: #fff;
-  padding: 20px;
-  margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
-}
-
-/* Page header tweaks */
-.page-header {
-  padding: 20px 20px 10px;
-  margin: -20px -20px 20px;
-  border:none;
-}
-
-.topbar .btn {
-  border: 0;
+div.page-header h1 {
+  margin-top: 1.5em;
+  margin-bottom: 0em;
 }
 
 .hideme{visibility:hidden;}
 
 dl dt, dl dd {
-    font-weight: normal;
-    line-height: 1.3em;
+  font-weight: normal;
+  line-height: 1.3em;
 }
 
 ul + dl, dd + dt {
-    padding-top: 1.3em;
+  padding-top: 1.3em;
 }
 
-.content p img {
-    width: 100%;
-    margin-left: -1.5em;
-    padding-top: 1.3em;
-    padding-bottom: 1.3em;
+main.page-content p img {
+  width: 100%;
+  margin-left: -1.5em;
+  padding-top: 1.3em;
+  padding-bottom: 1.3em;
 }
+
+/**
+ * Wrapper
+ */
+.wrapper {
+  max-width: 580px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 30px;
+padding-left: 30px; }
+@media screen and (max-width: 580px) {
+  .wrapper {
+    max-width: 580px;
+    padding-right: 15px;
+padding-left: 15px; } }
+
+/**
+ * Clearfix
+ */
+.wrapper:after, .footer-col-wrapper:after {
+  content: "";
+  display: table;
+clear: both; }

@@ -2,7 +2,6 @@
 layout: page
 title : Dustin Ingram
 ---
-{% include JB/setup %}
 
 ## About
 I'm Dustin (aka [@di](https://github.com/di/)), a software engineer at
@@ -15,10 +14,10 @@ Science](http://cs.drexel.edu) from [Drexel University](http://drexel.edu).
 <ul class="posts">
   {% for post in site.posts limit:5 %}
     <li>
-        <a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a>
+        <a href="{{ post.url }}">{{ post.title }}</a>
         <div>{{ post.description }}</div>
     </li>
   {% endfor %}
 </ul>
 
-[See all articles...](/categories.html)
+[See all articles...](/categories)
