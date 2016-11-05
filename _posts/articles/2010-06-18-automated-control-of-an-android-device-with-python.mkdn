@@ -5,7 +5,6 @@ title : Automated Control of an Android Device with Python
 description : Using Android's Simple Protocol for Automated Network Control to send touch events to a physical device using Python and a TCP socket.
 tags : [python, android, automation, adb]
 ---
-{% include JB/setup %}
 
 ## Intro
 As mentioned in my previous article, [Device Screenshots with the Android Debug

@@ -5,7 +5,6 @@ title : Threaded Messaging via Unix Domain Sockets in Python
 description : A small example using Unix Domain Sockets to send messages or data between threads on a local domain.
 tags : [python, threading, unix]
 ---
-{% include JB/setup %}
 
 ## Introduction
 As part of a recent project, I experimented for the first time with Unix Domain

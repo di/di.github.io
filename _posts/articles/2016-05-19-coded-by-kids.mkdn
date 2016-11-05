@@ -7,7 +7,6 @@ tags: tech literacy, young coders
 author: Dustin Ingram
 description: "A look at how a Philly nonprofit is trying to create a new generation of coders."
 ---
-{% include JB/setup %}
 
 This past week I attended two unusual [Philly Tech
 Week](http://phillytechweek.com) events. They were "Introduction to Coding"

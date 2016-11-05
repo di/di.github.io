@@ -1,31 +1,31 @@
 .highlight .hll { background-color: #ffffcc }
 .highlight .c, .highlight .cm, .highlight .c1, .highlight .cs {
-    color: #afaf5f; /* wombat, brown comment */
- }
+  color: #afaf5f; /* wombat, brown comment */
+}
 .highlight .k {
-    color: #87afff; /* wombat, bright blue */
+  color: #87afff; /* wombat, bright blue */
 }
 
 .highlight .kc, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .nb, .highlight .nt, .highlight .sx {
-    color: #d7875f;  /* wombat, salmon */
+  color: #d7875f;  /* wombat, salmon */
 }
 .highlight .nc, .highlight .nf, .highlight .kt, .highlight .nv, .highlight .ss, .highlight .vc, .highlight .vg, .highlight .vi {
-    color: #d7ff87; /* wombat, lime yellow*/
+  color: #d7ff87; /* wombat, lime yellow*/
 }
 .highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .s1, .highlight .cp, .highlight .gd, .highlight .si, .highlight .sr, .highlight .se {
-    color: #87d75f /* wombat, bright green*/
+  color: #87d75f /* wombat, bright green*/
 }
 .highlight .o, .highlight .nn, .highlight .bp, .highlight .na, .highlight .ge, .highlight .gs {
-    /* wombat, nada */
+  /* wombat, nada */
 }
 .highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .mo, .highlight .il {
-    color: #666666
+  color: #666666
 }
 .highlight .gh, .highlight .gp {
-    color: #000080;
+  color: #008000;
 }
 .highlight .nd, .highlight .ow {
-    color: #AA22FF;
+  color: #AA22FF;
 }
 
 .highlight .gr { color: #FF0000 }

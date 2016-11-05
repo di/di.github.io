@@ -5,7 +5,6 @@ title : When Is Cheryl's Birthday?
 description : Using Python to solve the latest viral math problem.
 tags : [python]
 ---
-{% include JB/setup %}
 
 ## The Problem
 A certain viral "math" problem is currently [taking the internet by

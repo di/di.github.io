@@ -5,7 +5,6 @@ title : On Doing It Yourself
 description : A short essay on the value of doing things the hard way.
 tags : [diy, lessons]
 ---
-{% include JB/setup %}
 
 ## Introduction
 I spent the other night talking with a [close friend](http://ryanhinkel.com/) of

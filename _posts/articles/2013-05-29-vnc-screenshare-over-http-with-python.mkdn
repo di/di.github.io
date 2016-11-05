@@ -5,7 +5,6 @@ title : VNC Screenshare over HTTP with Python and Flask
 description : Using Flask to create a simple in-browser screen sharing app.
 tags : [python, vnc, pyscreenshot, flask]
 ---
-{% include JB/setup %}
 
 ## The Problem
 I recently found an interesting implementation of [VNC over GIF in

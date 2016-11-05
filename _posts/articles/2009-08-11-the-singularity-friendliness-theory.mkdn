@@ -1,11 +1,10 @@
 ---
 layout : post
-category : articles 
-title : The Singularity - Friendliness Theory 
-description : An essay on the Singularity, and how Friendliness Theory relates. 
+category : articles
+title : The Singularity - Friendliness Theory
+description : An essay on the Singularity, and how Friendliness Theory relates.
 tags : [essay, singularity, friendliness theory]
 ---
-{% include JB/setup %}
 
 ## Introduction
 As computer scientists and engineers strive to create smaller, faster, and, most

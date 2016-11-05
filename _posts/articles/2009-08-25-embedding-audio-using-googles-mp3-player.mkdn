@@ -5,7 +5,6 @@ title : Embedding Audio Using Google's MP3 Player
 description : Using Google's existing video/audio player to embed MP3s hosted online on your blog or website.
 tags : [php, audio, mp3, google]
 ---
-{% include JB/setup %}
 
 ## Intro
 My friend needed an easy way to upload and embed audio clips to her blog, so I

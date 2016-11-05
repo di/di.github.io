@@ -5,7 +5,6 @@ title : Device Screenshots with the Android Debug Bridge
 description : Getting a screen shot of a live or emulated Android Device automatically using the Android Debug Bridge.
 tags : [python, android, screenshot, adb]
 ---
-{% include JB/setup %}
 
 ## Intro
 Certain recent endeavors have lead me to desire a way to automatically get

@@ -5,7 +5,6 @@ title : Using iTerm's Semantic History with vi
 description : A quick tip for getting the most out of one of iTerm's new features with everyone's favorite editor.
 tags : [iterm2, vi, semantic history]
 ---
-{% include JB/setup %}
 
 ## The Problem
 If you're running the [nightly version of

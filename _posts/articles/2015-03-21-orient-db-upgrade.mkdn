@@ -5,7 +5,6 @@ title : Upgrading OrientDB on Amazon EC2
 description : Using the latest and greatest version of OrientDB on AWS, and connecting with pyorient.
 tags : [orientdb, ec2, aws, amazon, python]
 ---
-{% include JB/setup %}
 
 ## The Problem
 The current version of [OrientDB](http://www.orientechnologies.com/orientdb/) available as an instance on [AWS Marketplace](https://aws.amazon.com/marketplace/pp/B00M07FHAO) is 1.7.9. Unfortunately this version lacks a lot of the niceties and compatabilities available in later versions of OrientDB.
