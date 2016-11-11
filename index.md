@@ -12,11 +12,17 @@ Science](http://cs.drexel.edu) from [Drexel University](http://drexel.edu).
 
 ## Newest tech articles
 <ul class="posts">
-  {% for post in site.posts limit:5 %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-        <div>{{ post.description }}</div>
-    </li>
+  {% assign combined = "" | split: "" %}
+  {% for post in site.posts %}
+    {% assign combined = combined | push: post %}
+  {% endfor %}
+  {% for external in site.data.external %}
+    {% assign combined = combined | push: external %}
+  {% endfor %}
+  {% assign sorted = (combined | sort: 'date') | reverse %}
+
+  {% for post in sorted limit:5 %}
+    {% include post_blob.html post=post %}
   {% endfor %}
 </ul>
 

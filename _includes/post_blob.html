@@ -1,0 +1,12 @@
+<li>
+  {% if post.external_url %}
+    <a class="external" href="{{ post.external_url }}">{{ post.title }}</a>
+    <div>
+      {{ post.description }}
+      <span class="external">({{ post.external_url | remove:'https://' | remove:'www.' | split:'/' | first }})</span>
+    </div>
+  {% else %}
+    <a href="{{ post.url }}">{{ post.title }}</a>
+    <div>{{ post.description }}</div>
+  {% endif %}
+</li>

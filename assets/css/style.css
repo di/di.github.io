@@ -33,7 +33,6 @@ ul.posts li + li {
 }
 
 ul, ol {
-  margin-left: 3em;
   margin-top: 1em;
 }
 
@@ -172,6 +171,17 @@ main.page-content p img {
   margin-left: -1.5em;
   padding-top: 1.3em;
   padding-bottom: 1.3em;
+}
+
+a.external::after {
+  color: #aaa;
+  content: " →";
+  font-family: 'Avenir Next', 'HelveticaNeue-Light', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+span.external {
+  color: #aaa;
+  font-style: italic;
 }
 
 /**
