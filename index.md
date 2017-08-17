@@ -5,8 +5,8 @@ title : Dustin Ingram
 
 ## About
 I'm Dustin (aka [@di](https://github.com/di/)), a software engineer at
-[PromptWorks](http://www.promptworks.com/), the premier Philadelphia software
-consulting shop. I'm also the co-founder of the design &amp; build firm [Wiota
+[PromptWorks](http://www.promptworks.com/) and director of our office in
+Austin, TX. I'm also the co-founder of the design &amp; build firm [Wiota
 Co.](http://wiota.co) and have a master's degree in [Computer
 Science](http://cs.drexel.edu) from [Drexel University](http://drexel.edu).
 
