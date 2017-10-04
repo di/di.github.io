@@ -1,0 +1,48 @@
+- title: "Detecting Asteroids with Neural Networks in Tensorflow"
+  date: 2017-10-07
+  url: "http://flpy.org/cth_speaker/dustin-ingram/"
+  venue: "FLPY 2017"
+
+- title: "Swiss Train Deployments"
+  date: 2017-10-07
+  url: "http://flpy.org/cth_speaker/dustin-ingram/"
+  venue: "FLPY 2017"
+
+- title: "The Fastest FizzBuzz In The West"
+  date: 2017-10-06
+  url: "https://2017.pygotham.org/talks/the-fastest-fizzbuzz-in-the-west-how-to-make-your-own-programming-language/"
+  venue: "PyGotham 2017"
+
+- title: "The Fastest FizzBuzz In The West"
+  date: 2017-04-20
+  slides: "https://github.com/di/talks/blob/master/pycon_2017/talk.pdf"
+  url: "https://us.pycon.org/2017/schedule/presentation/613/"
+  venue: "PyCon 2017"
+  video: "https://www.youtube.com/watch?v=ApgUrtCrmV8"
+
+- title: "The Fastest FizzBuzz In The West"
+  date: 2017-01-26
+  slides: "https://github.com/di/talks/blob/master/philly_pug_feb_2017/talk.pdf"
+  url: "https://www.meetup.com/phillypug/events/236726527/"
+  venue: "Philly PUG"
+
+- title: "Wat‽ Mind-bending Edge Cases in Python"
+  date: 2016-07-19
+  slides: "https://github.com/di/talks/blob/master/pygotham_2016/talk.pdf"
+  url: "https://2016.pygotham.org/talks/363/wat-mind-bending-edge-cas/"
+  venue: "PyGotham 2016"
+  video: "https://www.youtube.com/watch?v=qjk2pWY4RP0"
+
+- title: "What Is And What Can Be: An Exploration from <code>type</code> to Metaclasses"
+  date: 2016-05-30
+  slides: "https://github.com/di/talks/blob/master/pycon_2016/talk.pdf"
+  url: "https://us.pycon.org/2016/schedule/presentation/2138/"
+  venue: "PyCon 2016"
+  video: "https://www.youtube.com/watch?v=bI0JUY2qd2A"
+
+- title: "Python Tips, Tricks and Hidden Features"
+  date: 2015-11-25
+  slides: "https://github.com/di/talks/blob/master/philly_pug_nov_2015/tricks.pdf"
+  url: "https://www.meetup.com/phillypug/events/226490185/"
+  venue: "Philly PUG"
+  video: "https://www.youtube.com/watch?v=uWGPxYDo87Q"

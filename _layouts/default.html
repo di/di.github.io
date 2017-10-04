@@ -21,14 +21,18 @@
 </head>
   <body>
     <main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        {{ content }}
-      </div>
+      <h2>
+        <a href="/">{{ site.author.name }}</a>
+      </h2>
+      <small>
+        <a href="/writing">Writing</a> — <a href="/speaking">Speaking</a> — <a href="https://github.com/di">Github</a>
+      </small>
+      {{ content }}
     </main>
-    <footer class="site-footer">
-      <div class="wrapper">
-        <p>&copy; {{ site.author.name }} {{ 'now' | date: "%Y" }} -- Made with <a href="http://github.com/di/di.github.com">Github</a>, <a href="http://github.com/mojombo/jekyll">Jekyll</a>, <a href="http://daringfireball.net/projects/markdown/">Markdown</a> and <a href="http://en.wikipedia.org/wiki/Computer_Modern">Computer Modern</a>.</p>
-      </div>
+    <footer>
+      <center>
+        <small>&copy; {{ 'now' | date: "%Y" }}</small>
+      </center>
     </footer>
   </body>
 </html>
