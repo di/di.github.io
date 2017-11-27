@@ -1,3 +1,9 @@
+- title: "The Fastest FizzBuzz In The West"
+  date: 2017-11-18
+  slides: "https://github.com/di/talks/blob/master/pytexas_2017/divspl/talk.pdf"
+  url: "https://www.pytexas.org/2017/talk/U2Vzc2lvbk5vZGU6OQ=="
+  venue: "PyTexas 2017"
+
 - title: "Detecting Asteroids with Neural Networks in Tensorflow"
   date: 2017-10-07
   slides: "https://github.com/di/talks/blob/master/flpy_2017/astro-tf/talk.pdf"
