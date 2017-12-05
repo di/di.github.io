@@ -7,8 +7,9 @@ title : Dustin Ingram
 I'm Dustin (aka [@di](https://github.com/di/)), a software engineer at
 [PromptWorks](http://www.promptworks.com/) and director of our office in
 Austin, TX. I'm also a member of the [Python Packaging
-Authority](https://github.com/pypa) and have a master's degree in Computer
-Science from [Drexel University](http://drexel.edu).
+Authority](https://github.com/pypa), organizer for the
+[PyTexas](https://pytexas.org) conference and have a master's degree in
+Computer Science from [Drexel University](http://drexel.edu).
 
 ## Writing
 <ul>
