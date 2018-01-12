@@ -443,7 +443,7 @@ description : 'An exploration of the important milestones in the history of data
   </td></tr>
   <tr><td><a href="#61"><img id="61" class="slide" src="/assets/images/data_protection/61.png"></a></td><td>
     <p>
-      However, in the Supreme Court case <i>ALCU v. Clapper</i> it was
+      However, in the Supreme Court case <i>ACLU v. Clapper</i> it was
       determined that the global telephone data-gathering system is needed to
       thwart potential terrorist attacks, that it can only work if everyone's
       calls are included, that Congress legally set up the program and that it
