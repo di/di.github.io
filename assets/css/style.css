@@ -61,13 +61,13 @@ img.slide {
 }
 
 .slides {
-  width: 870px;
-  margin-left: -145px;
+  width: 800px;
+  margin-left: -110px;
 }
 
 td {
   vertical-align: top;
-  font-size: 11pt;
+  font-size: 12pt;
   padding: 20px;
 }
 
@@ -77,7 +77,7 @@ td p {
   text-align: left;
 }
 
-@media screen and (max-width: 870px) {
+@media screen and (max-width: 800px) {
   .slides {
     width: unset;
     max-width: 580px;
