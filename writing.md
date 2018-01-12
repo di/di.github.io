@@ -12,7 +12,7 @@ Some of my recent writing:
 
 <ul>
   {% assign combined = "" | split: "" %}
-  {% for post in site.posts %}
+  {% for post in site.posts['articles'] %}
     {% assign combined = combined | push: post %}
   {% endfor %}
   {% for external in site.data.external %}

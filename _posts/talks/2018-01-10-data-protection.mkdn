@@ -1,0 +1,677 @@
+---
+layout : post
+category : talks
+title : 'Data Protection for Developers'
+location : Austin TX
+venue: Austin Python Meetup
+venue_url: https://www.meetup.com/austinpython/events/wfkrdpyxcbnb/
+tags : [data protection]
+description : 'An exploration of the important milestones in the history of data protection laws, an examination of upcoming European regulation, and some predictions about what the future of data protection has in store for us.'
+---
+
+##### This is a text version of a talk I gave at the Austin Python Meetup in January 2017.
+
+<div class="slides">
+<table>
+  <tr><td><a href="#6"><img id="6" class="slide" src="/assets/images/data_protection/6.png"></a></td><td>
+    <p>
+      This talk lies at the intersection of my interests in technology and law.
+    </p>
+  </td></tr>
+  <tr><td><a href="#7"><img id="7" class="slide" src="/assets/images/data_protection/7.png"></a></td><td>
+    <p>
+      First things first: I am not a lawyer. Please don't take anything I'm
+      about to say as legal advice.
+    </p>
+  </td></tr>
+  <tr><td><a href="#8"><img id="8" class="slide" src="/assets/images/data_protection/8.png"></a></td><td>
+    <p>
+      So, when I say 'data', what am I talking about really? Am I talking about
+      big data? Small data?
+    </p><p>
+      People usually define 'data' as a collection of values for one or more
+      variables, or as discrete pieces of information.
+    </p>
+  </td></tr>
+  <tr><td><a href="#9"><img id="9" class="slide" src="/assets/images/data_protection/9.png"></a></td><td>
+    <p>
+      Interestingly enough, the word 'data' is the plural of datum, which is a
+      Latin word meaning "(something) given"
+    </p>
+  </td></tr>
+  <tr><td><a href="#10"><img id="10" class="slide" src="/assets/images/data_protection/10.png"></a></td><td>
+    <p>
+      Which brings me to a question: What kind of data is worth protecting?
+    </p><p>
+      If I sat here and counted how many pizza pies we all ate at the end of
+      this meetup, that probably wouldn't bother anyone. But if I started
+      counting the number of pieces each of you ate, individually, you would
+      probably ask me to stop.
+    </p><p>
+      There is sort of an ethical issue with considering such data as "given".
+      Did you "give" me did that data? Or did I "take" it from you? Who's was
+      it anyways?
+    </p>
+  </td></tr>
+  <tr><td><a href="#11"><img id="11" class="slide" src="/assets/images/data_protection/11.png"></a></td><td>
+    <p>
+      People who sometimes like to use the word 'capta' instead when referring
+      to this kind of data. It comes from the same root as capture and captive.
+    </p>
+  </td></tr>
+  <tr><td><a href="#12"><img id="12" class="slide" src="/assets/images/data_protection/12.png"></a></td><td>
+    <p>
+      Another term you might be familiar with is 'Personally Identifiable
+      Information'. This is any data specific to one person or which can be
+      used to identify a given person.
+    </p><p>
+      For the purposes of this talk, let's assume I'm talking about all data
+      that you generate, or which is about you.
+    </p>
+  </td></tr>
+  <tr><td><a href="#13"><img id="13" class="slide" src="/assets/images/data_protection/13.png"></a></td><td>
+    <p>
+      We're going to start in Germany, which might not be the first place you
+      think of as the birthplace of data protection. But Germany was an
+      interesting place after World War II.
+    </p>
+  </td></tr>
+  <tr><td><a href="#14"><img id="14" class="slide" src="/assets/images/data_protection/14.png"></a></td><td>
+    <p>
+      It was kind of like Twitter a few months ago. Many citizens were having a
+      strong reaction to their previous govenment, and wanted to ensure that a
+      potential dictator would never again have the chance to come into power
+      in the country.
+    </p>
+  </td></tr>
+  <tr><td><a href="#15"><img id="15" class="slide" src="/assets/images/data_protection/15.png"></a></td><td>
+    <p>
+      However, you can't just pass a law that says "No Hitlers", so instead,
+      they passed the Basic Law, which had two key tenets.
+    </p>
+  </td></tr>
+  <tr><td><a href="#16"><img id="16" class="slide" src="/assets/images/data_protection/16.png"></a></td><td>
+    <p>
+      First, a person's individual dignity must be respected and protected
+      under all circumstances.
+    </p>
+  </td></tr>
+  <tr><td><a href="#17"><img id="17" class="slide" src="/assets/images/data_protection/17.png"></a></td><td>
+    <p>
+      And second, that each person had the right to "freely develop their
+      personality" (as long as it doesn't injure the rights of others).
+    </p>
+  </td></tr>
+  <tr><td><a href="#18"><img id="18" class="slide" src="/assets/images/data_protection/18.png"></a></td><td>
+    <p>
+      You mind find "personality" to be an interesting choice of words here.
+      This is because in German, there is not really a direct translation for
+      the word 'privacy'. Instead, they talk about the "Rights of the
+      Personality".
+    </p>
+  </td></tr>
+  <tr><td><a href="#19"><img id="19" class="slide" src="/assets/images/data_protection/19.png"></a></td><td>
+    <p>
+      Besides these concerns about dictators, there were some other issues that
+      Germans in the '50s and '60s were becoming increasingly worried about.
+    </p><p>
+      One was nuclear power. Scary, scary nuclear power.
+    </p>
+  </td></tr>
+  <tr><td><a href="#20"><img id="20" class="slide" src="/assets/images/data_protection/20.png"></a></td><td>
+    <p>
+      Another was pollution, much like we are today.
+    </p>
+  </td></tr>
+  <tr><td><a href="#21"><img id="21" class="slide" src="/assets/images/data_protection/21.png"></a></td><td>
+    <p>
+      And the third was data privacy.
+    </p><p>
+      All of these have something in common: They all concern the appropriate
+      use of technological developments. Are we using this new technology in
+      the 'right' way?  There are so many complex and interconnected parts to
+      concepts like nuclear power, an individual cannot grasp all the issues.
+    </p><p>
+      For data privacy specifically, this concern comes from two places: the
+      increasing use of computers, but also from their country's history.  How
+      did the nazis know who was jewish? Census records, tax returns, synagogue
+      membership lists. All seemingly harmless data they had let their
+      govenment collect on them.
+    </p>
+  </td></tr>
+  <tr><td><a href="#22"><img id="22" class="slide" src="/assets/images/data_protection/22.png"></a></td><td>
+    <p>
+      So in 1970, the German state of Hesse passed the Hessian Data Protection
+      Act. This was more legislation on top of the Basic Law, and the name is
+      a bit of a misnomer, because it's goal wasn't to protect the data, but to
+      protect the people whose data are being processed.
+    </p>
+  </td></tr>
+  <tr><td><a href="#23"><img id="23" class="slide" src="/assets/images/data_protection/23.png"></a></td><td>
+    <p>
+      You'll notice that I use the word "processed" a lot when talking about
+      data in the context of Germany. This is because these laws are only
+      focused on what could be done <i>ex ante</i> with the data after it was
+      collected. They are not concerned with how it was collected or stored.
+      Again, this is a reaction to Germany's history.
+    </p>
+  </td></tr>
+  <tr><td><a href="#24"><img id="24" class="slide" src="/assets/images/data_protection/24.png"></a></td><td>
+    <p>
+      The other limitiation of this law is that it only applies to the
+      processing of personal data in the public sector. Private companies could
+      still do whatever they want -- it's governments you have to look out for.
+    </p>
+  </td></tr>
+  <tr><td><a href="#25"><img id="25" class="slide" src="/assets/images/data_protection/25.png"></a></td><td>
+    <p>
+      This law also called for a new position in the state govenment, who would
+      be in charge of overseeing violations of the Data Protection Act.
+    </p><p>
+      Ironically the first commissioner was somewhat of a dictator himself, and
+      held the post for 16 years.
+    </p>
+  </td></tr>
+  <tr><td><a href="#26"><img id="26" class="slide" src="/assets/images/data_protection/26.png"></a></td><td>
+    <p>
+      This was widely considered the first data protection act, ever. And while
+      you might think this law seems somewhat primitive, because it's only
+      focused on uses of the data, and has nothing about encryption, breaches,
+      etc...
+    </p>
+  </td></tr>
+  <tr><td><a href="#27"><img id="27" class="slide" src="/assets/images/data_protection/27.png"></a></td><td>
+    <p>
+      This was 1970, and this, the Enigma Machine, is the best thing we had in
+      terms of encryption at the end of WW2.
+    </p><p>
+      It wasn't until 1975 that we got the first standard for encryption (DES),
+      so this is actually pretty good.
+    </p>
+  </td></tr>
+  <tr><td><a href="#28"><img id="28" class="slide" src="/assets/images/data_protection/28.png"></a></td><td>
+    <p>
+      Meanwhile, over in Sweden, they had a completely different set of
+      circumstances that were leading up to similar data protection laws.
+    </p><p>
+      The Swedish government was adopting the use of computers much earlier
+      than most other countries. The country had a small population, a high
+      standard of living and high income. And they could forsee usefulness of
+      automation and computing.
+    </p>
+  </td></tr>
+  <tr><td><a href="#29"><img id="29" class="slide" src="/assets/images/data_protection/29.png"></a></td><td>
+    <p>
+      However there was a downside to all this fast adoption of computers.
+      Sweden at the time was considered a 'paradise for registers'. The
+      govenment had vast amounts of information about it's citizens It was said
+      that the average adult would appear in one hundred data systems, as many
+      as two hundred if you were married!
+    </p><p>
+      This might not seem like much to us. You probably have one hundred apps
+      on your smartphone alone, so one hundred data systems seems reasonable.
+      But this is the 1970s!
+    </p><p>
+      That much information stored on it citizens alone could be bad (as we've
+      seen with Germany). But there was another reason why it was becoming
+      problematic.
+    </p>
+  </td></tr>
+  <tr><td><a href="#30"><img id="30" class="slide" src="/assets/images/data_protection/30.png"></a></td><td>
+    <p>
+      In Swedish law at the time, there was already a strong notion of "the
+      right of public access", which as early as the Swedish Constitution
+      mostly meant right of the public to be present at court hearings.
+    </p>
+  </td></tr>
+  <tr><td><a href="#31"><img id="31" class="slide" src="/assets/images/data_protection/31.png"></a></td><td>
+    <p>
+      However in 1949 the Swedish Freedom of the Press Act was passed, which
+      gave the press the right to government information. Generally, this meant
+      that there was public access to official records, which is great if
+      you're a journalist: You're working on a lead, you need to know some
+      details, you go down to city hall, they pull some files on the person and
+      they make you a copy.
+    </p><p>
+      However, when these records are put in data systems on computers, private
+      entities would be able to gain vast amounts of information on citizens
+      with very little effort.
+    </p>
+  </td></tr>
+  <tr><td><a href="#32"><img id="32" class="slide" src="/assets/images/data_protection/32.png"></a></td><td>
+    <p>
+      So in 1973 they passed the very first national data protection act, the
+      Swedish Data Act.
+    </p>
+  </td></tr>
+  <tr><td><a href="#33"><img id="33" class="slide" src="/assets/images/data_protection/33.png"></a></td><td>
+    <p>
+      This act had three main tenets. The first was the right to get your data,
+      which is a holdover from previous laws.
+    </p>
+  </td></tr>
+  <tr><td><a href="#34"><img id="34" class="slide" src="/assets/images/data_protection/34.png"></a></td><td>
+    <p>
+      Second was the right to recieve compensation if something bad has
+      happened to you because some data on you was wrong.
+    </p><p>
+      The Swedes, in all their perfectionism, wanted to make sure that all
+      their data was perfectly accurate.
+    </p>
+  </td></tr>
+  <tr><td><a href="#35"><img id="35" class="slide" src="/assets/images/data_protection/35.png"></a></td><td>
+    <p>
+      And finally, it formally criminalized 'data intrusion'.
+    </p>
+  </td></tr>
+  <tr><td><a href="#36"><img id="36" class="slide" src="/assets/images/data_protection/36.png"></a></td><td>
+    <p>
+      In the law, this literally meant breaking into the offices where the data
+      lived, and physically stealing it.
+    </p><p>
+      The Swedes were smart, but they weren't able to predict the Internet.
+    </p>
+  </td></tr>
+  <tr><td><a href="#37"><img id="37" class="slide" src="/assets/images/data_protection/37.png"></a></td><td>
+    <p>
+      Back in Germany, since since the Hessian law was enacted, other states
+      were working on similar laws. Based on Sweden, it was determined that
+      they needed a national law as well.
+    </p>
+  </td></tr>
+  <tr><td><a href="#38"><img id="38" class="slide" src="/assets/images/data_protection/38.png"></a></td><td>
+    <p>
+      So in 1977, Germany passed the German Federal Data Protection Act, which
+      took all the state's laws, and combined them into a single federal law.
+    </p>
+  </td></tr>
+  <tr><td><a href="#39"><img id="39" class="slide" src="/assets/images/data_protection/39.png"></a></td><td>
+    <p>
+      This law had three goals, which had distinct echos of the previous
+      Hession law. First, it prevented the 'misuse' of data.
+    </p>
+  </td></tr>
+  <tr><td><a href="#40"><img id="40" class="slide" src="/assets/images/data_protection/40.png"></a></td><td>
+    <p>
+      Second, it wanted to prevent harm to any citizen's personal interests.
+    </p>
+  </td></tr>
+  <tr><td><a href="#41"><img id="41" class="slide" src="/assets/images/data_protection/41.png"></a></td><td>
+    <p>
+      And finally, it actually created a regulating body which would give out
+      permits for people to do data processing.
+    </p><p>
+      This means that can't just collect data and then decide what to do with
+      it later, you have to go and get approval every time you want to do
+      something different with it.
+    </p>
+  </td></tr>
+  <tr><td><a href="#42"><img id="42" class="slide" src="/assets/images/data_protection/42.png"></a></td><td>
+    <p>
+      Over in the UK, people were also having similar concerns, and decided
+      they wanted some data protection too.
+    </p>
+  </td></tr>
+  <tr><td><a href="#43"><img id="43" class="slide" src="/assets/images/data_protection/43.png"></a></td><td>
+    <p>
+      In 1984, the UK Data Protection Act was passed, but only after much
+      reluctance and dragging of feet by the British government, the archetypal
+      'nanny state'.
+    </p>
+  </td></tr>
+  <tr><td><a href="#44"><img id="44" class="slide" src="/assets/images/data_protection/44.png"></a></td><td>
+    <p>
+      In fact, one early commission actually found that there was no need for
+      data protection at all!
+    </p><p>
+      As you might not be surprised to discover, this law was widely
+      criticised.     </p>
+  </td></tr>
+  <tr><td><a href="#45"><img id="45" class="slide" src="/assets/images/data_protection/45.png"></a></td><td>
+    <p>
+      But in 1985, the UK joined the European Communities, which was a
+      precursor to the European Union, and they were working on their own
+      policies.
+    </p><p>
+      Just look how optimistic that flag is! So bright and shiny and sunny.
+    </p>
+  </td></tr>
+  <tr><td><a href="#46"><img id="46" class="slide" src="/assets/images/data_protection/46.png"></a></td><td>
+    <p>
+      And indeed, in 1995, they got the EU Data Protection Directive.
+    </p>
+  </td></tr>
+  <tr><td><a href="#47"><img id="47" class="slide" src="/assets/images/data_protection/47.png"></a></td><td>
+    <p>
+      Generally, this was about having a baseline respect for privacy (subject
+      to certain restrictions).
+    </p><p>
+      But more specifically, it had seven key recommendations.
+    </p>
+  </td></tr>
+  <tr><td><a href="#48"><img id="48" class="slide" src="/assets/images/data_protection/48.png"></a></td><td>
+    <p>
+      The first is notice. Data subjects should be given notice when their data
+      is being collected.
+    </p>
+  </td></tr>
+  <tr><td><a href="#49"><img id="49" class="slide" src="/assets/images/data_protection/49.png"></a></td><td>
+    <p>
+      Next is purpose. Data should only be used for the purpose stated and not
+      for any other purposes.
+    </p>
+  </td></tr>
+  <tr><td><a href="#50"><img id="50" class="slide" src="/assets/images/data_protection/50.png"></a></td><td>
+    <p>
+      Third is consent, and this is the first time we're really talking about
+      consent at all with regards to data protection. It means data should not
+      be disclosed without the data subject’s explicit agreement.
+    </p>
+  </td></tr>
+  <tr><td><a href="#51"><img id="51" class="slide" src="/assets/images/data_protection/51.png"></a></td><td>
+    <p>
+      Fourth is security, which is incredibly broad and mostly means that
+      collected data should be kept secure from any potential abuses.
+    </p>
+  </td></tr>
+  <tr><td><a href="#52"><img id="52" class="slide" src="/assets/images/data_protection/52.png"></a></td><td>
+    <p>
+      Fifth is disclosure. This is not about breach disclosure, or
+      vulnerability disclosure, but just that data subjects should be informed
+      as to who is collecting their data.
+    </p>
+  </td></tr>
+  <tr><td><a href="#53"><img id="53" class="slide" src="/assets/images/data_protection/53.png"></a></td><td>
+    <p>
+      Sixth is access and clearly a holdover from previous Swedish laws: data
+      subjects should be allowed to access their data and make corrections to
+      any inaccurate data.
+    </p>
+  </td></tr>
+  <tr><td><a href="#54"><img id="54" class="slide" src="/assets/images/data_protection/54.png"></a></td><td>
+    <p>
+      And finally accountability. Data subjects should have a method available
+      to them to hold data collectors accountable for not following the above
+      principles.
+    </p>
+  </td></tr>
+  <tr><td><a href="#55"><img id="55" class="slide" src="/assets/images/data_protection/55.png"></a></td><td>
+    <p>
+      This is awesome! Except... it's a directive. Which means it's not a law,
+      and thus it's non-binding. It's just a suggestion, recommendation or
+      'best practices' and nobody actually has to follow it.
+    </p><p>
+      So of course, nobody does.
+    </p>
+  </td></tr>
+  <tr><td><a href="#56"><img id="56" class="slide" src="/assets/images/data_protection/56.png"></a></td><td>
+    <p>
+      We're well into the 90's now, not so far in the past.
+    </p>
+  </td></tr>
+  <tr><td><a href="#57"><img id="57" class="slide" src="/assets/images/data_protection/57.png"></a></td><td>
+    <p>
+      Notice anybody missing from this long history of data protection laws?
+    </p>
+  </td></tr>
+  <tr><td><a href="#58"><img id="58" class="slide" src="/assets/images/data_protection/58.png"></a></td><td>
+    <p>
+      How about the good ol' US of A?
+    </p><p>
+      Can anyone name the major national data protection law we have here in
+      the United States?
+    </p><p>
+    <i>
+    At this point, somebody yells out "The Patriot Act!", which
+    I point out is pretty much the exact opposite of a
+    national data protection law.
+    </i>
+    </p>
+  </td></tr>
+  <tr><td><a href="#59"><img id="59" class="slide" src="/assets/images/data_protection/59.png"></a></td><td>
+    <p>
+      Some folks might say the Fourth Amendment. It's goal is to protect us
+      from unreasonable search & seizures.
+    </p>
+  </td></tr>
+  <tr><td><a href="#60"><img id="60" class="slide" src="/assets/images/data_protection/60.png"></a></td><td>
+    <p>
+      And in fact, the closest we've come to challenging the massive
+      wiretapping and metadata program by the US government is when a district
+      court ruled that it "probably violated the 4th amendment".
+    </p>
+  </td></tr>
+  <tr><td><a href="#61"><img id="61" class="slide" src="/assets/images/data_protection/61.png"></a></td><td>
+    <p>
+      However, in the Supreme Court case <i>ALCU v. Clapper</i> it was
+      determined that the global telephone data-gathering system is needed to
+      thwart potential terrorist attacks, that it can only work if everyone's
+      calls are included, that Congress legally set up the program and that it
+      does not violate anyone's constitutional rights.
+    </p><p>
+      As it turns out, wiretapping every US citizen doesn't actually constitute
+      unreasonable search and seizure.
+    </p>
+  </td></tr>
+  <tr><td><a href="#62"><img id="62" class="slide" src="/assets/images/data_protection/62.png"></a></td><td>
+    <p>
+      So, yeah, we don't really have a national data protection law.
+    </p>
+  </td></tr>
+  <tr><td><a href="#63"><img id="63" class="slide" src="/assets/images/data_protection/63.png"></a></td><td>
+    <p>
+      Oh, but we do have the Video Rental Protection Act from 1988!
+    </p><p>
+      This law prevents the wrongful disclosure of video tape rental or sale
+      records. So that's cool.
+    </p><p>
+      Don't get me wrong, we actually have a lot of laws like this, and they
+      aren't really bad laws at all. Netflix was actually recently prosecuted
+      under this law for sharing it's data with Facebook.
+    </p>
+  </td></tr>
+  <tr><td><a href="#64"><img id="64" class="slide" src="/assets/images/data_protection/64.png"></a></td><td>
+    <p>
+      But the problem is that while strong, all of these address a very small,
+      specific area of data protection. HIPPA is just for health records. Fair
+      Credit Reporting Act is just so that you can correct your credit history
+      if it's wrong. (Doesn't say anything about what happens if it's breached,
+      though). CAN-SPAM literally made spam email illegal.
+    </p>
+  </td></tr>
+  <tr><td><a href="#65"><img id="65" class="slide" src="/assets/images/data_protection/65.png"></a></td><td>
+    <p>
+      The other problem is things like Senate Joint Resolution 34, which was
+      recently signed into law by... somebody...
+    </p>
+  </td></tr>
+  <tr><td><a href="#66"><img id="66" class="slide" src="/assets/images/data_protection/66.png"></a></td><td>
+    <p>
+      TLDR; ISPs can sell your browsing history again!
+    </p>
+  </td></tr>
+  <tr><td><a href="#67"><img id="67" class="slide" src="/assets/images/data_protection/67.gif"></a></td><td>
+    <p>
+      So maybe you're thinking "Everything is terrible."
+    </p><p>
+      Well, yeah, maybe, if you live in the US.
+    </p>
+  </td></tr>
+  <tr><td><a href="#68"><img id="68" class="slide" src="/assets/images/data_protection/68.png"></a></td><td>
+    <p>
+      But remember that beautiful, shining, optimistic EU flag?
+    </p><p>
+      If tomorrow you decide you want to move to Sweden (and I don't blame you
+      if you do), you'd be about to get a brand, new...
+    </p>
+  </td></tr>
+  <tr><td><a href="#69"><img id="69" class="slide" src="/assets/images/data_protection/69.png"></a></td><td>
+    <p>
+      EU General Data Protection Regulation! Or "GDPR".
+    </p>
+  </td></tr>
+  <tr><td><a href="#70"><img id="70" class="slide" src="/assets/images/data_protection/70.png"></a></td><td>
+    <p>
+      This regulation has an incredibly broad scope. It applies to you if the
+      data controller (person holding data), data processor (person doing
+      something with data), or data subject is based in the EU.
+    </p><p>
+      This means that if you're an American company that has customers in the
+      EU, you must comply!
+    </p>
+  </td></tr>
+  <tr><td><a href="#71"><img id="71" class="slide" src="/assets/images/data_protection/71.png"></a></td><td>
+    <p>
+      The regulation has the same overarching rules for all member states, and
+      they might seem somewhat familiar at this point.
+    </p>
+  </td></tr>
+  <tr><td><a href="#72"><img id="72" class="slide" src="/assets/images/data_protection/72.png"></a></td><td>
+    <p>
+      First, the Right of Erasure. This is commonly called "The Right To Be
+      Forgotten," which is way more poetic.
+    </p><p>
+      This means that if someone has data about you, you have the right to tell
+      them to erase it -- forever!
+    </p>
+  </td></tr>
+  <tr><td><a href="#73"><img id="73" class="slide" src="/assets/images/data_protection/73.png"></a></td><td>
+    <p>
+      The Right of Access means that you, as an EU citizen, have the right to
+      get a copy of all the data a company has on you.
+    </p>
+  </td></tr>
+  <tr><td><a href="#74"><img id="74" class="slide" src="/assets/images/data_protection/74.png"></a></td><td>
+    <p>
+      This has led to some pretty wild newspaper articles where some journalist
+      calls up Tinder and gets their mind blown when they realize for the first
+      time that tech companies actually store <i>everything</i> you do.
+    </p><p>
+      And yeah, what <i>if</i> it's hacked or sold?
+    </p>
+  </td></tr>
+  <tr><td><a href="#75"><img id="75" class="slide" src="/assets/images/data_protection/75.png"></a></td><td>
+    <p>
+      If there's a data breach, it must be must be reported within 72 hours.
+      Not within a year, like Uber recently fessed up to. Not within a month,
+      like Equifax.
+    </p>
+  </td></tr>
+  <tr><td><a href="#76"><img id="76" class="slide" src="/assets/images/data_protection/76.png"></a></td><td>
+    <p>
+      Furthermore, if there has been a breach, and the data got sold or
+      whatever, for any person that has suffered material <i>or
+      non-material</i> damage shall have the right to recieve monetary
+      compensation.
+    </p><p>
+      This is a big deal! Here in the US, if we all wanted to get together and
+      sue some company for some crime against us, we could hire a lawyer,
+      create a class-action lawsuit, and take them to court. But there's no
+      such thing as a class-action lawsuit in the EU, so before this law, if
+      you suffered some damages from a company, there wasn't a whole lot you
+      could do.
+    </p>
+  </td></tr>
+  <tr><td><a href="#77"><img id="77" class="slide" src="/assets/images/data_protection/77.png"></a></td><td>
+    <p>
+      Pseudoanonymisation means that it should not be possible to attributed
+      some piece of data to a specific data subject without the use of
+      'additional information'.
+    </p><p>
+      So really this just means 'use encryption'.
+    </p>
+  </td></tr>
+  <tr><td><a href="#78"><img id="78" class="slide" src="/assets/images/data_protection/78.png"></a></td><td>
+    <p>
+      Here's consent again. This means that data collectors must be explicit
+      about what is being gathered and what it is being used for. And, they
+      can only use the data for the consented purposes!
+    </p><p>
+      This is why when you visit the Guardian or other websites based in
+      Europe, they show you a huge banner that says "THIS SITE USES COOKIES"
+      and you have to agree to letting them use cookies. That's consent!
+    </p>
+  </td></tr>
+  <tr><td><a href="#79"><img id="79" class="slide" src="/assets/images/data_protection/79.png"></a></td><td>
+    <p>
+      The other interesting thing this regulation does is create a required
+      role at any company that processes or stores large amounts of data. This
+      person should have expert knowledge of data protection law and practices
+      should assist the controller or processor to monitor internal compliance.
+    </p>
+  </td></tr>
+  <tr><td><a href="#80"><img id="80" class="slide" src="/assets/images/data_protection/80.png"></a></td><td>
+    <p>
+      And the best part about this regulation: it's a law! Which means that you
+      can get sanctioned if you don't comply.
+    </p><p>
+      Sanctions range from a warning (in cases of first and non-intentional
+      noncomplance), to regular periodic data protection audits, to fine of 20M
+      euros or 4% of annual worldwide revenue, whichever is greater.
+    </p><p>
+      To put that number in perspective, Facebook had 27 billion dollars in
+      revenue last year, so their fine would be more than a billion dollars.
+      For Google, 3.5 billion dollars. And for Apple, more than 9 billion
+      dollars.
+    </p>
+  </td></tr>
+  <tr><td><a href="#81"><img id="81" class="slide" src="/assets/images/data_protection/81.png"></a></td><td>
+    <p>
+      And the law goes into effect this year!
+    </p>
+  </td></tr>
+  <tr><td><a href="#82"><img id="82" class="slide" src="/assets/images/data_protection/82.png"></a></td><td>
+    <p>
+      So that's the present, and just right around the corner. Let's talk about
+      my three main predictions for data protection in the future.
+    </p>
+  </td></tr>
+  <tr><td><a href="#83"><img id="83" class="slide" src="/assets/images/data_protection/83.png"></a></td><td>
+    <p>
+      First, GDPR compliance is going to be a big deal. Just like 'HIPPA
+      compliance', but way more complex. It will be (and has already become) an
+      industry.
+    </p>
+  </td></tr>
+  <tr><td><a href="#84"><img id="84" class="slide" src="/assets/images/data_protection/84.png"></a></td><td>
+    <p>
+      Second, someone's gonna get sanctioned. Likely one of the big tech
+      companies, because not only do the regulators need to make an example out
+      of somebody, but they're going to be relying on the fines to fund the
+      work required to enforce the regulation.
+    </p>
+  </td></tr>
+  <tr><td><a href="#85"><img id="85" class="slide" src="/assets/images/data_protection/85.png"></a></td><td>
+    <p>
+      And finally, I don't expect anything in the US to get better in the next,
+      oh... three years or so. Just a hunch.
+    </p><p>
+      Instead, expect further dismantling of privacy laws and regulations.
+    </p>
+  </td></tr>
+  <tr><td><a href="#86"><img id="86" class="slide" src="/assets/images/data_protection/86.png"></a></td><td>
+    <p>
+      <i>Insert way too many questions to include here.</i>
+    </p>
+  </td></tr>
+  <tr><td><a href="#87"><img id="87" class="slide" src="/assets/images/data_protection/87.png"></a></td><td>
+    <p>
+      One last thing: I'm not trying to hate on Google, Facebook, all the
+      companies I used as examples here. I'm sure those companies already take
+      data protection very seriously and there's a lot of smart people working
+      hard to ensure that it's used properly and never breached.
+    </p><p>
+      However, we live in an age where the ability to generate data about
+      oneself and the capacity of others to collect it is enormous. It might
+      not come as a surpise to any of you that Tinder has so much data on it's
+      users, but for the majority of them, they simply do not know.
+    </p><p>
+      We need to make sure on their behalf, and for our own sake, that this
+      data is being protected, used responsibly, and that it will not and
+      cannot endanger the people from which it has been taken.
+    </p><p>
+      Thanks!
+    </p>
+  </td></tr>
+</table>
+</div>

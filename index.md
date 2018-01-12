@@ -14,7 +14,7 @@ Computer Science from [Drexel University](http://drexel.edu).
 ## Writing
 <ul>
   {% assign combined = "" | split: "" %}
-  {% for post in site.posts %}
+  {% for post in site.categories['articles'] %}
     {% assign combined = combined | push: post %}
   {% endfor %}
   {% for external in site.data.external %}
@@ -33,12 +33,28 @@ Computer Science from [Drexel University](http://drexel.edu).
 
 ## Speaking
 <ul>
-  {% assign talks = site.data.talks | sort: 'date' | reverse %}
-  {% for talk in talks limit:4 %}
+  {% assign combined = "" | split: "" %}
+  {% for talk in site.categories['talks'] %}
+    {% assign combined = combined | push: talk %}
+  {% endfor %}
+  {% for talk in site.data.talks %}
+    {% assign combined = combined | push: talk %}
+  {% endfor %}
+  {% assign sorted = combined | sort: 'date' | reverse %}
+
+  {% for talk in sorted limit:4 %}
   <li>
-    <a href="{{ talk.url }}">
-      {{ talk.venue }}: {{ talk.title }}
-    </a>
+  {% if talk.url %}
+    <a href="{{ talk.url }}">{{ talk.title }}</a><br>
+  {% else %}
+    <a href="{{ talk.slides_url }}">{{ talk.title }}</a><br>
+  {% endif %}
+    <small>
+      <a href="{{ talk.venue_url }}">{{ talk.venue }}</a>, {{ talk.location }}, {{ talk.date | date : "%B %Y" }}
+      {% if talk.video_url %}
+      (<a href="{{ video_url }}">video</a>)
+      {% endif %}
+    </small>
   </li>
   {% endfor %}
   <li>

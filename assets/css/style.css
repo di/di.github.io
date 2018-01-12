@@ -54,3 +54,38 @@ h2 {
 footer {
   text-align: center;
 }
+
+img.slide {
+  height: 160px;
+  border: 1px solid #eee;
+}
+
+.slides {
+  width: 870px;
+  margin-left: -145px;
+}
+
+td {
+  vertical-align: top;
+  font-size: 11pt;
+  padding: 20px;
+}
+
+td p {
+  margin-bottom: 13px;
+  line-height: 140%;
+  text-align: left;
+}
+
+@media screen and (max-width: 870px) {
+  .slides {
+    width: unset;
+    max-width: 580px;
+    margin-left: 0px;
+  }
+  tr, td {
+    display: block;
+    text-align: center;
+    padding: 0px;
+  }
+}

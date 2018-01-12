@@ -1,58 +1,68 @@
 - title: "The Fastest FizzBuzz In The West"
-  date: 2017-11-18
-  slides: "https://github.com/di/talks/blob/master/pytexas_2017/divspl/talk.pdf"
-  url: "https://www.pytexas.org/2017/talk/U2Vzc2lvbk5vZGU6OQ=="
+  date: 2017-11-18 00:00:00 -0600
+  slides_url: "https://github.com/di/talks/blob/master/pytexas_2017/divspl/talk.pdf"
+  venue_url: "https://www.pytexas.org/2017/talk/U2Vzc2lvbk5vZGU6OQ=="
   venue: "PyTexas 2017"
+  video_url: "https://www.youtube.com/watch?v=GTqpPB6jiyc"
+  location: Austin TX
 
 - title: "Detecting Asteroids with Neural Networks in Tensorflow"
-  date: 2017-10-07
-  slides: "https://github.com/di/talks/blob/master/flpy_2017/astro-tf/talk.pdf"
-  url: "http://flpy.org/cth_speaker/dustin-ingram/"
+  date: 2017-10-07 00:00:00 -0600
+  slides_url: "https://github.com/di/talks/blob/master/flpy_2017/astro-tf/talk.pdf"
+  venue_url: "http://flpy.org/cth_speaker/dustin-ingram/"
   venue: "FLPY 2017"
+  location: Orlando FL
 
 - title: "Swiss Train Deployments"
-  date: 2017-10-07
-  slides: "https://github.com/di/talks/blob/master/flpy_2017/swiss_train_deployments/talk.pdf"
-  url: "http://flpy.org/cth_speaker/dustin-ingram/"
+  date: 2017-10-07 00:00:00 -0600
+  slides_url: "https://github.com/di/talks/blob/master/flpy_2017/swiss_train_deployments/talk.pdf"
+  venue_url: "http://flpy.org/cth_speaker/dustin-ingram/"
   venue: "FLPY 2017"
+  location: Orlando FL
 
 - title: "The Fastest FizzBuzz In The West"
-  date: 2017-10-06
-  slides: "https://github.com/di/talks/blob/master/pygotham_2017/talk.pdf"
-  url: "https://2017.pygotham.org/talks/the-fastest-fizzbuzz-in-the-west-how-to-make-your-own-programming-language/"
+  date: 2017-10-06 00:00:00 -0600
+  slides_url: "https://github.com/di/talks/blob/master/pygotham_2017/talk.pdf"
+  venue_url: "https://2017.pygotham.org/talks/the-fastest-fizzbuzz-in-the-west-how-to-make-your-own-programming-language/"
   venue: "PyGotham 2017"
-  video: "https://www.youtube.com/watch?v=DZ8kyT9oDUQ"
+  video_url: "https://www.youtube.com/watch?v=DZ8kyT9oDUQ"
+  location: New York NY
 
 - title: "The Fastest FizzBuzz In The West"
-  date: 2017-04-20
-  slides: "https://github.com/di/talks/blob/master/pycon_2017/talk.pdf"
-  url: "https://us.pycon.org/2017/schedule/presentation/613/"
+  date: 2017-04-20 00:00:00 -0600
+  slides_url: "https://github.com/di/talks/blob/master/pycon_2017/talk.pdf"
+  venue_url: "https://us.pycon.org/2017/schedule/presentation/613/"
   venue: "PyCon 2017"
-  video: "https://www.youtube.com/watch?v=ApgUrtCrmV8"
+  video_url: "https://www.youtube.com/watch?v=ApgUrtCrmV8"
+  location: Portland OR
 
 - title: "The Fastest FizzBuzz In The West"
-  date: 2017-01-26
-  slides: "https://github.com/di/talks/blob/master/philly_pug_feb_2017/talk.pdf"
-  url: "https://www.meetup.com/phillypug/events/236726527/"
+  date: 2017-01-26 00:00:00 -0600
+  slides_url: "https://github.com/di/talks/blob/master/philly_pug_feb_2017/talk.pdf"
+  venue_url: "https://www.meetup.com/phillypug/events/236726527/"
   venue: "Philly PUG"
+  location: Philadelphia PA
 
 - title: "Wat‽ Mind-bending Edge Cases in Python"
-  date: 2016-07-19
-  slides: "https://github.com/di/talks/blob/master/pygotham_2016/talk.pdf"
-  url: "https://2016.pygotham.org/talks/363/wat-mind-bending-edge-cas/"
+  date: 2016-07-19 00:00:00 -0600
+  slides_url: "https://github.com/di/talks/blob/master/pygotham_2016/talk.pdf"
+  venue_url: "https://2016.pygotham.org/talks/363/wat-mind-bending-edge-cas/"
   venue: "PyGotham 2016"
-  video: "https://www.youtube.com/watch?v=qjk2pWY4RP0"
+  video_url: "https://www.youtube.com/watch?v=qjk2pWY4RP0"
+  location: New York NY
 
 - title: "What Is And What Can Be: An Exploration from <code>type</code> to Metaclasses"
-  date: 2016-05-30
-  slides: "https://github.com/di/talks/blob/master/pycon_2016/talk.pdf"
-  url: "https://us.pycon.org/2016/schedule/presentation/2138/"
+  date: 2016-05-30 00:00:00 -0600
+  slides_url: "https://github.com/di/talks/blob/master/pycon_2016/talk.pdf"
+  venue_url: "https://us.pycon.org/2016/schedule/presentation/2138/"
   venue: "PyCon 2016"
-  video: "https://www.youtube.com/watch?v=bI0JUY2qd2A"
+  video_url: "https://www.youtube.com/watch?v=bI0JUY2qd2A"
+  location: Portland OR
 
 - title: "Python Tips, Tricks and Hidden Features"
-  date: 2015-11-25
-  slides: "https://github.com/di/talks/blob/master/philly_pug_nov_2015/tricks.pdf"
-  url: "https://www.meetup.com/phillypug/events/226490185/"
+  date: 2015-11-25 00:00:00 -0600
+  slides_url: "https://github.com/di/talks/blob/master/philly_pug_nov_2015/tricks.pdf"
+  venue_url: "https://www.meetup.com/phillypug/events/226490185/"
   venue: "Philly PUG"
-  video: "https://www.youtube.com/watch?v=uWGPxYDo87Q"
+  video_url: "https://www.youtube.com/watch?v=uWGPxYDo87Q"
+  location: Philadelphia PA
