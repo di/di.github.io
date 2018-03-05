@@ -1,3 +1,11 @@
+blockquote {
+  margin: 0;
+  border-left: 3.5px solid #dfe2e5;
+  color: #6a737d;
+  box-sizing: border-box;
+  padding-left: 1em;
+}
+
 body {
   font-family: helvetica,sans-serif;
   margin:40px auto;
