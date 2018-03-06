@@ -1,0 +1,134 @@
+---
+layout : post
+category : articles
+title : ! "Why PyPI Doesn't Know Your Projects Dependencies"
+description : A explanation as to why PyPI currently can't tell you the dependencies of a given project
+tags : [python, pypi, packaging, dependencies]
+---
+
+## The Problem
+One of the questions that I see come up relatively often within the Python
+Packaging ecosystem is related to dependencies. It often takes many forms:
+
+> How can I produce a dependency graph for Python packages?
+
+> Why doesn't PyPI show a project's dependencies on it's project page?
+
+> How can I get a project's dependencies without downloading the package?
+
+> Can I search PyPI and filter out projects that have a certain dependency?
+
+Essentially, all these questions are asking the same thing, and often the
+answers to these questions are not quite what a user wants to hear, mostly
+because they don't usually sound like a "yes" and more like a "it can't be
+done".
+
+Since it might not be immediately clear _why_ it can't always be done, and
+_why_, sometimes, it can, I'm going to attempt to explain some common
+"missed-conceptions" that are fundamental to understanding how Python package
+dependencies work.
+
+## What is `setup.py`?
+
+For most folks, `setup.py` is a familiar name. For new users, though, this file
+can often be confusing, so much so that there is even a highly-voted
+StackOverflow question called, appropriately, ["What is
+setup.py?"](https://stackoverflow.com/questions/1471994/what-is-setup-py)
+
+While some of the confusion comes from elsewhere, the main thing to note is
+that while `setup.py` often looks very similar from one project to another, at
+the end of the day, it is _just another Python script_.
+
+This leads us to the next question:
+
+## What is the difference between `setup.py` and `requirements.txt`?
+
+This question is a common enough question about Python packaging that it has
+already been answered by [Donald's definitive blog post on the
+subject](https://caremad.io/posts/2013/07/setup-vs-requirement/). However,
+there's something more to consider here when it comes to getting dependencies
+up on PyPI:
+
+* `requirements.txt`, since it's just a text file, is guaranteed to be
+  deterministic (given the dependencies available on your package index);
+* `setup.py`, since it's a Python script, makes no guarantees about determinism
+  at all.
+
+This means that `setup.py` can possibly give us non-deterministic dependencies.
+
+## What do you mean by "non-deterministic dependencies"?
+
+For example, let's define the smallest `setup.py` possible:
+
+```python
+from setuptools import setup
+
+setup(
+    name='paradox',
+    version='0.0.1',
+    description='A nondeterministic package',
+)
+```
+
+This is pretty straightforward. Now, let's make it nondeterministic:
+
+```diff
++ import random
+from setuptools import setup
++
++ dependency = random.choice(['Schrodinger', 'Cat'])
+
+setup(
+    name='paradox',
+    version='0.0.1',
+    description='A nondeterministic package',
++     install_requires=[dependency],
+)
+```
+
+Now, attempting to install our `paradox` will sometimes install
+[Schrodinger](https://pypi.org/project/schrodinger/) as a dependency, and
+sometimes it will install [his cat](https://pypi.org/project/cat/).
+
+## Why would I want non-deterministic dependencies?
+
+Making your package install different dependencies using `random.choice()` is a
+great way to upset your users, but not a great way to write Python packages.
+
+While this type of nondeterministic dependency might not make sense, it might
+make a lot of sense to install different dependencies based on the state of the
+installing user's system -- maybe Linux users get Package A, while Windows
+users get Package B instead.
+
+## So, why can't PyPI know my project's dependencies?
+
+At this point, you should be able to answer this question yourself!
+
+Since the package author can do _anything_ to come up with a list of
+dependencies, given the current ecosystem, there's no way an index like PyPI
+could reliably take into account all the intricacies of your package
+installation process and determine what they will be.
+
+At this point, you may be asking yourself what can be done to fix this.
+
+First, consider that the current status quo is not necessarily broken: having a
+`setup.py` which can install dependencies based on _literally anything_ is a
+feature that has enabled better compatibility across an increasingly broad
+spectrum of platforms.
+
+However, this is annoying for a lot of people: it's annoying for the
+ninety-something percent of package maintainers that have a reliable and known
+set of dependencies for their package, and just want a dependency graph, or to
+see a list of projects that depend on their project, etc.
+
+One way to be able to "predict" the dependencies of a package is to severely
+limit some of the variables that are commonly used to determine which
+dependencies to install, like Python version, platform, etc. This is
+essentially what the [wheel](https://www.python.org/dev/peps/pep-0427/) format
+is, and it's why there is _some_ dependency information available on PyPI.
+
+Implementing new specifications like [PEP
+517](https://www.python.org/dev/peps/pep-0517/) will pave the way for
+dependency specification in a more sane way, and will allow tools like `pip`
+and PyPI to extract dependency information from source distributions as well as
+wheels.
