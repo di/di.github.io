@@ -1,0 +1,115 @@
+---
+layout : post
+category : articles
+title : ! "Markdown Descriptions on PyPI"
+description : The best way to render your project's description as Markdown on PyPI
+tags : [python, pypi, packaging, markdown]
+---
+
+### Finally!
+
+I'm really excited to say that as of today, PyPI supports rendering project
+descriptions from Markdown! This has been a oft-requested feature and after
+lots of work (including the creation of [PEP
+566](https://www.python.org/dev/peps/pep-0566/)) it is now possible, without
+translating Markdown to rST or any other hacks!
+
+For example, [this `markdown-description-example`
+project](https://pypi.org/project/markdown-description-example/) has a Markdown
+description, [take a look at the source
+here](https://github.com/di/markdown-description-example).
+
+Here are the steps necessary to make a new release with a Markdown description
+of your project:
+
+### 1. Have a `README.md`
+
+And make sure it contains markdown. The extension doesn't have to be `.md`
+(`.mkdn` or `.markdown` or anything else is fine), just be sure you're reading
+it in and setting it as the `long_description`.
+
+### 2. Add a new argument in `setup.py`:
+
+[PEP 566](https://www.python.org/dev/peps/pep-0566/) added new metadata fields
+including
+[`Description-Content-Type`](https://packaging.python.org/specifications/core-metadata/#description-content-type-optional).
+To set the content type for your long description, you'll need to add the
+following argument to the `setup()` call in your projects `setup.py`:
+
+```diff
+    long_description=long_description,
++   long_description_content_type="text/markdown",
+```
+
+### 3. Upgrade your `setuptools`:
+
+You'll need a version of `setuptools>=38.6.0` to be able to produce a
+distribution with the new metadata.
+
+```
+$ pip install -U setuptools
+```
+
+You also must be actually using `setuptools`. This means that in your
+`setup.py` you have an import like:
+
+```python
+from setuptools import setup
+```
+
+### 4. Make a source distribution
+
+This is the same as usual:
+
+```
+$ python setup.py sdist
+```
+
+### 5. Upgrade your `twine`:
+
+You _must_ upload the distribution with
+[`twine`](https://github.com/pypa/twine), and only `twine>=1.11.0` will
+correctly send the metadata to PyPI:
+
+```
+$ pip install -U twine --pre
+```
+
+(The `--pre` flag is necessary to install a prerelease at the time of writing)
+
+### 6. Upload the distribution:
+
+This is also the same as usual:
+
+```
+$ twine upload dist/*
+```
+
+### 7. View your project on `pypi.org`
+
+Only <https://pypi.org> will correctly render your new Markdown description.
+
+Legacy PyPI (<http://pypi.python.org/>) will still render your description as
+plaintext, but don't worry, [it's going away
+real soon](https://wiki.python.org/psf/WarehouseRoadmap). 😉
+
+### Thanks
+
+Thanks to [Marc Abramowitz](https://twitter.com/MSAbramo) for originally
+starting the push for this feature, to [Nick
+Coghlan](https://twitter.com/ncoghlan_dev) and [Daniel
+Holth](https://twitter.com/dholth) for help and guidance with PEP authorship
+and reviews, to Tres Seaver, [Sumana
+Harihareswara](https://twitter.com/brainwane) and [Jason R.
+Coombs](https://twitter.com/jaraco) for reviewing, testing and releasing pull
+requests, and the entire PyPI team including [Nicole
+Harris](https://twitter.com/nlhkabu), [Ernest W. Durbin
+III](https://twitter.com/ewdurbin) and [Donald
+Stufft](https://twitter.com/dstufft) for being amazing teammates.
+
+### Follow me
+If you want to stay up to date with all the latest PyPI changes, you can follow
+me:
+
+* <https://github.com/di>
+* <https://twitter.com/di_codes>
