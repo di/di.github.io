@@ -72,10 +72,8 @@ You _must_ upload the distribution with
 correctly send the metadata to PyPI:
 
 ```
-$ pip install -U twine --pre
+$ pip install -U twine
 ```
-
-(The `--pre` flag is necessary to install a prerelease at the time of writing)
 
 ### 6. Upload the distribution:
 
