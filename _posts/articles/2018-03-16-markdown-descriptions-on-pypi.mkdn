@@ -77,7 +77,17 @@ $ pip install -U twine
 
 ### 6. Upload the distribution:
 
-This is also the same as usual:
+**Note**: If, in the previous step, you also created a wheel, perhaps with
+`python setup.py bdist_wheel`, you will need to upload your distributions one
+at a time, with the source distribution first, to avoid an issue in `wheel`
+which should be fixed soon. E.g.:
+
+```
+$ twine upload dist/<filename>.tar.gz
+$ twine upload dist/<filename>.whl
+```
+
+Otherwise, this is also the same as usual:
 
 ```
 $ twine upload dist/*
