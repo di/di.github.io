@@ -65,6 +65,13 @@ This is the same as usual:
 $ python setup.py sdist
 ```
 
+**Note**: If you'd like to create a wheel as well, perhaps with `python setup.py
+bdist_wheel`, you will need a version of `wheel>=0.31.0`:
+
+```
+$ pip install -U wheel
+```
+
 ### 5. Upgrade your `twine`:
 
 You _must_ upload the distribution with
@@ -77,17 +84,7 @@ $ pip install -U twine
 
 ### 6. Upload the distribution:
 
-**Note**: If, in the previous step, you also created a wheel, perhaps with
-`python setup.py bdist_wheel`, you will need to upload your distributions one
-at a time, with the source distribution first, to avoid an issue in `wheel`
-which should be fixed soon. E.g.:
-
-```
-$ twine upload dist/<filename>.tar.gz
-$ twine upload dist/<filename>.whl
-```
-
-Otherwise, this is also the same as usual:
+This is also the same as usual:
 
 ```
 $ twine upload dist/*
