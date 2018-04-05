@@ -1,3 +1,15 @@
+- title: "Inside the Cheeseshop: How Python Packaging Works"
+  date: 2018-06-11 00:00:00 -0600
+  venue_url: "https://scipy2018.scipy.org/"
+  venue: "SciPY 2018"
+  location: Austin TX
+
+- title: "Inside the Cheeseshop: How Python Packaging Works"
+  date: 2018-04-12 00:00:00 -0600
+  venue_url: "https://us.pycon.org/2018/schedule/presentation/148/"
+  venue: "PyCon 2018"
+  location: Cleveland OH
+
 - title: "The Fastest FizzBuzz In The West"
   date: 2017-11-18 00:00:00 -0600
   slides_url: "https://github.com/di/talks/blob/master/pytexas_2017/divspl/talk.pdf"
