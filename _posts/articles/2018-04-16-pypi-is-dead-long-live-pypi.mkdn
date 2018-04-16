@@ -20,7 +20,7 @@ last five months!
 
 It has been both a blast and an honor to be a part of the team who made this
 project a success. These folks are extremely talented, and I'd like to thank
-for all their hard work:
+them for all their hard work:
 
 * [Sumana Harihareswara](https://github.com/brainwane/), for running one of the
   most focused and efficient projects I've ever been on, and for always
