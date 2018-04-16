@@ -1,0 +1,62 @@
+---
+layout : post
+category : articles
+title : ! "PyPI is dead. Long live PyPI!"
+description : Some thoughts on the launch of the new PyPI
+tags : [python, pypi, packaging]
+---
+
+### Launch 🚀
+
+Today, we flipped the proverbial switch, and <https://pypi.org> became _the_
+Python Package Index.
+
+Two years ago, when I made my very first contribution to
+[`pypa/warehouse`](https://github.com/pypa/warehouse/), I never dreamed that it
+would one day be my job to work full-time on the project.
+
+However, as luck would have it, that's exactly what I've been doing for the
+last five months!
+
+It has been both a blast and an honor to be a part of the team who made this
+project a success. These folks are extremely talented, and I'd like to thank
+for all their hard work:
+
+* [Sumana Harihareswara](https://github.com/brainwane/), for running one of the
+  most focused and efficient projects I've ever been on, and for always
+  thinking about our users;
+
+* [Nicole Harris](https://github.com/nlhkabu/), for turning what would have
+  been a pretty janky looking website into something that is clean, beautiful,
+  organized, user-tested and accessible;
+
+* [Ernest W. Durbin III](https://github.com/ewdurbin/), for doing a tremendous
+  amount of behind-the-scenes infrastructure work, and tracking down nasty
+  queries and memory leaks;
+
+* [Donald Stufft](https://github.com/dstufft/), for being a fount of knowledge,
+  and for being caremad enough to start a ground-up rewrite of PyPI in the
+  first place.
+
+And of course, thanks to Mozilla for [supporting the Python
+ecosystem](https://blog.mozilla.org/blog/2018/01/23/moss-q4-supporting-python-ecosystem/)
+by [providing the funds to make this possible via a MOSS
+award](http://pyfound.blogspot.com/2017/11/the-psf-awarded-moss-grant-pypi.html).
+(If your project is looking for financial support, see
+<https://mozilla.org/moss> to see if you qualify.)
+
+### Stay tuned
+
+Follow me on Twitter ([@di_codes](https://twitter.com/di_codes)) to stay tuned
+for some upcoming retrospective articles about the project, including:
+
+* Choosing a front-end JS framework for PyPI
+* How PyPI turns 5K req/s into 5 req/s
+* What we're leaving behind with legacy PyPI
+* New and exciting features for a new and exciting PyPI
+
+Also, if you'll be at [PyCon in Cleveland](https://us.pycon.org/2018/) this
+spring, come see my talk ["Inside the Cheeseshop: How Python Packaging
+Works"](https://us.pycon.org/2018/schedule/presentation/148/), or join me at
+the [Packaging Development
+Sprints](https://wiki.python.org/psf/PackagingSprints)!
