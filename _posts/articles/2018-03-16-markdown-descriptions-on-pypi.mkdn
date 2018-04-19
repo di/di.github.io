@@ -65,6 +65,12 @@ This is the same as usual:
 $ python setup.py sdist
 ```
 
+You may see a warning from `distutils` which can be safely ignored:
+
+```
+Unknown distribution option: 'long_description_content_type'
+```
+
 **Note**: If you'd like to create a wheel as well, perhaps with `python setup.py
 bdist_wheel`, you will need a version of `wheel>=0.31.0`:
 
