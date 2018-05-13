@@ -23,6 +23,7 @@
   slides_url: "https://github.com/di/talks/blob/master/flpy_2017/astro-tf/talk.pdf"
   venue_url: "http://flpy.org/cth_speaker/dustin-ingram/"
   venue: "FLPY 2017"
+  video_url: "https://www.youtube.com/watch?v=cnCiCjgA_BQ"
   location: Orlando FL
 
 - title: "Swiss Train Deployments"
@@ -30,6 +31,7 @@
   slides_url: "https://github.com/di/talks/blob/master/flpy_2017/swiss_train_deployments/talk.pdf"
   venue_url: "http://flpy.org/cth_speaker/dustin-ingram/"
   venue: "FLPY 2017"
+  video_url: "https://www.youtube.com/watch?v=po_vypiqX3Y"
   location: Orlando FL
 
 - title: "The Fastest FizzBuzz In The West"
