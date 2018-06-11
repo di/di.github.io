@@ -12,6 +12,18 @@
   slides_url: "https://github.com/di/talks/blob/master/pycon_2018/talk.pdf"
   location: Cleveland OH
 
+- title: "FLOSS Weekly: PyPI"
+  date: 2018-05-02 00:00:00 -0600
+  venue_url: "https://twit.tv/shows/floss-weekly/episodes/482"
+  video_url: "https://twit.tv/shows/floss-weekly/episodes/482"
+  venue: "FLOSS Weekly Episode #482"
+
+- title: "TalkPython: Inside the new PyPI launch"
+  date: 2018-04-27 00:00:00 -0600
+  venue_url: "https://talkpython.fm/episodes/show/159/inside-the-new-pypi-launch"
+  video_url: "https://talkpython.fm/episodes/show/159/inside-the-new-pypi-launch"
+  venue: "TalkPython Episode #159"
+
 - title: "The Fastest FizzBuzz In The West"
   date: 2017-11-18 00:00:00 -0600
   slides_url: "https://github.com/di/talks/blob/master/pytexas_2017/divspl/talk.pdf"
