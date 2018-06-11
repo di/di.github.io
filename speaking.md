@@ -25,15 +25,19 @@ A sample of my recent talks:
   <li>
   {% if talk.url %}
     <a href="{{ talk.url }}">{{ talk.title }}</a><br>
+  {% elsif talk.video_url %}
+    <a href="{{ talk.video_url }}">{{ talk.title }}</a><br>
   {% elsif talk.slides_url %}
     <a href="{{ talk.slides_url }}">{{ talk.title }}</a><br>
   {% else %}
     {{ talk.title }}<br>
   {% endif %}
     <small>
-      <a href="{{ talk.venue_url }}">{{ talk.venue }}</a>, {{ talk.location }}, {{ talk.date | date : "%B %Y" }}
-      {% if talk.video_url %}
-      (<a href="{{ video_url }}">video</a>)
+      <a href="{{ talk.venue_url }}">{{ talk.venue }}</a>,
+      {% if talk.location %} {{ talk.location }}, {% endif %}
+      {{ talk.date | date : "%B %Y" }}
+      {% if talk.slides_url %}
+      (<a href="{{ talk.slides_url }}">slides</a>)
       {% endif %}
       {% if talk.description %}
       <br>
