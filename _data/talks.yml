@@ -1,8 +1,8 @@
-- title: "Inside the Cheeseshop: How Python Packaging Works"
-  date: 2018-06-11 00:00:00 -0600
-  venue_url: "https://scipy2018.scipy.org/ehome/index.php?eventid=299527&tabid=712461&cid=2233540&sessionid=21620161&sessionchoice=1&"
-  venue: "SciPy 2018"
-  location: Austin TX
+#- title: "Inside the Cheeseshop: How Python Packaging Works"
+#  date: 2018-06-11 00:00:00 -0600
+#  venue_url: "https://scipy2018.scipy.org/ehome/index.php?#eventid=299527&tabid=712461&cid=2233540&sessionid=21620161&sessionchoice=1&"
+#  venue: "SciPy 2018"
+#  location: Austin TX
 
 - title: "Inside the Cheeseshop: How Python Packaging Works"
   date: 2018-04-12 00:00:00 -0600
