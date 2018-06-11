@@ -25,8 +25,10 @@ A sample of my recent talks:
   <li>
   {% if talk.url %}
     <a href="{{ talk.url }}">{{ talk.title }}</a><br>
-  {% else %}
+  {% elsif talk.slides_url %}
     <a href="{{ talk.slides_url }}">{{ talk.title }}</a><br>
+  {% else %}
+    {{ talk.title }}<br>
   {% endif %}
     <small>
       <a href="{{ talk.venue_url }}">{{ talk.venue }}</a>, {{ talk.location }}, {{ talk.date | date : "%B %Y" }}
