@@ -43,6 +43,7 @@ degree in Computer Science from [Drexel University](http://drexel.edu).
   {% assign sorted = combined | sort: 'date' | reverse %}
 
   {% for talk in sorted limit:4 %}
+  {% if talk.venue %}
   <li>
   {% if talk.url %}
     <a href="{{ talk.url }}">{{ talk.title }}</a><br>
@@ -62,6 +63,7 @@ degree in Computer Science from [Drexel University](http://drexel.edu).
       {% endif %}
     </small>
   </li>
+  {% endif %}
   {% endfor %}
   <li>
     <a href="/speaking">See more...</a>

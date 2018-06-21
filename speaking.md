@@ -22,6 +22,7 @@ A sample of my recent talks:
   {% assign sorted = combined | sort: 'date' | reverse %}
 
   {% for talk in sorted %}
+  {% if talk.venue %}
   <li>
   {% if talk.url %}
     <a href="{{ talk.url }}">{{ talk.title }}</a><br>
@@ -46,5 +47,6 @@ A sample of my recent talks:
     </small>
     <br><br>
   </li>
+  {% endif %}
   {% endfor %}
 </ul>
