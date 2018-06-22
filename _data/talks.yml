@@ -4,6 +4,18 @@
 #  venue: "SciPy 2018"
 #  location: Austin TX
 
+- date: 2018-07-11 00:00:00 -6000
+  venue: "SciPy 2018"
+  venue_url: "https://scipy2018.scipy.org/ehome/index.php?eventid=299527&"
+  location: "Austin TX"
+  upcoming: True
+
+- date: 2018-07-28 00:00:00 -6000
+  venue: "PyOhio 2018"
+  venue_url: "https://www.pyohio.org/2018/"
+  location: "Columbus OH"
+  upcoming: True
+
 - title: "Inside the Cheeseshop: How Python Packaging Works"
   date: 2018-05-12 00:00:00 -0600
   venue_url: "https://us.pycon.org/2018/schedule/presentation/148/"

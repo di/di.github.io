@@ -41,9 +41,17 @@ degree in Computer Science from [Drexel University](http://drexel.edu).
     {% assign combined = combined | push: talk %}
   {% endfor %}
   {% assign sorted = combined | sort: 'date' | reverse %}
+  {% assign n_upcoming = sorted | where: "upcoming",true | size %}
+  {% assign n_unpublished = sorted | where: "publish",false| size %}
+  {% assign n_talks = 4 | plus: n_upcoming | plus: n_unpublished %}
 
-  {% for talk in sorted limit:4 %}
-  {% if talk.venue %}
+  {% for talk in sorted limit:n_talks %}
+  {% if talk.upcoming %}
+  <li>
+    <i>Upcoming:</i> <a href="{{ talk.venue_url }}">{{ talk.venue }}</a> in {{ talk.location }}, {{ talk.date | date : "%B %Y" }}
+  </li>
+  {% endif %}
+  {% if talk.venue and talk.title %}
   <li>
   {% if talk.url %}
     <a href="{{ talk.url }}">{{ talk.title }}</a><br>

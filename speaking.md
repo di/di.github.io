@@ -22,7 +22,13 @@ A sample of my recent talks:
   {% assign sorted = combined | sort: 'date' | reverse %}
 
   {% for talk in sorted %}
-  {% if talk.venue %}
+  {% if talk.upcoming %}
+  <li>
+    <i>Upcoming:</i> <a href="{{ talk.venue_url }}">{{ talk.venue }}</a> in {{ talk.location }}, {{ talk.date | date : "%B %Y" }}
+    <br><br>
+  </li>
+  {% endif %}
+  {% if talk.venue and talk.title %}
   <li>
   {% if talk.url %}
     <a href="{{ talk.url }}">{{ talk.title }}</a><br>

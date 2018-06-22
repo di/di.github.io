@@ -3,6 +3,7 @@ layout : post
 category : talks
 title : 'Software of the Long Now'
 tags : [software, pypi]
+publish : false
 description : 'A discussion on principles of designing software to have longevity, and my experiences with long software'
 ---
 
