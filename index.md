@@ -4,7 +4,7 @@ title : Dustin Ingram
 ---
 
 ## About
-I'm Dustin (aka [@di](https://github.com/di/)), a developer advocate at Google,
+I'm Dustin (aka [@di](https://github.com/di/)), a Developer Advocate at Google,
 focused on supporting the Python community on the Google Cloud Platform. I'm
 also a member of the [Python Packaging Authority](https://github.com/pypa),
 maintainer of [PyPI](https://pypi.org), organizer for the
@@ -71,6 +71,3 @@ Computer Science from [Drexel University](http://drexel.edu).
     <a href="/speaking">See more...</a>
   </li>
 </ul>
-
-## Github
-You can follow me on Github [here](https://github.com/di).
