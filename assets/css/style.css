@@ -21,6 +21,10 @@ a, a code {
   text-decoration: none;
 }
 
+a:hover {
+  text-decoration: underline;
+}
+
 h1, h2, h3 {
   margin-top: 2em;
   margin-bottom: 0.2em;
