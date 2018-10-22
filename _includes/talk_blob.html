@@ -6,30 +6,24 @@
   {{ talk.title }}<br>
 {%- endif -%}
   <small>
-  {% if talk.description %}
-  {{ talk.description }}
-  {% endif %}
-  <ul>
   {%- for venue in talk.venues -%}
-    <li>
-      {% if venue.venue_url -%}
-        <a href="{{ venue.venue_url }}">{{ venue.venue }}</a>,
-      {% else -%}
-        {{ venue.venue }}
-      {% endif -%}
-      {%- if venue.location -%}{{ venue.location }},{%- endif %}
-      {{ venue.date | date : "%B %Y" }}
-      {%- if venue.links %}
-      (
-        {%- for link in venue.links -%}
-        <a href="{{ link[1] }}">{{ link[0] }}</a>
-        {%- if forloop.last == false -%}, {% endif -%}
-        {%- endfor -%}
-      )
-      {%- endif -%}
-    </li>
+    {% if venue.venue_url -%}
+      - <a href="{{ venue.venue_url }}">{{ venue.venue }}</a>,
+    {% else -%}
+      - {{ venue.venue }}
+    {% endif -%}
+    {%- if venue.location -%}{{ venue.location }},{%- endif %}
+    {{ venue.date | date : "%B %Y" }}
+    {%- if venue.links %}
+    (
+      {%- for link in venue.links -%}
+      <a href="{{ link[1] }}">{{ link[0] }}</a>
+      {%- if forloop.last == false -%}, {% endif -%}
+      {%- endfor -%}
+    )
+    {%- endif -%}
+    <br>
   {%- endfor -%}
-  </ul>
   </small>
 </li>
 {%- endif -%}
