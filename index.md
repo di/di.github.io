@@ -30,7 +30,6 @@ Computer Science from [Drexel University](http://drexel.edu).
   </li>
 </ul>
 
-
 ## Speaking
 <ul>
   {% assign combined = "" | split: "" %}
@@ -45,27 +44,7 @@ Computer Science from [Drexel University](http://drexel.edu).
   {% assign n_talks = 4 | plus: n_unpublished %}
 
   {% for talk in sorted limit:n_talks %}
-  {% if talk.venue and talk.title %}
-  <li>
-  {% if talk.url %}
-    <a href="{{ talk.url }}">{{ talk.title }}</a><br>
-  {% elsif talk.video_url %}
-    <a href="{{ talk.video_url }}">{{ talk.title }}</a><br>
-  {% elsif talk.slides_url %}
-    <a href="{{ talk.slides_url }}">{{ talk.title }}</a><br>
-  {% else %}
-    {{ talk.title }}<br>
-  {% endif %}
-    <small>
-      <a href="{{ talk.venue_url }}">{{ talk.venue }}</a>,
-      {% if talk.location %} {{ talk.location }}, {% endif %}
-      {{ talk.date | date : "%B %Y" }}
-      {% if talk.slides_url %}
-      (<a href="{{ talk.slides_url }}">slides</a>)
-      {% endif %}
-    </small>
-  </li>
-  {% endif %}
+    {% include talk_blob.html %}
   {% endfor %}
   <li>
     <a href="/speaking">See more...</a>

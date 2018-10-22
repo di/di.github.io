@@ -2,9 +2,11 @@
 layout : post
 category : talks
 title : 'Data Protection for Developers'
-location : Austin TX
-venue: Austin Python Meetup
-venue_url: https://www.meetup.com/austinpython/events/wfkrdpyxcbnb/
+venues:
+  - location: "Austin TX"
+    venue: "Austin Python Meetup"
+    venue_url: "https://www.meetup.com/austinpython/events/wfkrdpyxcbnb/"
+    date: 2017-01-10 00:00:00 -0600
 tags : [data protection]
 description : 'An exploration of the important milestones in the history of data protection laws, an examination of upcoming European regulation, and some predictions about what the future of data protection has in store for us.'
 ---

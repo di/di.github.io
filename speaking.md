@@ -22,31 +22,6 @@ A sample of my recent talks:
   {% assign sorted = combined | sort: 'date' | reverse %}
 
   {% for talk in sorted %}
-  {% if talk.venue and talk.title %}
-  <li>
-  {% if talk.url %}
-    <a href="{{ talk.url }}">{{ talk.title }}</a><br>
-  {% elsif talk.video_url %}
-    <a href="{{ talk.video_url }}">{{ talk.title }}</a><br>
-  {% elsif talk.slides_url %}
-    <a href="{{ talk.slides_url }}">{{ talk.title }}</a><br>
-  {% else %}
-    {{ talk.title }}<br>
-  {% endif %}
-    <small>
-      <a href="{{ talk.venue_url }}">{{ talk.venue }}</a>,
-      {% if talk.location %} {{ talk.location }}, {% endif %}
-      {{ talk.date | date : "%B %Y" }}
-      {% if talk.slides_url %}
-      (<a href="{{ talk.slides_url }}">slides</a>)
-      {% endif %}
-      {% if talk.description %}
-      <br>
-      {{ talk.description }}
-      {% endif %}
-    </small>
-    <br><br>
-  </li>
-  {% endif %}
+    {% include talk_blob.html %}
   {% endfor %}
 </ul>
