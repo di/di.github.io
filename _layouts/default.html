@@ -5,8 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ page.title }} - {{ site.author.name }}</title>
-    {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
     <meta name="author" content="{{ site.author.name }}">
+    <meta name="twitter:creator" content="{{ site.author.twitter }}">
+    <meta name="twitter:card" content="summary">
+    <meta name="og:title" content="{{ page.title }}">
+    {% if page.description -%}
+    <meta name="og:description" content="{{ page.description }}">
+    <meta name="description" content="{{ page.description }}">
+    {%- endif %}
+    {% if page.image -%}
+    <meta name="og:image" content="{{ page.image | absolute_url }}">
+    {%- endif %}
+    <meta name="og:url" content="{{ page.url | absolute_url }}">
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css?{{ site.time | date: '%s%N' }}">
     <link rel="stylesheet" type="text/css" href="/assets/css/syntax.css?{{ site.time | date: '%s%N' }}">
     <link rel="alternate" type="application/atom+xml" title="ATOM Feed" href="/atom.xml">

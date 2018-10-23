@@ -26,6 +26,7 @@ venues:
     location: "Cleveland OH"
     links:
       video: "https://www.youtube.com/watch?v=AQsZsgJ30AE"
+image : assets/images/cheeseshop/34.png
 description : 'This talk identifies the key tools in the Python Packaging ecosystem, what they are used for, why they exist, their history, and what the future has in store for them.'
 ---
 

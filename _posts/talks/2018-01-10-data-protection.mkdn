@@ -8,6 +8,7 @@ venues:
     venue_url: "https://www.meetup.com/austinpython/events/wfkrdpyxcbnb/"
     date: 2017-01-10 00:00:00 -0600
 tags : [data protection]
+image: assets/images/data_protection/27.png
 description : 'An exploration of the important milestones in the history of data protection laws, an examination of upcoming European regulation, and some predictions about what the future of data protection has in store for us.'
 ---
 

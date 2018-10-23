@@ -1,7 +1,8 @@
-title: Dustin Ingram
+title: "Dustin Ingram"
 author:
-  name: Dustin Ingram
-production_url: https://dustingram.com
+  name: "Dustin Ingram"
+  twitter: "@di_codes"
+production_url: "https://dustingram.com"
 
 # Build settings
 permalink: /:categories/:year/:month/:day/:title
