@@ -277,13 +277,13 @@ description : 'This talk identifies the key tools in the Python Packaging ecosys
     <p>
       So let's go back in time, back to a time when Python was brand new and
       everything we're familiar with today didn't exist. Back to the beginning
-      where there was just python
+      where there was just Python.
     </p>
   </td></tr>
   <tr><td><a href="#39"><img id="39" class="slide" src="/assets/images/cheeseshop/39.png"></a></td><td>
     <p>
       Pretty much as soon as there was Python, there was something written in
-      Python
+      Python.
     </p>
     <p>
       Let's pretend you're the author of this totally awesome library. Nice
@@ -329,7 +329,7 @@ description : 'This talk identifies the key tools in the Python Packaging ecosys
     </p>
     <p>
       So what we need is a place where people can go to find interesting Python
-      code... some sort of "index" for "python packages"... I think we'll call
+      code... some sort of "index" for "Python packages"... I think we'll call
       it...
     </p>
   </td></tr>
@@ -375,8 +375,8 @@ description : 'This talk identifies the key tools in the Python Packaging ecosys
   </td></tr>
   <tr><td><a href="#49"><img id="49" class="slide" src="/assets/images/cheeseshop/49.png"></a></td><td>
     <p>
-      This gave us the somewhat familiar incantation, "python setup.py
-      whatever".
+      This gave us the somewhat familiar incantation, <code>python setup.py
+      whatever</code>.
     </p>
     <p>
       I think some people have run this without really thinking about what's
@@ -403,7 +403,7 @@ description : 'This talk identifies the key tools in the Python Packaging ecosys
     <p>
       The <code>distutils</code> library also gave us a standard way to package
       up source code for sharing, by turning it into a compressed archive like
-      a zip or a tar.gz.
+      a <code>.zip</code> or a <code>.tar.gz</code>.
     </p>
   </td></tr>
   <tr><td><a href="#52"><img id="52" class="slide" src="/assets/images/cheeseshop/52.png"></a></td><td>
@@ -546,7 +546,8 @@ description : 'This talk identifies the key tools in the Python Packaging ecosys
       cheeseshop which has no cheese for sale.
     </p>
     <p>
-      The joke is that when PyPI was first created, there was nothing in it. Hence, the cheeseshop.
+      The joke is that when PyPI was first created, there was nothing in it.
+      Hence, "The Cheeseshop".
     </p>
     <p>
       But it does have stuff in it now, so it's not really even appropriate to
@@ -566,8 +567,8 @@ description : 'This talk identifies the key tools in the Python Packaging ecosys
     <p>
       Now that we have a package index, it's possible to not only point to some
       version of a package somewhere, but it's also possible to distribute
-      something that does more than <code>distutils</code>. Which again, was in the standard
-      library and came with your Python.
+      something that does more than <code>distutils</code>. Which again, was in
+      the standard library and came with your Python.
     </p>
   </td></tr>
   <tr><td><a href="#73"><img id="73" class="slide" src="/assets/images/cheeseshop/73.png"></a></td><td>
@@ -586,7 +587,8 @@ description : 'This talk identifies the key tools in the Python Packaging ecosys
       good idea, especially monkeypatching the standard library.
     </p>
     <p>
-      But once we had <code>setuptools</code>, all sorts of other things came along with it.
+      But once we had <code>setuptools</code>, all sorts of other things came
+      along with it.
     </p>
   </td></tr>
   <tr><td><a href="#74"><img id="74" class="slide" src="/assets/images/cheeseshop/74.png"></a></td><td>
@@ -627,7 +629,7 @@ description : 'This talk identifies the key tools in the Python Packaging ecosys
   </td></tr>
   <tr><td><a href="#78"><img id="78" class="slide" src="/assets/images/cheeseshop/78.png"></a></td><td>
     <p>
-      But <code>easy_install</code> gave us some new problems.
+      But <code>easy_install</code> also gave us some new problems.
     </p>
   </td></tr>
   <tr><td><a href="#79"><img id="79" class="slide" src="/assets/images/cheeseshop/79.png"></a></td><td>
@@ -652,11 +654,8 @@ description : 'This talk identifies the key tools in the Python Packaging ecosys
     <p>
       You might have never heard of <code>pyinstall</code>. This is because
       pretty much as soon as <code>pyinstall</code> was created, we had a new
-      problem.
-    </p>
-    <p>
-      The name <code>pyinstall</code> is too long, and typing <code>pyinstall
-      install</code> feels redundant.
+      problem: The name <code>pyinstall</code> is too long, and typing
+      <code>pyinstall install</code> feels redundant.
     </p>
     <p>
       Again, naming things is hard!
@@ -729,10 +728,10 @@ description : 'This talk identifies the key tools in the Python Packaging ecosys
     </p>
     <p>
       What happens when I forget to re-register the domain my package is hosted
-      on? An attacker can go and register it, put malicious code in place.
+      on? An attacker can go and register it and put malicious code in place.
     </p>
     <p>
-      My users will have no idea, they are so used to <code>pip</code> trying
+      My users will have no idea. They are so used to <code>pip</code> trying
       to connect to random domains willy-nilly that they'll never notice.
     </p>
   </td></tr>
@@ -744,7 +743,7 @@ description : 'This talk identifies the key tools in the Python Packaging ecosys
   </td></tr>
   <tr><td><a href="#89"><img id="89" class="slide" src="/assets/images/cheeseshop/89.png"></a></td><td>
     <p>
-      This is standardized in PEP 438.
+      This is standardized in PEP 438, and PyPI becomes much faster.
     </p>
   </td></tr>
   <tr><td><a href="#90"><img id="90" class="slide" src="/assets/images/cheeseshop/90.png"></a></td><td>
@@ -777,7 +776,8 @@ description : 'This talk identifies the key tools in the Python Packaging ecosys
   </td></tr>
   <tr><td><a href="#93"><img id="93" class="slide" src="/assets/images/cheeseshop/93.png"></a></td><td>
     <p>
-      The name "wheel" came from a "wheel of cheese": you put wheels in a cheeseshop.
+      The name "wheel" came from a "wheel of cheese": you put wheels in a
+      cheeseshop.
     </p>
     <p>
       I like to think the authors of the spec really got this name right,
@@ -801,19 +801,20 @@ description : 'This talk identifies the key tools in the Python Packaging ecosys
   </td></tr>
   <tr><td><a href="#95"><img id="95" class="slide" src="/assets/images/cheeseshop/95.png"></a></td><td>
     <p>
-      The solution to this problem is twine. In the same vein as <code>setuptools</code> and
-      <code>pip</code>, this is a separate package from the standard library, available from
-      PyPI, which is responsible for securely uploading a new project to PyPI.
+      The solution to this problem is <code>twine</code>. In the same vein as
+      <code>setuptools</code> and <code>pip</code>, this is a separate package
+      from the standard library, available from PyPI, which is responsible for
+      securely uploading a new project to PyPI.
     </p>
   </td></tr>
   <tr><td><a href="#96"><img id="96" class="slide" src="/assets/images/cheeseshop/96.png"></a></td><td>
     <p>
-      The name comes from tying up packages with twine before sending them
+      The name comes from tying up packages with twine before sending them.
     </p>
     <p>
-      This name doesn't really correlate well with what it does though. Twine
-      doesn't do anything _to_ your package, all the bundling has already been
-      done
+      This name doesn't really correlate well with what it does though. The
+      <code>twine</code> tool doesn't do anything _to_ your package, all the
+      bundling has already been done.
     </p>
     <p>
       It just looks up some information about your package, and it knows how to
@@ -833,17 +834,19 @@ description : 'This talk identifies the key tools in the Python Packaging ecosys
   </td></tr>
   <tr><td><a href="#99"><img id="99" class="slide" src="/assets/images/cheeseshop/99.png"></a></td><td>
     <p>
-      Here's PyPI in April of 2018, over ten years later.
+      Here's PyPI in April of 2018, more than ten years later.
     </p>
   </td></tr>
   <tr><td><a href="#100"><img id="100" class="slide" src="/assets/images/cheeseshop/100.png"></a></td><td>
     <p>
-      Here they are side by side. It's kind of like one of those "spot the difference" games.
+      Here they are side by side. It's kind of like one of those "spot the
+      difference" games.
     </p>
   </td></tr>
   <tr><td><a href="#101"><img id="101" class="slide" src="/assets/images/cheeseshop/101.png"></a></td><td>
     <p>
-      It's not really fair to just visually compare PyPI in 2007 with PyPI in 2018.
+      It's not really fair to just visually compare PyPI in 2007 with PyPI in
+      2018.
     </p>
     <p>
       One big difference that might be hard to see is the number of packages
@@ -974,7 +977,7 @@ description : 'This talk identifies the key tools in the Python Packaging ecosys
     </p>
     <p>
       Unfortunately this excludes a lot of people that don't have malicious
-      intent though. So while lowering that barrier is a priority, it does
+      intent, though. So while lowering that barrier is a priority, it does
       produce new problems like spam packages on PyPI.
     </p>
   </td></tr>
@@ -1107,7 +1110,7 @@ description : 'This talk identifies the key tools in the Python Packaging ecosys
   </td></tr>
   <tr><td><a href="#127"><img id="127" class="slide" src="/assets/images/cheeseshop/127.png"></a></td><td>
     <p>
-      We also development sprints at various Python conferences and other
+      We also do development sprints at various Python conferences and other
       events. If you're a contributor, come find me at one of these, and I'll
       be happy to give you one of these contributor stickers.
     </p>
@@ -1142,7 +1145,7 @@ description : 'This talk identifies the key tools in the Python Packaging ecosys
       <li>
         You can file an issue on the <a
         href="https://github.com/pypa/packaging-problems">Packaging
-        Problems</a> tracker, for long term, ecosystem-wide changes.
+        Problems</a> tracker for long-term, ecosystem-wide changes.
       </li>
     </ul>
   </td></tr>
