@@ -8,6 +8,8 @@ venues:
     venue_url: "https://2018.pygotham.org/talks/inside-the-cheeseshop-how-python-packaging-works/"
     venue: "PyGotham 2018"
     location: "New York NY"
+    links:
+      video: "https://www.youtube.com/watch?v=m7J1IAaNHQ8"
   - date: 2018-07-28 00:00:00 -6000
     venue_url: "https://www.pyohio.org/2018/schedule/presentation/46/"
     venue: "PyOhio 2018"
