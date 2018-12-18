@@ -6,4 +6,4 @@ layout: default
   <small>{{ page.date | date : "%B %d %Y"}}</small>
 </div>
 
-{{ content }}
+{% include anchor_headings.html html=content anchorBody="#" anchorClass="anchor" %}

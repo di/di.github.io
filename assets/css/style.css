@@ -101,3 +101,17 @@ td p {
     padding: 0px;
   }
 }
+
+.anchor {
+  visibility: hidden;
+  color: #dfe2e5;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+  visibility: visible;
+}
