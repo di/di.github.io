@@ -1,0 +1,378 @@
+---
+layout : post
+category : articles
+title : ! "Popular PyPI projects made in 2018"
+description : Taking a look at some of the most popular projects on PyPI that didn't exist in 2017.
+tags : [python, pypi, packaging]
+---
+
+### New and shiny
+
+One of my favorite parts of being a PyPI maintainer and administrator is seeing
+all the new and interesting projects the Python community is creating. PyPI now
+contains more than 150K unique projects, and sometimes it feels like every day
+I'm finding some nifty little piece of software.
+
+Often, it takes a while for a new project to shake out bugs, release new
+features, and grow in popularity. However, some new projects are so
+phenomenally useful that the community immediately adopts them.
+
+In this post, I'm going to take a look at some of the most "popular" projects
+created on PyPI in 2018 (i.e., they didn't exist in 2017), why they exist, and
+how you can use them.
+
+### A note on "popularity"
+
+I'm using the number of downloads from PyPI as a proxy for the "popularity"
+of a given PyPI project. We aggregate download statistics into [a public
+BigQuery dataset][0], which contains details about each individual download,
+including which version of the project was downloaded, when it was downloaded,
+and how it was downloaded.
+
+However, using downloads to determine popularity is inherently flawed for a
+number of reasons. An individual download doesn't necessarily mean that someone
+typed `pip install <whatever>`--the project might be getting installed
+automatically in a CI environment, or might just be a dependency of another
+truly popular project.
+
+In addition, some of the largest users of projects from PyPI use private
+mirrors to improve latency and increase control over what projects can be
+installed, so any project downloaded and installed internally at these
+organizations won't show up in our query at all.
+
+And on the other hand, these statistics are incredibly easy to game: since
+PyPI has no "rate limit", you can write a script that stuffs the ballot box
+for your project as fast as you want. In fact, in the course of writing this
+post, I found a few projects that seemed to be doing exactly that--so generally
+you should take download counts with a grain of salt.
+
+I've published the query I'm using in this post [here][1] (GCP account
+required). If you're interested in doing your own analysis of the public
+dataset, see the ["Analyzing PyPI package downloads"][2] guide from the Python
+Packaging User Guide.
+
+### The projects
+
+Without further ado, here's some of the most "popular" projects created in
+2018, in no particular order:
+
+#### Project: [`black`][], by Łukasz Langa
+>  "The uncompromising code formatter."
+
+The [`black`][] project is easily my favorite project created this year. It's
+definitely not the first auto-formatter for Python, but it's might be the
+_least_ configurable one I've seen -- and that's a good thing.
+
+It seeks to reduce bikeshedding and nitpicking about formatting your Python
+code by being so opinionated that you (and your peers) won't ever need to think
+about formatting again. A number of notable projects have "blackened" their
+code bases ([including PyPI itself][3]). Pairs nicely with [`isort`][].
+
+#### Project: [`lalsuite`][], by the LIGO Scientific Collaboration team
+> LIGO Scientific Collaboration Algorithm Library - minimal Python package
+
+More than a century ago, Einstein predicted the existence of gravitational
+waves. However, these waves were undetectable until a few years ago, when a
+team of scientists working at the Laser Interferometer Gravitational-Wave
+Observatory ([LIGO][12]) announced that the waves resulting from the merger of
+two black holes had been detected for the very first time.
+
+This year, the team behind the discovery published [`lalsuite`][], the LSC
+Algorithm Library Suite, which is comprised of various gravitational wave data
+analysis tools used to make the discovery. While the core algorithms are
+written in C, the team has published a Python project which wraps these
+libraries and makes them usable from other Python projects, like [`PyCBC`][], a
+software package used to explore astrophysical sources of gravitational waves.
+
+#### Project: [`cfgv`][], by Anthony Sottile
+> Validate configuration and produce human readable error messages.
+
+The [`cfgv`][] project is a handy little utility that lets you write validators
+for essentially any configuration file that can be expressed as a Python data
+structure. For example, let's say you had this JSON file named `menu.json`:
+
+```json
+{
+  "menu": [
+    {
+        "name": "Menu Item 1",
+        "ingredients": ["egg", "bacon"]
+    },
+    {
+        "name": "Menu Item 2",
+        "ingredients": ["egg", "sausage", "bacon"]
+    },
+    {
+        "name": "Menu Item 3",
+        "ingredients": ["egg", "spam"]
+    }
+  ]
+}
+```
+
+You can write the following schema to validate that validates that the menu:
+
+* has at least one menu item;
+* has a name for each menu item;
+* the name for each menu item is a string.
+
+```python
+import cfgv
+
+SCHEMA = cfgv.Map(
+    "Menu",
+    "menu",
+    cfgv.RequiredRecurse(
+        "menu",
+        cfgv.Array(
+            cfgv.Map(
+                "Item",
+                "item",
+                cfgv.Required(
+                    "name",
+                    cfgv.check_type(str)
+                ),
+            ),
+            allow_empty=False
+        ),
+    ),
+)
+```
+
+You can then load the file and check it against the schema:
+
+```python
+cfgv.load_from_filename(
+    'menu.json',
+    SCHEMA,
+    load_strategy=json.loads
+)
+```
+
+The project comes with a [variety of validators][13], but you can also write
+your own. For example, if you wanted to validate that none of the ingredients
+contained `"spam"`, we could write this validator:
+
+```python
+def no_spam(value):
+    if value == "spam":
+        raise cfgv.ValidationError("Spam detected!")
+```
+
+We can then add it to our schema:
+
+```diff
+import cfgv
+
+SCHEMA = cfgv.Map(
+    "Menu",
+    "menu",
+    cfgv.RequiredRecurse(
+        "menu",
+        cfgv.Array(
+            cfgv.Map(
+                "Item",
+                "item",
+                cfgv.Required(
+                    "name",
+                    cfgv.check_type(str)
+                ),
++               cfgv.Required(
++                   "ingredients",
++                   cfgv.check_array(no_spam)
++               ),
+            ),
+            allow_empty=False
+        ),
+    ),
+)
+```
+
+And attempting to check the file against the new schema will produce a very
+understandable error message:
+
+```
+  ...
+  File "cfgv_test.py", line 12, in check_not_spam
+    raise cfgv.ValidationError("Spam detected!")
+cfgv.ValidationError:
+=====>
+==> File menu.json
+==> At Menu(menu=[{'name': 'Menu Item 1', 'ingredients': ['egg', 'bacon']}, {'name': 'Menu Item 2', 'ingredients': ['egg', 'sausage', 'bacon']}, {'name': 'Menu Item 3', 'ingredients': ['egg', 'spam']}])
+==> At key: menu
+==> At Item(item=MISSING)
+==> At key: ingredients
+==> At index 1
+=====> Spam detected!
+```
+
+The `cfgv` project is already in use by other popular projects like [`diffy`][]
+and [`notifiers`][], which likely accounts for a large portion of it's download
+counts.
+
+#### Project: [`cmarkgfm`][], by Thea Flowers
+> Minimal bindings to GitHub's fork of cmark
+
+Most folks may not realize that there are multiple "flavors" of Markdown. This
+year, when [PyPI added support for Markdown project descriptions][4], we
+initially only supported the "[CommonMark][9]" format, because there was a
+parser and renderer already available as a Python project.
+
+In order to support the more widely used "Github-flavored Markdown" (GFM), Thea
+Flowers created [`cmarkgfm`][], which provides a Python binds for [Github's fork of
+`cmark`][10]. This project was added as a dependency of [`readme-renderer`][],
+which is widely used by project maintainers to check their project's descriptions.
+
+#### Project: [`importlib-metadata`][], by Barry Warsaw
+> Read metadata from Python packages
+
+The `importlib-metadata` provides an importable API for reasoning about
+installed Python packages, such as determining the version, entry points,  and
+other metadata:
+
+```python
+>>> import importlib_metadata
+>>> importlib_metadata.version('pip')
+'18.1'
+>>> dict(importlib_metadata.metadata('pip'))
+{
+    'Metadata-Version': '2.1',
+    'Name': 'pip',
+    'Version': '18.1',
+    'Summary': 'The PyPA recommended tool for installing Python packages.',
+    'Home-page': 'https://pip.pypa.io/',
+    'Author': 'The pip developers',
+    'Author-email': 'pypa-dev@groups.google.com',
+    'License': 'MIT',
+    'Keywords': 'distutils easy_install egg setuptools wheel virtualenv',
+    'Platform': 'UNKNOWN',
+    'Classifier': 'Development Status :: 5 - Production/Stable',
+    'Requires-Python': '>=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*'
+}
+```
+
+The library is a backport of a standard library module in Python 3.8, and can
+be used by older versions including Python 2.7.
+
+#### Project: [`tomlkit`][], by Sébastien Eustace
+> Style preserving TOML library
+
+TOML is a configuration file format that has recently been gaining popularity.
+It looks somewhat similar to YAML or INI, except without much of the complexity
+and with a more formal specification, respectively. It looks like this:
+
+```toml
+# This is a TOML document.
+title = "TOML Example"
+
+[owner]
+name = "Tom Preston-Werner"
+dob = 1979-05-27T07:32:00-08:00
+```
+
+It's designed to be easy for humans to write (for example, it includes
+comments), and unambiguous for computers to read (a TOML file will map directly
+to a dictionary).
+
+However, there's a problem: when parsing a TOML file to a dictionary, everything
+that that doesn't map, like comments, whitespace, and ordering) is not
+preserved, since these don't change the underlying values of the document.
+
+This is problematic for programs that read and write user-generated TOML files:
+a small change in the underlying machine-readable data could result in a loss of
+human-readable elements.
+
+The [`tomlkit`][] project solves this by providing a TOML parser that preserves
+all of these human-readable elements, so your application can read a file,
+modify it, and write it back out without losing anything at all.
+
+#### Project: [`sentry-sdk`][], by Sentry
+> Python client for Sentry (https://getsentry.com)
+
+[Sentry][11] is a company that provides some fantastic error-tracking software
+(we use it on PyPI). Their original Python client, [`raven`][] is now
+considered "legacy" and is being replaced by a new client, [`sentry-sdk`][].
+
+Even though the project says it's an "Experimental Python SDK" and "Do not use
+me yet", when has that ever stopped anyone? Judging by the quantity of
+downloads, it's starting to pick up steam.
+
+#### Projects: [`azure-*`][], by Microsoft
+> "Microsoft Azure Client Libraries for Python"
+
+The Azure team seems to have seen some value in distributing their Python
+client libraries via PyPI: thirty one of the top 100 new projects by downloads
+start with `azure-`. The following are all in the top 20:
+
+* [`azure-cli-telemetry`](https://pypi.org/p/azure-cli-telemetry)
+* [`azure-mgmt-iothubprovisioningservices`](https://pypi.org/p/azure-mgmt-iothubprovisioningservices)
+* [`azure-mgmt-marketplaceordering`](https://pypi.org/p/azure-mgmt-marketplaceordering)
+* [`azure-mgmt-managementgroups`](https://pypi.org/p/azure-mgmt-managementgroups)
+* [`azure-mgmt-relay`](https://pypi.org/p/azure-mgmt-relay)
+* [`azure-mgmt-datamigration`](https://pypi.org/p/azure-mgmt-datamigration)
+* [`azure-eventgrid`](https://pypi.org/p/azure-eventgrid)
+* [`azure-mgmt-applicationinsights`](https://pypi.org/p/azure-mgmt-applicationinsights)
+* [`azure-mgmt-hanaonazure`](https://pypi.org/p/azure-mgmt-hanaonazure)
+
+This shouldn't come as a surpise, as it seems to align with [Microsoft's
+growing investment in Python][6] in general.
+
+### Some other notable changes
+
+* [`msgpack-python`][] renamed itself to just [`msgpack`][];
+* [`psycopg2`][] split it's built distributions into [`psycopg2-binary`][]
+  ([Here's why][5]);
+* [`Keras`][] completed a [proposed unbundling][7] of its `preprocessing` and
+  `applications` modules into [`Keras-Preprocessing`] and [`Keras-Applications`];
+* [`pypiwin32`][] was renamed to [`pywin32`][];
+* Mozilla's Gecko project split out the [`mozterm`][] project... and
+  presumably, used it heavily in their builds for Firefox?
+
+### Conclusion
+
+These are just a few of the projects I found particularly interesting,
+innovative, or useful. If you want to dive deeper, you can run [this BigQuery
+query][1] to get the full list of new projects in 2018, ordered by downloads,
+and if you have questions or comments, [come and chat with me on
+Twitter](https://twitter.com/di_codes). Happy hacking!
+
+
+[0]: https://bigquery.cloud.google.com/dataset/the-psf:pypi
+[1]: https://bigquery.cloud.google.com/savedquery/823264803812:683d7ea0addf40c3864e1ce1f064b1b1
+[2]: https://packaging.python.org/guides/analyzing-pypi-package-downloads/
+[3]: https://github.com/pypa/warehouse/pull/5132
+[4]: https://dustingram.com/articles/2018/03/16/markdown-descriptions-on-pypi
+[5]: http://initd.org/psycopg/articles/2018/02/08/psycopg-274-released/
+[6]: https://medium.com/microsoft-open-source-stories/python-at-microsoft-flying-under-the-radar-eabbdebe4fb0
+[7]: https://github.com/keras-team/keras/issues/9256
+[8]: https://github.com/mhammond/pywin32/commit/56a683b074cee1425c9dfa707e84dc8f945ffe92
+[9]: https://github.com/commonmark/cmark
+[10]: https://github.com/github/cmark-gfm
+[11]: https://sentry.io/
+[12]: https://en.wikipedia.org/wiki/LIGO
+[13]: https://github.com/asottile/cfgv#validator-objects
+
+[`black`]: https://pypi.org/project/black/
+[`isort`]: https://pypi.org/project/isort/
+[`msgpack`]: https://pypi.org/project/msgpack/
+[`msgpack-python`]: https://pypi.org/project/msgpack-python/
+[`psycopg2`]: https://pypi.org/project/psycopg2/
+[`psycopg2-binary`]: https://pypi.org/project/psycopg2-binary/
+[`azure-*`]: https://pypi.org/search/?q=%22azure-%22
+[`keras`]: https://pypi.org/project/Keras/
+[`keras-preprocessing`]: https://pypi.org/project/Keras-Preprocessing/
+[`keras-applications`]: https://pypi.org/project/Keras-Applications/
+[`pypiwin32`]: https://pypi.org/project/pypiwin32/
+[`pywin32`]: https://pypi.org/project/pywin32/
+[`mozterm`]: https://pypi.org/project/mozterm/
+[`cmarkgfm`]: https://pypi.org/project/cmarkgfm/
+[`readme-renderer`]: https://pypi.org/project/readme-renderer/
+[`sentry-sdk`]: https://pypi.org/project/sentry-sdk/
+[`raven`]: https://pypi.org/project/raven/
+[`lalsuite`]: https://pypi.org/project/lalsuite/
+[`PyCBC`]: https://pypi.org/project/PyCBC/
+[`cfgv`]: https://pypi.org/project/cfgv/
+[`diffy`]: https://pypi.org/project/diffy/
+[`notifiers`]: https://pypi.org/project/notifiers/
+[`importlib-metadata`]: https://pypi.org/project/importlib-metadata/
+[`tomlkit`]: https://pypi.org/project/tomlkit/
