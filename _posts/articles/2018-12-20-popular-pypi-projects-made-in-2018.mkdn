@@ -3,6 +3,7 @@ layout : post
 category : articles
 title : ! "Popular PyPI projects made in 2018"
 description : Taking a look at some of the most popular projects on PyPI that didn't exist in 2017.
+image: assets/images/pypi2018/pypi_2018.png
 tags : [python, pypi, packaging]
 ---
 
