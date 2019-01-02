@@ -5,7 +5,7 @@ author:
 production_url: "https://dustingram.com"
 
 # Build settings
-permalink: /:categories/:year/:month/:day/:title
+permalink: /:categories/:year/:month/:day/:title/
 markdown: kramdown
 exclude:
   - README.md
