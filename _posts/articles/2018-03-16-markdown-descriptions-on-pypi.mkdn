@@ -98,11 +98,8 @@ $ twine upload dist/*
 
 ### 7. View your project on `pypi.org`
 
-Only <https://pypi.org> will correctly render your new Markdown description.
-
-Legacy PyPI (<http://pypi.python.org/>) will still render your description as
-plaintext, but don't worry, [it's going away
-real soon](https://wiki.python.org/psf/WarehouseRoadmap). 😉
+Visiting your project page on <https://pypi.org> to see your new Markdown
+description.
 
 ### Thanks
 
