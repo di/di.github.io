@@ -614,8 +614,6 @@ description : 'An exploration of the important milestones in the history of data
     </p><p>
       To put that number in perspective, Facebook had 27 billion dollars in
       revenue last year, so their fine would be more than a billion dollars.
-      For Google, 3.5 billion dollars. And for Apple, more than 9 billion
-      dollars.
     </p>
   </td></tr>
   <tr><td><a href="#81"><img id="81" class="slide" src="/assets/images/data_protection/81.png"></a></td><td>
@@ -659,10 +657,10 @@ description : 'An exploration of the important milestones in the history of data
   </td></tr>
   <tr><td><a href="#87"><img id="87" class="slide" src="/assets/images/data_protection/87.png"></a></td><td>
     <p>
-      One last thing: I'm not trying to hate on Google, Facebook, all the
-      companies I used as examples here. I'm sure those companies already take
-      data protection very seriously and there's a lot of smart people working
-      hard to ensure that it's used properly and never breached.
+      One last thing: I'm not trying to hate on all the companies I used as
+      examples here. I'm sure those companies already take data protection very
+      seriously and there's a lot of smart people working hard to ensure that
+      it's used properly and never breached.
     </p><p>
       However, we live in an age where the ability to generate data about
       oneself and the capacity of others to collect it is enormous. It might
