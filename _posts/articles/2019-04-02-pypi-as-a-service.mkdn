@@ -3,6 +3,7 @@ layout : post
 category : articles
 title : ! "PyPI as a Service"
 description : Challenges in making a package index turn a profit
+image: assets/images/pypiaas/moneyindex.png
 tags : [python, pypi, packaging]
 ---
 
