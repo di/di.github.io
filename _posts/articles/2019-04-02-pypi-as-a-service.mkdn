@@ -152,7 +152,7 @@ In addition, PyCon has addressed (or is addressing) many of these challenges,
 but it remains that the transition would be very challenging.
 
 PyPI as it exists today is an established service and a core piece of
-infrastructure. In order to transition from our current model to a "PyPI as s
+infrastructure. In order to transition from our current model to a "PyPI as a
 Service", we'd need to solve all the problems above, plus keep PyPI up and
 running while we do it.
 
