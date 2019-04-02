@@ -1,0 +1,178 @@
+---
+layout : post
+category : articles
+title : ! "PyPI as a Service"
+description : Challenges in making a package index turn a profit
+tags : [python, pypi, packaging]
+---
+
+### The inevitable idea
+
+In the wake of recent [layoffs at NPM][NPM], I noticed [some folks talking
+about the two extremes that are NPM and PyPI][hynek]. To compare:
+
+NPM:
+* Founded: January 2014
+* Funding: [$10.6MM](https://www.crunchbase.com/organization/npm)
+* Employees: [~60](https://craft.co/npm)
+* Status: Private, VC-backed company
+
+PyPI:
+* First commit: [October 2002][firstcommit]
+* Funding: Less than $0.5MM in grants ([MOSS][moss], [OTF][otf]), and all in the last year
+* Employees: [A small fraction of a single employee][ernest], plus a handful of volunteers
+* Status: Basically [a Github repo](https://github.com/pypa/warehouse), ["Kubernetes,
+  deployed via a little weirdware"][weirdware], [an amazing
+  CDN](https://www.fastly.com/) and a Slack channel
+
+A question that gets inevitably raised when discussing PyPI's "business model"
+is: why not turn it into something that makes money? We could offer private
+repositories, we could offer support for on-site mirrors, we could add [custom
+badges for our PRO users](https://news.ycombinator.com/item?id=18850748), we
+could auction off the best package names to the highest bidder... the
+possibilities are endless.
+
+I'll admit: it's a tantalizing thought, especially considering how much I love
+working on PyPI, how bare-bones of an operation we truly run, and how often I
+get asked this question.
+
+However, turning PyPI into a service that makes money has a number of
+challenges beyond "how much do we start charging" and "where do we put all the
+money" that aren't often considered.
+
+To be clear, these are not challenges that NPM has faced, or would be inherent
+to a VC-backed service like NPM. They have their own set of challenges, and
+although I don't presume to know exactly what they are, I think it's probably
+not impossible for them to succeed.
+
+These are the challenges of turning a more or less functional long-running
+service that's free to use into something that generates income.
+
+### Our non-profit status
+PyPI is a project by The Python Software Foundation, and the PSF is a 501(c)(3)
+non-profit. Its mission is "to promote, protect, and advance the Python
+programming language", not necessarily to provide paid services relating to it.
+
+From ["How to lose your 501(c)(3) tax-exempt status _(without really trying)_"][irs]:
+
+> Earning too much income generated from unrelated activities can jeopardize an
+> organization’s 501(c)(3) tax-exempt status. This income comes from a
+> regularly carried on trade or business that is not substantially related to
+> the organization’s exempt purpose.
+
+Generally, being a non-profit, and trying to run a business in the domain of
+other for-profit enterprises might call into question our tax-exempt status,
+which is very important for the PSF to maintain in order to continue existing
+as we've grown accustomed.
+
+Obviously, that could always be changed, but it might not worth it. Nick
+Coghlan writes:
+
+> Taking the PSF down the same road as Mozilla (where the taxable Mozilla
+> Corporation is a wholly owned subsidiary of the non-profit Mozilla
+> Foundation) would be possible, but also a non-trivial distraction for the PSF
+> staff and Board. [And even that option isn't foolproof, as the Mozilla
+> Foundation found out](https://en.wikipedia.org/wiki/Mozilla_Corporation#IRS_audit).
+
+TL;DR: the Mozilla Foundation received a four-year long audit, after which they
+were required to settle with the IRS for $1.5MM.
+
+### Donated services
+[PyPI relies heavily on donated services and infrastructure][sponsors], to the
+tune of more than **$1MM per year**. If we start trying to make money, what would
+our sponsors think about that? Hynek Schlawack writes:
+
+> The (very high) costs of running are mostly covered by sponsors like Fastly
+> that would probably have little interest in funding a new business.
+
+My guess is, yeah, they probably wouldn't appreciate it. They'd likely pull
+their sponsorships and in-kind donations. It'd be pretty hard to say when
+exactly they would decide to do that, but it'd probably be sooner than later.
+
+What if they all pull out on day one? It would sure be hard to make PyPI go
+from making $0 a year in revenue to more than $1MM per year, all without
+incurring significant debts or outages.
+
+### The current ecosystem
+In addition to PyPI, there is already a plethora of alternative Python package
+repositories. They range from very DIY ([devpi][devpi],
+[bandersnatch][bandersnatch]) to fully hosted paid services
+([Artifactory][artifactory], [Gemfury][gemfury], etc), each with various
+features, use cases, and purposes.
+
+However, this is not to say that the existence of these options means that a
+"PyPI as a Service" would not be successful--in fact, given the frequency of
+which I hear this request, I'm quite sure any new entrant into this "market"
+would be.
+
+What's important to consider is that each of these services depend to some
+degree on the ecosystem that PyPI provides: either they literally depend on
+PyPI (in the case of mirrors, they need our APIs and file hosting to do their
+job) or they depend on the packaging standards we drive (in the case of the
+private repos, to maintain compatibility with the current installers, packaging
+formats, etc).
+
+If PyPI gets into the business of hosting private packages, it could
+de-incentivize us from helping to make sure "competing" services remain
+functional. [Why bother fixing an annoying issue that breaks old versions of
+bandersnatch][5653], when we could prioritize feature work that would bring in
+more income?
+
+### Our volunteers
+With the exception of [the PSF Director of Infrastructure][ernest] (who doesn't
+spend a whole lot of time working on PyPI) and the contractors we've hired to
+fulfill the grants we've recently gotten (who only work on PyPI within the
+bounds of their respective contracts), PyPI is supported entirely by unpaid
+volunteers.
+
+This raises kind of an ethical issue: Is it fair to ask volunteers to continue
+contributing their time to a for-profit enterprise? Probably not.
+
+It's one thing to have people work for free when you're not making any money
+anyways, but if you're making income, those people are called your employees
+and they probably want a living salary. Donald Stufft writes:
+
+> People cost a lot of money, and there is infrastructure around hiring
+people that we'd need to take into account.
+
+Similar to the sponsors, it'd be hard to predict how this would go. Would we
+need to replace all our volunteers with hired staff immediately?
+
+### The transition
+All this is not to discourage anyone who has this idea. In fact, the [annual
+PyCon conference][pycon] is quite similar to what often gets proposed here:
+
+* it turns a profit
+* it has sponsors
+* it "competes" with other for-profit conferences
+* it uses volunteer support
+
+In addition, PyCon has addressed (or is addressing) many of these challenges,
+but it remains that the transition would be very challenging.
+
+PyPI as it exists today is an established service and a core piece of
+infrastructure. In order to transition from our current model to a "PyPI as s
+Service", we'd need to solve all the problems above, plus keep PyPI up and
+running while we do it.
+
+Would it be completely impossible? No. But would it actually be worth all
+the time, energy, and lawyers? In the long run, probably not.
+
+_Thanks to Nick Coghlan, Ewa Jodlowska, and Donald Stufft for educating me
+on this topic (and many others)_.
+
+[npm]: https://www.theregister.co.uk/2019/04/01/npm_layoff_staff/
+[devpi]: https://www.devpi.net/
+[artifactory]: https://jfrog.com/artifactory/
+[gemfury]: https://gemfury.com/
+[bandersnatch]: https://github.com/pypa/bandersnatch
+[5653]: https://github.com/pypa/warehouse/issues/5653
+[pycon]: https://us.pycon.org/
+[moss]: http://pyfound.blogspot.com/2017/11/the-psf-awarded-moss-grant-pypi.html
+[otf]: https://pyfound.blogspot.com/2019/03/commencing-security-accessibility-and.html
+[weirdware]: https://twitter.com/EWDurbin/status/1102757328418422786
+[ernest]: http://pyfound.blogspot.com/2018/06/ernest-w-durbin-iii-joins-psf-team.html
+[irs]: https://www.irs.gov/pub/irs-tege/How%20to%20Lose%20Your%20Tax%20Exempt%20Status.pdf
+[sponsors]: https://pypi.org/sponsors/
+[hynek]: https://twitter.com/hynek/status/1112870144555040779
+[firstcommit]: https://github.com/pypa/pypi-legacy/commit/85d2502cce33d21787f62b1c0de95290af360b40
