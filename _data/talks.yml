@@ -1,3 +1,28 @@
+- title: "PEP 572: The Walrus Operator"
+  date: 2019-04-04 00:00:00 -0600
+  venues:
+
+  - date: 2019-04-04 00:00:00 -0600
+    venue: "PyCon US 2019"
+    venue_url: "https://us.pycon.org/2019/schedule/presentation/195/"
+    location: "Cleveland OH"
+
+  - date: 2018-11-10 00:00:00 -0600
+    venue: "PyCon Canada 2018"
+    venue_url: "https://2018.pycon.ca/talks/talk-PC-55520/"
+    location: "Toronto CA"
+    links:
+      video: "https://www.youtube.com/watch?v=mHOgGuALfNc"
+
+- title: "What's new in Python 3.7"
+  date: 2019-02-16 00:00:00 -0600
+  venues:
+
+  - date: 2019-02-16 00:00:00 -0600
+    venue: "PyCaribbean 2019"
+    venue_url: "http://pycaribbean.com/talk/what's-new-in-python-3.7/"
+    location: "Santo Domingo DR"
+
 - title: "FLOSS Weekly Episode #482: PyPI"
   date: 2018-05-02 00:00:00 -0600
   venue_url: "https://twit.tv/shows/floss-weekly/episodes/482"
