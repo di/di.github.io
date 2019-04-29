@@ -15,3 +15,7 @@ theme: null
 analytics :
   google :
       tracking_id : 'UA-2445654-1'
+
+# Plugins
+plugins:
+  - jekyll-redirect-from
