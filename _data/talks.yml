@@ -16,6 +16,13 @@
     links:
       video: "https://www.youtube.com/watch?v=mHOgGuALfNc"
 
+  - date: 2019-05-20 00:00:00 -0600
+    venue: "Philly PUG May 2019"
+    venue_url: "https://www.meetup.com/phillypug/events/261421428/"
+    location: "Philadelphia PA"
+    links:
+      video: "https://www.youtube.com/watch?v=p2kLr29z4wY"
+
 - title: "What's new in Python 3.7"
   date: 2019-02-16 00:00:00 -0600
   venues:
