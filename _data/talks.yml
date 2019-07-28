@@ -1,3 +1,17 @@
+- title: "Keeping Fun in Computing"
+  date: 2019-07-28 00:00:00 -0600
+  venues:
+
+  - date: 2019-07-28 00:00:00 -0600
+    venue: "PyOhio 2019"
+    venue_url: "https://www.pyohio.org/2019/presentations/101"
+    location: "Columbus OH"
+
+  - date: 2019-07-16 00:00:00 -0600
+    venue: "PyHou July 2019"
+    venue_url: "https://2018.pycon.ca/talks/talk-PC-55520/"
+    location: "Houston TX"
+
 - title: "PEP 572: The Walrus Operator"
   date: 2019-04-04 00:00:00 -0600
   venues:
