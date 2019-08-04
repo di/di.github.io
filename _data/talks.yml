@@ -1,3 +1,14 @@
+- title: "Building a Sustainable Python Package Index"
+  date: 2019-08-03 00:00:00 -0600
+  venues:
+
+  - date: 2019-08-03 00:00:00 -0600
+    venue: "PyCon Australia 2019"
+    venue_url: "https://2019.pycon-au.org/talks/building-a-sustainable-python-package-index"
+    location: Sydney, AU
+    links:
+      video: "https://www.youtube.com/watch?v=gcbNT3tLgUg"
+
 - title: "Keeping Fun in Computing"
   date: 2019-07-28 00:00:00 -0600
   venues:
@@ -6,6 +17,8 @@
     venue: "PyOhio 2019"
     venue_url: "https://www.pyohio.org/2019/presentations/101"
     location: "Columbus OH"
+    links:
+      video: "https://www.youtube.com/watch?v=qo4EJq1slD8"
 
   - date: 2019-07-16 00:00:00 -0600
     venue: "PyHou July 2019"
