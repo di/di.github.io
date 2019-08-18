@@ -2,6 +2,11 @@
   date: 2019-08-03 00:00:00 -0600
   venues:
 
+  - date: 2019-08-17 00:00:00 -0600
+    venue: "PyBay 2019"
+    venue_url: "https://pybay.com/speaker/dustin-ingram/"
+    location: San Francisco, CA
+
   - date: 2019-08-03 00:00:00 -0600
     venue: "PyCon Australia 2019"
     venue_url: "https://2019.pycon-au.org/talks/building-a-sustainable-python-package-index"
