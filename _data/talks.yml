@@ -1,3 +1,36 @@
+- title: "Modern Development Environments for Pythonistas"
+  date: 2019-08-30 00:00:00 -0600
+  venues:
+
+  - date: 2019-09-17 00:00:00 -0600
+    venue: "PyCon Japan 2019"
+    venue_url: "https://pycon.jp/2019/en/sessions"
+    location: Tokyo, JP
+
+  - date: 2019-08-30 00:00:00 -0600
+    venue: "PyCon Latam 2019"
+    venue_url: "https://www.pylatam.org/en/full-schedule/modern-development-environments-for-pythonistas/"
+    location: Puerto Vallarta, MX
+
+- title: "Static Typing in Python"
+  date: 2019-09-08 00:00:00 -0600
+  venues:
+
+  - date: 2019-09-24 00:00:00 -0600
+    venue: "DjangoCon US 2019"
+    venue_url: "https://2019.djangocon.us/talks/static-typing-in-python/"
+    location: San Diego, CA
+
+  - date: 2019-09-13 00:00:00 -0600
+    venue: "PyCon UK 2019"
+    venue_url: "https://pretalx.com/pyconuk-2019/schedule/"
+    location: Cardiff, UK
+
+  - date: 2019-09-08 00:00:00 -0600
+    venue: "PyColorado 2019"
+    venue_url: "https://pycolorado.org/schedule"
+    location: Denver, CO
+
 - title: "Building a Sustainable Python Package Index"
   date: 2019-08-03 00:00:00 -0600
   venues:
@@ -15,7 +48,7 @@
       video: "https://www.youtube.com/watch?v=gcbNT3tLgUg"
 
 - title: "Keeping Fun in Computing"
-  date: 2019-07-28 00:00:00 -0600
+  date: 2019-07-16 00:00:00 -0600
   venues:
 
   - date: 2019-07-28 00:00:00 -0600
@@ -47,6 +80,11 @@
     location: "Toronto CA"
     links:
       video: "https://www.youtube.com/watch?v=mHOgGuALfNc"
+
+  - date: 2019-09-20 00:00:00 -0600
+    venue: "PyCon Taiwan 2019"
+    venue_url: "https://tw.pycon.org/2019/en-us/events/talk/871864096805355836/"
+    location: "Taipei, TW"
 
   - date: 2019-05-20 00:00:00 -0600
     venue: "Philly PUG May 2019"
