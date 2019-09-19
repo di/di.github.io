@@ -67,6 +67,18 @@
   date: 2019-04-04 00:00:00 -0600
   venues:
 
+  - date: 2019-09-20 00:00:00 -0600
+    venue: "PyCon Taiwan 2019"
+    venue_url: "https://tw.pycon.org/2019/en-us/events/talk/871864096805355836/"
+    location: "Taipei, TW"
+
+  - date: 2019-05-20 00:00:00 -0600
+    venue: "Philly PUG May 2019"
+    venue_url: "https://www.meetup.com/phillypug/events/261421428/"
+    location: "Philadelphia PA"
+    links:
+      video: "https://www.youtube.com/watch?v=p2kLr29z4wY"
+
   - date: 2019-04-04 00:00:00 -0600
     venue: "PyCon US 2019"
     venue_url: "https://us.pycon.org/2019/schedule/presentation/195/"
@@ -80,18 +92,6 @@
     location: "Toronto CA"
     links:
       video: "https://www.youtube.com/watch?v=mHOgGuALfNc"
-
-  - date: 2019-09-20 00:00:00 -0600
-    venue: "PyCon Taiwan 2019"
-    venue_url: "https://tw.pycon.org/2019/en-us/events/talk/871864096805355836/"
-    location: "Taipei, TW"
-
-  - date: 2019-05-20 00:00:00 -0600
-    venue: "Philly PUG May 2019"
-    venue_url: "https://www.meetup.com/phillypug/events/261421428/"
-    location: "Philadelphia PA"
-    links:
-      video: "https://www.youtube.com/watch?v=p2kLr29z4wY"
 
 - title: "What's new in Python 3.7"
   date: 2019-02-16 00:00:00 -0600
