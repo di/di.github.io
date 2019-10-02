@@ -3,6 +3,14 @@ import glob
 
 from jinja2 import Template
 
+# resize images first:
+#
+# $ mogrify -geometry x500 *.png
+#
+# use like:
+#
+# $ python generate_slides.py assets/images/DIRECTORY > _posts/talks/YYYY-MM-DD-title.mkdn
+
 asset_dir = sys.argv[1]
 
 slides = range(1, len(glob.glob(asset_dir + '/*.png')) + 1)
