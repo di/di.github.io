@@ -6,15 +6,29 @@
     venue: "PyCon Japan 2019"
     venue_url: "https://pycon.jp/2019/en/sessions"
     location: Tokyo, JP
+    links:
+      video: "https://www.youtube.com/watch?v=d3cj4f63u-A"
 
   - date: 2019-08-30 00:00:00 -0600
     venue: "PyCon Latam 2019"
     venue_url: "https://www.pylatam.org/en/full-schedule/modern-development-environments-for-pythonistas/"
     location: Puerto Vallarta, MX
+    links:
+      video: "https://www.youtube.com/watch?v=QECiSSpWVrI"
 
 - title: "Static Typing in Python"
-  date: 2019-09-08 00:00:00 -0600
+  date: 2019-10-10 00:00:00 -0600
   venues:
+
+  - date: 2019-10-10 00:00:00 -0600
+    venue: "PyCon DE 2019"
+    venue_url: "https://de.pycon.org/program/pyconde-nh9uey-static-typing-in-python-dustin-ingram/"
+    location: Berlin, DE
+
+  - date: 2019-10-04 00:00:00 -0600
+    venue: "PyGotham 2019"
+    venue_url: "https://2019.pygotham.org/talks/static-typing-in-python/"
+    location: New York, NY
 
   - date: 2019-09-24 00:00:00 -0600
     venue: "DjangoCon US 2019"
@@ -25,6 +39,8 @@
     venue: "PyCon UK 2019"
     venue_url: "https://pretalx.com/pyconuk-2019/schedule/"
     location: Cardiff, UK
+    links:
+      video: "https://www.youtube.com/watch?v=L8sWR5kRlxM"
 
   - date: 2019-09-08 00:00:00 -0600
     venue: "PyColorado 2019"
@@ -39,6 +55,8 @@
     venue: "PyBay 2019"
     venue_url: "https://pybay.com/speaker/dustin-ingram/"
     location: San Francisco, CA
+    links:
+      video: "https://www.youtube.com/watch?v=9ZiDt1FRfRo"
 
   - date: 2019-08-03 00:00:00 -0600
     venue: "PyCon Australia 2019"
