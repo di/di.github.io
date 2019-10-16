@@ -46,6 +46,8 @@
     venue: "PyColorado 2019"
     venue_url: "https://pycolorado.org/schedule"
     location: Denver, CO
+    links:
+      video: "https://www.youtube.com/watch?v=8BNuawmpFXQ"
 
 - title: "Building a Sustainable Python Package Index"
   date: 2019-08-03 00:00:00 -0600
