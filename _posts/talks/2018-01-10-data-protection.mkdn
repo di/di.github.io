@@ -9,7 +9,7 @@ venues:
     venue_url: "https://2019.pycascades.com/talks/data-protection-for-developers-past-present-and-future/"
     date: 2019-02-24 00:00:00 -0600
     links:
-      video: "https://www.youtube.com/watch?v=MTdYyCKcI8Q#t=46m47s"
+      video: "https://www.youtube.com/watch?v=hCAGvsyLEN4"
   - location: "Austin TX"
     venue: "Austin Python Meetup"
     venue_url: "https://www.meetup.com/austinpython/events/wfkrdpyxcbnb/"
