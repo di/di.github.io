@@ -1,0 +1,716 @@
+---
+layout : transcript
+category : talks
+title : 'PEP 572: The Walrus Operator'
+date : 2019-04-04 00:00:00 -0600
+venues:
+  - date: 2019-09-20 00:00:00 -0600
+    venue: "PyCon Taiwan 2019"
+    venue_url: "https://tw.pycon.org/2019/en-us/events/talk/871864096805355836/"
+    location: "Taipei, TW"
+
+  - date: 2019-05-20 00:00:00 -0600
+    venue: "Philly PUG May 2019"
+    venue_url: "https://www.meetup.com/phillypug/events/261421428/"
+    location: "Philadelphia PA"
+    links:
+      video: "https://www.youtube.com/watch?v=p2kLr29z4wY"
+
+  - date: 2019-04-04 00:00:00 -0600
+    venue: "PyCon US 2019"
+    venue_url: "https://us.pycon.org/2019/schedule/presentation/195/"
+    location: "Cleveland OH"
+    links:
+      video: "https://www.youtube.com/watch?v=6uAvHOKofws"
+
+  - date: 2018-11-10 00:00:00 -0600
+    venue: "PyCon Canada 2018"
+    venue_url: "https://2018.pycon.ca/talks/talk-PC-55520/"
+    location: "Toronto CA"
+    links:
+      video: "https://www.youtube.com/watch?v=mHOgGuALfNc"
+image : assets/images/walrus/55.png
+description : 'A discussion about a highly controversial proposed change to Python syntax, the rationale for it, and the fallout as the result of it.'
+---
+
+<div class="slides">
+<table>
+  <tr><td><a href="#1"><img id="1" class="slide" src="/assets/images/walrus/1.png"></a></td><td>
+    <p>
+      You might have heard about PEP 572. It caused a bit of drama in the Python community.
+    </p><p>
+      But before we talk about this PEP, and what happened, we need to talk about "Python Governance".
+    </p>
+  </td></tr>
+  <tr><td><a href="#5"><img id="5" class="slide" src="/assets/images/walrus/5.png"></a></td><td>
+    <p>
+      Python Governance is the answer to question "How do we govern the language of Python?"
+    </p><p>
+      That is, how do we make changes to the language, how do we implement new features, and that kind of thing. How do we make decisions about Python?
+    </p>
+  </td></tr>
+  <tr><td><a href="#6"><img id="6" class="slide" src="/assets/images/walrus/6.png"></a></td><td>
+    <p>
+      When Python was first created, it's creator installed himself as the "BDFL": the Benevolent Dictator For Life.
+    </p><p>
+      "Dictator" meaning that he can do whatever he wants to the language, "benevolent" meaning that he's generally going to be looking out for us as Python users.
+    </p>
+  </td></tr>
+  <tr><td><a href="#7"><img id="7" class="slide" src="/assets/images/walrus/7.png"></a></td><td>
+    <p>
+      This is the creator of Python, Guido van Rossum, and he's our BDFL.
+    </p><p>
+      But one thing to note is that Python was created more than 20 years ago, and in that time, it's really grown, and Guido hasn't been making every decision himself.
+    </p>
+  </td></tr>
+  <tr><td><a href="#8"><img id="8" class="slide" src="/assets/images/walrus/8.png"></a></td><td>
+    <p>
+      Instead what we have is a process. The way that decisions are made within the Python language is with a PEP: a Python Enhancement Proposal.
+    </p>
+  </td></tr>
+  <tr><td><a href="#9"><img id="9" class="slide" src="/assets/images/walrus/9.png"></a></td><td>
+    <p>
+      This is kind of like amendments to the constitution of a country, which similarly determines how a country is governed.
+    </p><p>
+      Each PEP builds on the previous one, and makes changes to "the law of Python". So we started with <a href="https://www.python.org/dev/peps/pep-0001/">PEP 1</a>, which tells us what a PEP is and how to write it, and we grew from there.
+    </p><p>
+      Can anyone name a PEP? <i>Someone in the audience inevitably shouts: "PEP 8!"</i>
+    </p>
+  </td></tr>
+  <tr><td><a href="#10"><img id="10" class="slide" src="/assets/images/walrus/10.png"></a></td><td>
+    <p>
+     Right, <a href="https://www.python.org/dev/peps/pep-0008/">PEP 8</a>, I figured you'd say that. So PEP 8 is probably the most well-known PEP. It's a style guide for Python code.
+    </p>
+  </td></tr>
+  <tr><td><a href="#11"><img id="11" class="slide" src="/assets/images/walrus/11.png"></a></td><td>
+    <p>
+      The author of this PEP? It's Guido van Rossum, as you might expect. This was a pretty early PEP, and it was authored by Guido himself.
+    </p>
+  </td></tr>
+  <tr><td><a href="#12"><img id="12" class="slide" src="/assets/images/walrus/12.png"></a></td><td>
+    <p>
+      Some other interesting and well-known PEPs: There's <a href="https://www.python.org/dev/peps/pep-0020/">PEP 20</a>, the Zen of Python. It's what you get if you type <code>import this</code> in your Python REPL.
+    </p>
+  </td></tr>
+  <tr><td><a href="#13"><img id="13" class="slide" src="/assets/images/walrus/13.png"></a></td><td>
+    <p>
+      The author of the Zen of Python is Tim Peters, who's one of Python's core contributors.
+    </p>
+  </td></tr>
+  <tr><td><a href="#14"><img id="14" class="slide" src="/assets/images/walrus/14.png"></a></td><td>
+    <p>
+      My favorite PEP is <a href="https://www.python.org/dev/peps/pep-0566/">PEP 566</a>, Metadata for Python Packages 2.1.
+    </p><p>
+      The reason I like this PEP so much?
+    </p>
+  </td></tr>
+  <tr><td><a href="#15"><img id="15" class="slide" src="/assets/images/walrus/15.png"></a></td><td>
+    <p>
+      I am the author of this PEP.
+    </p>
+  </td></tr>
+  <tr><td><a href="#16"><img id="16" class="slide" src="/assets/images/walrus/16.png"></a></td><td>
+    <p>
+      When I wrote this PEP, this is what the process was generally like. First, I came up with a draft for the PEP in a format in which all PEPs should be made.
+    </p>
+  </td></tr>
+  <tr><td><a href="#17"><img id="17" class="slide" src="/assets/images/walrus/17.png"></a></td><td>
+    <p>
+      Then, it went for acceptance, had some discussion, and someone accepted it.
+    </p>
+  </td></tr>
+  <tr><td><a href="#18"><img id="18" class="slide" src="/assets/images/walrus/18.png"></a></td><td>
+    <p>
+      And then, it was implemented. Sort of a three-step process.
+    </p><p>
+      One thing to note is that Guido himself did not approve my PEP directly.
+    </p><p>
+      In fact, I'm quite sure he has never read it, and he has no idea who I am. But that's fine!
+    </p>
+  </td></tr>
+  <tr><td><a href="#19"><img id="19" class="slide" src="/assets/images/walrus/19.png"></a></td><td>
+    <p>
+      Instead, what we have are BDFL Delegates.
+    </p><p>
+      These are people that Guido has entrusted the ability to make decisions about the language, in areas which he doesn't really care about, doesn't know that much about, or thinks someone else is a better steward for that part of Python.
+    </p><p>
+      In my example, Daniel Holth was the delegate for this packaging-related PEP.
+    </p>
+  </td></tr>
+  <tr><td><a href="#20"><img id="20" class="slide" src="/assets/images/walrus/20.png"></a></td><td>
+    <p>
+      So the flow of power kind of looks like this: there's Guido, and then there's the delegates beneath him, and they derive their power from Guido, and then all those delegates are approving (or rejecting) PEPs.
+    </p><p>
+      (And sometimes Guido is still approving PEPs himself as well).
+    </p>
+  </td></tr>
+  <tr><td><a href="#21"><img id="21" class="slide" src="/assets/images/walrus/21.png"></a></td><td>
+    <p>
+      So, you might have heard about PEP 572. This is a relatively recent PEP, and the title of the PEP was "Assignment Expressions".
+    </p><p>
+      The reason you might have heard about it is because it caused a little bit of drama.
+    </p>
+  </td></tr>
+  <tr><td><a href="#22"><img id="22" class="slide" src="/assets/images/walrus/22.png"></a></td><td>
+    <p>
+      This PEP is centered around just these two little characters: <code>:=</code>
+    </p><p>
+      These two characters represent a new operator for Python, and it has a name... but I'm not going to tell you what the name of it is though.
+    </p>
+  </td></tr>
+  <tr><td><a href="#23"><img id="23" class="slide" src="/assets/images/walrus/23.png"></a></td><td>
+    <p>
+      Instead, what I'm going to do is call it the "walrus operator" because it kind of looks like a walrus lying on it's side.
+    </p><p>
+      And by the way, when I gave this talk once before, some folks were really concerned that this walrus was dead.
+    </p>
+  </td></tr>
+  <tr><td><a href="#24"><img id="24" class="slide" src="/assets/images/walrus/24.png"></a></td><td>
+    <p>
+      <a href="https://www.youtube.com/watch?v=vnciwwsvNcc">He's not dead, he's just resting.</a> Don't worry.
+    </p>
+  </td></tr>
+  <tr><td><a href="#25"><img id="25" class="slide" src="/assets/images/walrus/25.png"></a></td><td>
+    <p>
+      So instead of explaining to you word-for-word the contents of this PEP and what it aims to do, I'm going to give you some examples to give you some ideas about why we might need the walrus operator.
+    </p>
+  </td></tr>
+  <tr><td><a href="#26"><img id="26" class="slide" src="/assets/images/walrus/26.png"></a></td><td>
+    <p>
+      One is for balancing lines of code (LOC) and complexity (big-O).
+    </p>
+  </td></tr>
+  <tr><td><a href="#27"><img id="27" class="slide" src="/assets/images/walrus/27.png"></a></td><td>
+    <p>
+      Let's take this example. Let's say I'm setting the variable <code>foo</code> to the list which contains <code>f(x)</code>, <code>f(x)**2</code>, <code>f(x)**3</code>.
+    </p><p>
+      Let's say that <code>f(x)</code> is a really expensive, deterministic computation. Maybe each call takes a full minute to run, and so we don't want to re-run it every time. Here, we're calling it three times, but it's going to give us the same result every time.
+    </p>
+  </td></tr>
+  <tr><td><a href="#28"><img id="28" class="slide" src="/assets/images/walrus/28.png"></a></td><td>
+    <p>
+      What you'd normally do as a Python user is break that function call out to a new line, set a new variable <code>y</code> to the result of that call to <code>f(x)</code>, and then you'd reuse that variable <code>y</code> inside the list.
+    </p><p>
+      Some people don't like this because it's two lines of code where you could have had one line of code and a little more complexity.
+    </p>
+  </td></tr>
+  <tr><td><a href="#29"><img id="29" class="slide" src="/assets/images/walrus/29.png"></a></td><td>
+    <p>
+      If you had the walrus operator, you could do this. You could set <code>y := f(x)</code> inside the list expression, and value of that gets bound to <code>y</code>, and you can reuse that later in that expression, so you can reuse a value that's expensive to compute, and keep it on a single line.
+    </p>
+  </td></tr>
+  <tr><td><a href="#30"><img id="30" class="slide" src="/assets/images/walrus/30.png"></a></td><td>
+    <p>
+      Another example for why you might want to use the walrus operator is avoiding inefficient comprehensions.
+    </p>
+  </td></tr>
+  <tr><td><a href="#31"><img id="31" class="slide" src="/assets/images/walrus/31.png"></a></td><td>
+    <p>
+      Let's look at this <code>for</code> loop: we have an empty list of results, we're iterating over <code>data</code>, we're calling <code>f(x)</code> on each item in the data, and we get a result from it. If the result is truthy, we're appending it to the list of results, and if it's not, we're doing nothing with it.
+    </p><p>
+      Normally, when I see a <code>for</code> loop that looks like this, with an empty list initialized above it like that, that's kind of a code smell, and I say "this should probably be turned into a list comprehension".
+    </p>
+  </td></tr>
+  <tr><td><a href="#32"><img id="32" class="slide" src="/assets/images/walrus/32.png"></a></td><td>
+    <p>
+      And you'd be right, if you turned this into a list comprehension, it would look like this, it would produce the same results, it would be less lines, it would look a little cleaner...
+    </p><p>
+      ...and it would also be more inefficient, because you'd be calling <code>f(x)</code> twice now instead of calling it once.
+    </p>
+  </td></tr>
+  <tr><td><a href="#33"><img id="33" class="slide" src="/assets/images/walrus/33.png"></a></td><td>
+    <p>
+      With the walrus operator, you can do something very similar to what we did before: you can set <code>y := f(x)</code> in the filter clause, and then you can re-use it and share that sub-expression in the other part of the comprehension.
+    </p>
+  </td></tr>
+  <tr><td><a href="#34"><img id="34" class="slide" src="/assets/images/walrus/34.png"></a></td><td>
+    <p>
+      Another example: unnecessary variables in scope.
+    </p>
+  </td></tr>
+  <tr><td><a href="#35"><img id="35" class="slide" src="/assets/images/walrus/35.png"></a></td><td>
+    <p>
+      If you've ever used the <code>re</code> (regular expression) module in Python, you've probably written something kind of like this.
+    </p><p>
+      You call <code>pattern.search()</code> for some piece of data, and you get back something that is either <code>None</code>, or it's a regular expression match object, and you can do things with it. So you always have this check for <code>None</code> in your code.
+    </p><p>
+      What happens here is that <code>match</code> is always going to exist farther down: as your program passes this <code>if</code> condition, <code>match</code> is still going to be there, and it's kind of a little bit annoying, because you only need <code>match</code> inside that <code>if</code> block, but it's sitting outside of it.
+    </p>
+  </td></tr>
+  <tr><td><a href="#36"><img id="36" class="slide" src="/assets/images/walrus/36.png"></a></td><td>
+    <p>
+      With the walrus operator, you can move <code>match</code> into the <code>if</code> statment, and it's less lines and more clearly within the conditional.
+    </p>
+  </td></tr>
+  <tr><td><a href="#37"><img id="37" class="slide" src="/assets/images/walrus/37.png"></a></td><td>
+    <p>
+      Another example: processing streams in chunks.
+    </p>
+  </td></tr>
+  <tr><td><a href="#38"><img id="38" class="slide" src="/assets/images/walrus/38.png"></a></td><td>
+    <p>
+      This is a pretty common pattern: if we have a big file, but we only want to process part of it at a time, we'll work on it in chunks. We take the first chunk from the file, and then we can set up a <code>while</code> loop, processing that chunk over and over until <code>file.read()</code> eventually gives us something falsey like an empty string.
+    </p><p>
+      This works fine, but one thing that is kind of "not pretty" is that the <code>chunk = file.read(8192)</code> line with a magic number is being repeated twice, and if I want to change the value of that chunk, I have to change that number on two lines, and not one.
+    </p><p>
+      And maybe that could live in a variable, and I could put it outside this block, but then I'm still duplicating a line here.
+    </p>
+  </td></tr>
+  <tr><td><a href="#39"><img id="39" class="slide" src="/assets/images/walrus/39.png"></a></td><td>
+    <p>
+      We can make it even simpler with the walrus operator. Here, we can put <code>chunk</code> inside the <code>while</code> statement similar to before, and then it behaves exactly the same way.
+    </p>
+  </td></tr>
+  <tr><td><a href="#40"><img id="40" class="slide" src="/assets/images/walrus/40.png"></a></td><td>
+    <p>
+      You might say "why?": why do we have to do this?
+    </p><p>
+      All those examples from before were totally fine, and if I paid attention to where I was using expensive or duplicated statements, I could find ways to avoid them entirely.
+    </p>
+  </td></tr>
+  <tr><td><a href="#41"><img id="41" class="slide" src="/assets/images/walrus/41.png"></a></td><td>
+    <p>
+      One argument for why is that <i>maybe</i> fewer lines are better.
+    </p><p>
+      Programmers kind of hate change, so minimizing your diffs by at least one line is worth it. You want to minimize the amount of code you have to grok, to review, to explain to another developer.
+    </p>
+  </td></tr>
+  <tr><td><a href="#42"><img id="42" class="slide" src="/assets/images/walrus/42.png"></a></td><td>
+    <p>
+      So you might say if I can turn these two lines...
+    </p>
+  </td></tr>
+  <tr><td><a href="#43"><img id="43" class="slide" src="/assets/images/walrus/43.png"></a></td><td>
+    <p>
+      ...into one line, my coworkers are going to love me, right?
+    </p><p>
+      Well, maybe.
+    </p>
+  </td></tr>
+  <tr><td><a href="#45"><img id="45" class="slide" src="/assets/images/walrus/45.png"></a></td><td>
+    <p>
+      One of the proponents of this PEP looked through some Python code bases and found this example, where instead of writing these two lines...
+    </p>
+  </td></tr>
+  <tr><td><a href="#46"><img id="46" class="slide" src="/assets/images/walrus/46.png"></a></td><td>
+    <p>
+      ...the programmer had combined them into a single line like this, in the interest of minimizing their diffs, perhaps.
+    </p><p>
+      But again, this has become more inefficient, because <code>re.match(data)</code> is being called twice where before it would only have been called once.
+    </p>
+  </td></tr>
+  <tr><td><a href="#47"><img id="47" class="slide" src="/assets/images/walrus/47.png"></a></td><td>
+    <p>
+      With the walrus operator, the programmer could have kept it on one line, but also maintained the same efficiency of two lines.
+    </p>
+  </td></tr>
+  <tr><td><a href="#48"><img id="48" class="slide" src="/assets/images/walrus/48.png"></a></td><td>
+    <p>
+      You might be looking at all this and be thinking "hmm, this kind of looks like the assignment operator".
+    </p><p>
+      It's important to note that the walrus operator is almost nothing like the assignment operator. In fact, everywhere you can use the assignment operator, you cannot use the walrus operator, and vice versa.
+    </p>
+  </td></tr>
+  <tr><td><a href="#49"><img id="49" class="slide" src="/assets/images/walrus/49.png"></a></td><td>
+    <p>
+      So for example, with the assignment operator, you can have multiple targets, which lets you set multiple variables to the same value on one line.
+    </p><p>
+      You can't do that with the walrus operator.
+    </p>
+  </td></tr>
+  <tr><td><a href="#50"><img id="50" class="slide" src="/assets/images/walrus/50.png"></a></td><td>
+    <p>
+      Another example is setting the value of a dictionary or an index in a list.
+    </p><p>
+      You can't do this with the walrus operator.
+    </p>
+  </td></tr>
+  <tr><td><a href="#51"><img id="51" class="slide" src="/assets/images/walrus/51.png"></a></td><td>
+    <p>
+      Same thing with properties. You can assign to a property with an assignment operator, you can't with the walrus operator.
+    </p>
+  </td></tr>
+  <tr><td><a href="#52"><img id="52" class="slide" src="/assets/images/walrus/52.png"></a></td><td>
+    <p>
+      Another difference is comma priority: in this example, with the assignment operator, <code>x</code> will become the tuple <code>(1, 2)</code>, while with the walrus operator, <code>x</code> will only become <code>1</code>, since this is actually defining <code>x</code> inside the creation of a <code>(x, 2)</code> tuple.
+    </p>
+  </td></tr>
+  <tr><td><a href="#53"><img id="53" class="slide" src="/assets/images/walrus/53.png"></a></td><td>
+    <p>
+      And, finally, we can't do things like like the augmented assignment operator, where we can add and reassign in a single operation.
+    </p>
+  </td></tr>
+  <tr><td><a href="#54"><img id="54" class="slide" src="/assets/images/walrus/54.png"></a></td><td>
+    <p>
+      We can't do that with the walrus operator, and actually I don't even know what we'd call it at that point, like maybe...
+    </p>
+  </td></tr>
+  <tr><td><a href="#55"><img id="55" class="slide" src="/assets/images/walrus/55.png"></a></td><td>
+    <p>
+      ...a walrus...
+    </p>
+  </td></tr>
+  <tr><td><a href="#56"><img id="56" class="slide" src="/assets/images/walrus/56.png"></a></td><td>
+    <p>
+      ...but with a pope hat?
+    </p>
+  </td></tr>
+  <tr><td><a href="#58"><img id="58" class="slide" src="/assets/images/walrus/58.png"></a></td><td>
+    <p>
+      So that's PEP 572. Let's talk a bit about the reception of this PEP.
+    </p><p>
+      Like I said before, most people hate change, and programmers especially hate change.
+    </p>
+  </td></tr>
+  <tr><td><a href="#59"><img id="59" class="slide" src="/assets/images/walrus/59.png"></a></td><td>
+    <p>
+      One of the reactions was related to backwards compatibility: where will this work?
+    </p><p>
+      The thing is, it's not backwards compatible. If you write code using the walrus operator, you cannot use it in older versions of Python, which didn't support that syntax. So it's not a breaking change to the syntax, but it's not backwards compatible.
+    </p>
+  </td></tr>
+  <tr><td><a href="#60"><img id="60" class="slide" src="/assets/images/walrus/60.png"></a></td><td>
+    <p>
+      Another concern was teachability: what do we call this? I've been avoiding calling it by it's real name, I've been calling it the "walrus operator", but we shouldn't really call it that, that's jargon, we need a real name for it that tells us what it does. We can't call it the assignment operator, that's the equals symbol. We could call it the "becomes" operator... how about the "named expression" operator?
+    </p><p>
+      So that's actually the name of it, the "named expression" operator, but it's still challenging. If I told you "hey, we're adding a named expression operator to Python", you probably wouldn't understand what that means. What is a named expression?
+    </p>
+  </td></tr>
+  <tr><td><a href="#61"><img id="61" class="slide" src="/assets/images/walrus/61.png"></a></td><td>
+    <p>
+      Another common complaint was attractiveness: a lot of people looked at this and said "wow, that's really ugly or weird or different, I hate it!"
+    </p>
+  </td></tr>
+  <tr><td><a href="#62"><img id="62" class="slide" src="/assets/images/walrus/62.png"></a></td><td>
+    <p>
+      There was a lot of discussion about this: there were long mailing list threads debating the merits of this PEP.
+    </p>
+  </td></tr>
+  <tr><td><a href="#63"><img id="63" class="slide" src="/assets/images/walrus/63.png"></a></td><td>
+    <p>
+      Like, really long threads.
+    </p>
+  </td></tr>
+  <tr><td><a href="#64"><img id="64" class="slide" src="/assets/images/walrus/64.png"></a></td><td>
+    <p>
+      There were polls, where core contributors were polled to see if they liked it or not.
+    </p>
+  </td></tr>
+  <tr><td><a href="#65"><img id="65" class="slide" src="/assets/images/walrus/65.png"></a></td><td>
+    <p>
+      Some of the core contributors weighed in with opinions of their own.
+    </p><p>
+      Tim Peters, who was the author of the Zen of Python and actually a co-author of this PEP, said that the proposal would have allowed a modest but clear improvement in quite a few bits of code.
+    </p>
+  </td></tr>
+  <tr><td><a href="#66"><img id="66" class="slide" src="/assets/images/walrus/66.png"></a></td><td>
+    <p>
+      Barry Warsaw said that since it changes the syntax of the language, people were tending to focus on that, rather than understanding the deeper issues here.
+    </p>
+  </td></tr>
+  <tr><td><a href="#67"><img id="67" class="slide" src="/assets/images/walrus/67.png"></a></td><td>
+    <p>
+      Łukasz Langa said that he thought dictators should dictate: he thought that Guido should just do whatever he wanted and ignore everyone else.
+    </p>
+  </td></tr>
+  <tr><td><a href="#68"><img id="68" class="slide" src="/assets/images/walrus/68.png"></a></td><td>
+    <p>
+      And in fact, Guido himself said that he had to stop reading the threads so that he wouldn't <i>go insane</i>.
+    </p>
+  </td></tr>
+  <tr><td><a href="#69"><img id="69" class="slide" src="/assets/images/walrus/69.png"></a></td><td>
+    <p>
+      So, after all this discussion, Guido accepted this PEP...
+    </p>
+  </td></tr>
+  <tr><td><a href="#70"><img id="70" class="slide" src="/assets/images/walrus/70.png"></a></td><td>
+    <p>
+      And then he sent an email to the core contributors mailing list, stepping down as BDFL, and going on a permanent vacation.
+    </p><p>
+      He said that now that PEP 572 is done, he doesn't ever want to have to fight so hard for a PEP and find that so many people despise his decisions.
+    </p><p>
+      So he removed himself entirely from the decision process.
+    </p>
+  </td></tr>
+  <tr><td><a href="#71"><img id="71" class="slide" src="/assets/images/walrus/71.png"></a></td><td>
+    <p>
+      In my talks, I like to share reactions on Twitter that people have, so here's a few about Guido stepping down.
+    </p><p>
+      This one's a bit funny: long before the PEP was proposed, this person said all they wanted for their birthday was the chunk example I showed before.
+    </p><p>
+      And then after Guido stepped down, they realized that thanks to PEP 572, they got their wish... but at what cost?
+    </p>
+  </td></tr>
+  <tr><td><a href="#72"><img id="72" class="slide" src="/assets/images/walrus/72.png"></a></td><td>
+    <p>
+      Hynek says PEP 572 rocks: what a farewell gift.
+    </p>
+  </td></tr>
+  <tr><td><a href="#73"><img id="73" class="slide" src="/assets/images/walrus/73.png"></a></td><td>
+    <p>
+      This person says "TFW reddit says PEP 572 lost the Zen of Python, but the author of the Zen is a co-author of the PEP!"
+    </p>
+  </td></tr>
+  <tr><td><a href="#74"><img id="74" class="slide" src="/assets/images/walrus/74.png"></a></td><td>
+    <p>
+      This person shared that Guido is stepping down as BDFL, and after quoting the first line of Guido's resignation email, says that he's shocked by the vitriol we throw at the people who run important free and open source software projects.
+    </p>
+  </td></tr>
+  <tr><td><a href="#75"><img id="75" class="slide" src="/assets/images/walrus/75.png"></a></td><td>
+    <p>
+      And as an example of that, there was this tweet: "PEP 572 is a trash feature, and I'm sad it was the straw that broke Guido's back".
+    </p>
+  </td></tr>
+  <tr><td><a href="#76"><img id="76" class="slide" src="/assets/images/walrus/76.png"></a></td><td>
+    <p>
+      I want to be really clear here: If we're talking about straws breaking people's backs...
+    </p>
+  </td></tr>
+  <tr><td><a href="#77"><img id="77" class="slide" src="/assets/images/walrus/77.png"></a></td><td>
+    <p>
+      ...the straw that broke Guido's back was not trash PEPs that were heaped upon him by PEP authors...
+    </p>
+  </td></tr>
+  <tr><td><a href="#78"><img id="78" class="slide" src="/assets/images/walrus/78.png"></a></td><td>
+    <p>
+      ...it was having your work called trash by people on the internet.
+    </p>
+  </td></tr>
+  <tr><td><a href="#79"><img id="79" class="slide" src="/assets/images/walrus/79.png"></a></td><td>
+    <p>
+      I think when we're on the internet, we kind of tend to forget who we're talking to. Even in the Python community, I think we're forgetting that dictators are people too.
+    </p><p>
+      Guido is the creator of our language, but he is a person, and he has thoughts feelings just like the rest of us. And just because he's the super-famous creator of our language doesn't mean that we get to treat him poorly.
+    </p>
+  </td></tr>
+  <tr><td><a href="#80"><img id="80" class="slide" src="/assets/images/walrus/80.png"></a></td><td>
+    <p>
+      And in fact, it's not just true for Guido, it's true for all people that work on open source software in our community: maintainers are people too.
+    </p>
+  </td></tr>
+  <tr><td><a href="#81"><img id="81" class="slide" src="/assets/images/walrus/81.png"></a></td><td>
+    <p>
+      Really, just think about it like this: people are people too.
+    </p><p>
+      I think this is what we're forgetting here is that everyone that you talk to on the internet is a real person.
+    </p><p>
+      I think, as a community, we need to step back and think, how are we acting with each other?
+    </p><p>
+      We were so mean and vitriolic that the creator of our language stepped away from us!
+    </p>
+  </td></tr>
+  <tr><td><a href="#82"><img id="82" class="slide" src="/assets/images/walrus/82.png"></a></td><td>
+    <p>
+      I'm going to pre-empt some questions about this.
+    </p>
+  </td></tr>
+  <tr><td><a href="#83"><img id="83" class="slide" src="/assets/images/walrus/83.png"></a></td><td>
+    <p>
+      The first is, what does this mean for Python?
+    </p>
+  </td></tr>
+  <tr><td><a href="#87"><img id="87" class="slide" src="/assets/images/walrus/87.png"></a></td><td>
+    <p>
+      I gave this talk before and someone asked "is this going to be the PEP that ends all PEPs?"
+    </p><p>
+      And in a way, this is kind of true.
+    </p><p>
+      Like I said before, the power to approve PEPs come from him. So with him stepping down, we had no BDFL-delegates, and we couldn't approve any PEPs and couldn't change the language.
+    </p>
+  </td></tr>
+  <tr><td><a href="#88"><img id="88" class="slide" src="/assets/images/walrus/88.png"></a></td><td>
+    <p>
+      That said, it's going to be OK. Right after this happened, a bunch of smart people got to work on the governance problem.
+    </p><p>
+      When Guido stepped down, he specifically entrusted those people with figuring out what we were going to do next, and they got to work.
+    </p>
+  </td></tr>
+  <tr><td><a href="#89"><img id="89" class="slide" src="/assets/images/walrus/89.png"></a></td><td>
+    <p>
+      They created a new PEP, <a href="https://www.python.org/dev/peps/pep-8000/">PEP 8000</a>, which outlined exactly what we were going to do to come up with a new governance model for Python.
+    </p>
+  </td></tr>
+  <tr><td><a href="#90"><img id="90" class="slide" src="/assets/images/walrus/90.png"></a></td><td>
+    <p>
+      They also created <a href="https://www.python.org/dev/peps/pep-8001/">PEP 8001</a>, which outlined the voting process for how we're going to decide which governance model to use.
+    </p>
+  </td></tr>
+  <tr><td><a href="#91"><img id="91" class="slide" src="/assets/images/walrus/91.png"></a></td><td>
+    <p>
+      They also performed a survey, of the governance models of other similar projects and ecosystems, to see if we could emulate them or learn from them in some way, and put that in <a href="https://www.python.org/dev/peps/pep-8002/">PEP 8002</a>.
+    </p>
+  </td></tr>
+  <tr><td><a href="#92"><img id="92" class="slide" src="/assets/images/walrus/92.png"></a></td><td>
+    <p>
+      Then, there were a whole bunch of proposals for the new model:
+    </p>
+    <ul>
+      <li>
+        <a href="https://www.python.org/dev/peps/pep-8010/">PEP 8010</a>: The Technical Leader Governance Model
+      </li>
+      <li>
+        <a href="https://www.python.org/dev/peps/pep-8011/">PEP 8011</a>: Python Governance Model Lead by Trio of Pythonistas
+      </li>
+      <li>
+        <a href="https://www.python.org/dev/peps/pep-8012/">PEP 8012</a>: The Community Governance Model
+      </li>
+      <li>
+        <a href="https://www.python.org/dev/peps/pep-8013/">PEP 8013</a>: The External Governance Model
+      </li>
+      <li>
+        <a href="https://www.python.org/dev/peps/pep-8014/">PEP 8014</a>: The Commons Governance Model
+      </li>
+      <li>
+        <a href="https://www.python.org/dev/peps/pep-8015/">PEP 8015</a>: Organization of the Python Community
+      </li>
+      <li>
+        <a href="https://www.python.org/dev/peps/pep-8016/">PEP 8016</a>: The Steering Council Model
+      </li>
+    </ul>
+  </td></tr>
+  <tr><td><a href="#93"><img id="93" class="slide" src="/assets/images/walrus/93.png"></a></td><td>
+    <p>
+      ...there was a vote on them...
+    </p>
+  </td></tr>
+  <tr><td><a href="#94"><img id="94" class="slide" src="/assets/images/walrus/94.png"></a></td><td>
+    <p>
+      ...and the <a href="https://discuss.python.org/t/python-governance-vote-december-2018-results/546">results were announced in December of 2018</a>.
+    </p>
+  </td></tr>
+  <tr><td><a href="#95"><img id="95" class="slide" src="/assets/images/walrus/95.png"></a></td><td>
+    <p>
+      The model that was accepted was <a href="https://www.python.org/dev/peps/pep-8016/">PEP 8016</a>, the steering council model, which was proposed by Nathaniel Smith and Donald Stufft, and called for a council of five members voted on by the core contributors.
+    </p>
+  </td></tr>
+  <tr><td><a href="#96"><img id="96" class="slide" src="/assets/images/walrus/96.png"></a></td><td>
+    <p>
+      Then, the core contributors had a second vote to determine who would be on the council based on nominations, <a href="https://discuss.python.org/t/2019-steering-council-election-results/824">and we elected our steering council</a>.
+    </p>
+  </td></tr>
+  <tr><td><a href="#97"><img id="97" class="slide" src="/assets/images/walrus/97.png"></a></td><td>
+    <p>
+      This is steering council that was elected at a panel at PyCon US in 2019. From left to right, we have:
+    </p>
+    <ul>
+      <li>
+        <a href="https://twitter.com/pumpichank">Barry Warsaw</a>
+      </li>
+      <li>
+        <a href="https://twitter.com/brettsky">Brett Cannon</a>
+      </li>
+      <li>
+        <a href="https://twitter.com/WillingCarol">Carol Willing</a>
+      </li>
+      <li>
+        <a href="https://twitter.com/gvanrossum">Guido van Rossum</a>
+      </li>
+      <li>
+        <a href="https://twitter.com/ncoghlan_dev">Nick Coghlan</a>
+      </li>
+    </ul>
+  </td></tr>
+  <tr><td><a href="#98"><img id="98" class="slide" src="/assets/images/walrus/98.png"></a></td><td>
+    <p>
+      OK, on to some more Q&A.
+    </p>
+  </td></tr>
+  <tr><td><a href="#99"><img id="99" class="slide" src="/assets/images/walrus/99.png"></a></td><td>
+    <p>
+      Will this become part of Python?
+    </p>
+  </td></tr>
+  <tr><td><a href="#100"><img id="100" class="slide" src="/assets/images/walrus/100.png"></a></td><td>
+    <p>
+      The answer to this is that it already has: most of you probably aren't using Python 3.8, but you could be using it right now.
+    </p><p>
+      Emily Morehouse, a core developer, has already implemented this in 3.8, so you can <a href="https://www.python.org/downloads/release/python-380/">install Python 3.8</a> and go and play with this today.
+    </p>
+  </td></tr>
+  <tr><td><a href="#101"><img id="101" class="slide" src="/assets/images/walrus/101.png"></a></td><td>
+    <p>
+      You might say: but I don't like it!
+    </p>
+  </td></tr>
+  <tr><td><a href="#102"><img id="102" class="slide" src="/assets/images/walrus/102.png"></a></td><td>
+    <p>
+      That's totally fine. You are entitled to your opinion! If you don't like it, then just don't write it. Nobody is going to force you to use the walrus operator.
+    </p><p>
+      And if someone on your team is telling you that you should be using it, it's your job to have a discussion with them and the rest of your team to decided if you'll use it (like any other optional feature, library, etc).
+    </p>
+  </td></tr>
+  <tr><td><a href="#103"><img id="103" class="slide" src="/assets/images/walrus/103.png"></a></td><td>
+    <p>
+      Another question you might have: is Guido coming back?
+    </p>
+  </td></tr>
+  <tr><td><a href="#104"><img id="104" class="slide" src="/assets/images/walrus/104.png"></a></td><td>
+    <p>
+       This depends on what you mean. Is Guido coming back to Python?
+    </p>
+  </td></tr>
+  <tr><td><a href="#105"><img id="105" class="slide" src="/assets/images/walrus/105.png"></a></td><td>
+    <p>
+      Of course. He's here, he's here for us, and he's not actually on a permanent vacation on a beach somewhere, or working on some other programming language. He's still involved.
+    </p>
+  </td></tr>
+  <tr><td><a href="#106"><img id="106" class="slide" src="/assets/images/walrus/106.png"></a></td><td>
+    <p>
+      Maybe you mean "Is Guido going to come back as BDFL?".
+    </p>
+  </td></tr>
+  <tr><td><a href="#107"><img id="107" class="slide" src="/assets/images/walrus/107.png"></a></td><td>
+    <p>
+      The answer to that is definitely no: We have solved the governance process, we chose a new model, we elected people to that committee, and so there will no longer be a BDFL for Python.
+    </p>
+  </td></tr>
+  <tr><td><a href="#108"><img id="108" class="slide" src="/assets/images/walrus/108.png"></a></td><td>
+    <p>
+      Another question: Will this happen again?
+    </p><p>
+      Again, this kind of depends on what you mean.
+    </p>
+  </td></tr>
+  <tr><td><a href="#109"><img id="109" class="slide" src="/assets/images/walrus/109.png"></a></td><td>
+    <p>
+      Maybe you're asking if another PEP will ever be this controversial.
+    </p>
+  </td></tr>
+  <tr><td><a href="#110"><img id="110" class="slide" src="/assets/images/walrus/110.png"></a></td><td>
+    <p>
+      I'm going to say "probably not". I think this PEP was an outlier: it was a very all syntax change that was easily understandable by anyone that looked at it, and that meant that it was easy for folks to make a quick gut reaction.
+    </p>
+  </td></tr>
+  <tr><td><a href="#111"><img id="111" class="slide" src="/assets/images/walrus/111.png"></a></td><td>
+    <p>
+      However, maybe your question is "Will people continue to be negative on the internet?".
+    </p>
+  </td></tr>
+  <tr><td><a href="#112"><img id="112" class="slide" src="/assets/images/walrus/112.png"></a></td><td>
+    <p>
+      My answer to that is... I don't know. I <i>hope</i> not: I'd really like it if we all could learn from this and just treat each other a little better and be more open and receptive to new ideas. I hope this all makes us take a step back and realize we could all be a little nicer.
+    </p><p>
+      However, so many people use Python now, and for a lot of those people, the language already feels perfect. And they don't want it to change.
+    </p><p>
+      So maybe this is the new status quo: maybe we're all going to get really upset every time we try to make some fundamental change to the language.
+    </p><p>
+      But I really hope it's not: I hope we can entrust the people that know the most about our language to make good decisions for us, that we aren't so reactionary online, and that we can treat those dictators, those maintainers, those people like they're actually people.
+    </p><p>
+      I hope we can do better.
+    </p>
+  </td></tr>
+  <tr><td><a href="#113"><img id="113" class="slide" src="/assets/images/walrus/113.png"></a></td><td>
+    <p>
+      Thanks!
+    </p>
+    <ul>
+      <li>
+        Github: <a href="https://github.com/di"><code>@di</code></a>
+      </li>
+      <li>
+        Twitter: <a href="https://twitter.com/di_codes"><code>@di_codes</code></a>
+      </li>
+    </ul>
+  </td></tr>
+</table>
+</div>
