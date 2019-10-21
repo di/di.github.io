@@ -30,7 +30,7 @@ venues:
     links:
       video: "https://www.youtube.com/watch?v=mHOgGuALfNc"
 image : assets/images/walrus/55.png
-description : 'A discussion about a highly controversial proposed change to Python syntax, the rationale for it, and the fallout as the result of it.'
+description : 'A discussion about a highly controversial proposed change to Python syntax, the rationale for it, and the resulting fallout.'
 ---
 
 <div class="slides">
