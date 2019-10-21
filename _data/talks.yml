@@ -34,6 +34,8 @@
     venue: "DjangoCon US 2019"
     venue_url: "https://2019.djangocon.us/talks/static-typing-in-python/"
     location: San Diego, CA
+    links:
+      video: "https://www.youtube.com/watch?v=5pluSWgTa6I"
 
   - date: 2019-09-13 00:00:00 -0600
     venue: "PyCon UK 2019"
