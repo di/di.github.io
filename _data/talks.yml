@@ -29,6 +29,8 @@
     venue: "PyGotham 2019"
     venue_url: "https://2019.pygotham.org/talks/static-typing-in-python/"
     location: New York, NY
+    links:
+      video: "https://www.youtube.com/watch?v=2gBP1qN5T7I"
 
   - date: 2019-09-24 00:00:00 -0600
     venue: "DjangoCon US 2019"
