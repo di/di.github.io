@@ -8,6 +8,8 @@ venues:
     venue: "PyCon Taiwan 2019"
     venue_url: "https://tw.pycon.org/2019/en-us/events/talk/871864096805355836/"
     location: "Taipei, TW"
+    links:
+      video: "https://www.youtube.com/watch?v=F5cPSzEcVQs"
 
   - date: 2019-05-20 00:00:00 -0600
     venue: "Philly PUG May 2019"
