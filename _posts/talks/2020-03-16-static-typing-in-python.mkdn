@@ -2,7 +2,7 @@
 layout : transcript
 category : talks
 title : 'Static Typing in Python'
-date : 2020-03-16 00:00:00 -0600
+date : 2020-03-19 00:00:00 -0600
 venues:
   - date: 2019-10-10 00:00:00 -0600
     venue: "PyCon US 2020"
