@@ -9,6 +9,9 @@ layout: default
 {% capture venues_list %}
   {% for venue in page.venues %}
     {%- if venue.cancelled != true -%}
+      {%- if forloop.last == true %}
+      and
+      {% endif%}
       {%- if venue.links.video -%}
       <a href="{{ venue.links.video }}">{{ venue.venue }}</a>
       {%- else -%}
