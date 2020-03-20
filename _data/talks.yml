@@ -16,43 +16,6 @@
     links:
       video: "https://www.youtube.com/watch?v=QECiSSpWVrI"
 
-- title: "Static Typing in Python"
-  date: 2019-10-10 00:00:00 -0600
-  venues:
-
-  - date: 2019-10-10 00:00:00 -0600
-    venue: "PyCon DE 2019"
-    venue_url: "https://de.pycon.org/program/pyconde-nh9uey-static-typing-in-python-dustin-ingram/"
-    location: Berlin, DE
-
-  - date: 2019-10-04 00:00:00 -0600
-    venue: "PyGotham 2019"
-    venue_url: "https://2019.pygotham.org/talks/static-typing-in-python/"
-    location: New York, NY
-    links:
-      video: "https://www.youtube.com/watch?v=2gBP1qN5T7I"
-
-  - date: 2019-09-24 00:00:00 -0600
-    venue: "DjangoCon US 2019"
-    venue_url: "https://2019.djangocon.us/talks/static-typing-in-python/"
-    location: San Diego, CA
-    links:
-      video: "https://www.youtube.com/watch?v=5pluSWgTa6I"
-
-  - date: 2019-09-13 00:00:00 -0600
-    venue: "PyCon UK 2019"
-    venue_url: "https://pretalx.com/pyconuk-2019/schedule/"
-    location: Cardiff, UK
-    links:
-      video: "https://www.youtube.com/watch?v=L8sWR5kRlxM"
-
-  - date: 2019-09-08 00:00:00 -0600
-    venue: "PyColorado 2019"
-    venue_url: "https://pycolorado.org/schedule"
-    location: Denver, CO
-    links:
-      video: "https://www.youtube.com/watch?v=8BNuawmpFXQ"
-
 - title: "Building a Sustainable Python Package Index"
   date: 2019-08-03 00:00:00 -0600
   venues:
