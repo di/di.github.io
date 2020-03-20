@@ -7,12 +7,15 @@
 {%- endif -%}
   <small>
   {%- for venue in talk.venues -%}
-    {% if venue.venue_url -%}
-      - <a href="{{ venue.venue_url }}">{{ venue.venue }}</a>,
-    {% else -%}
+    {%- if venue.venue_url -%}
+      - <a href="{{ venue.venue_url }}">{{ venue.venue }}</a>
+    {%- else -%}
       - {{ venue.venue }}
-    {% endif -%}
-    {%- if venue.location -%}{{ venue.location }},{%- endif %}
+    {%- endif -%}
+    {%- if venue.cancelled %}
+    (cancelled)
+    {%- endif -%},
+    {% if venue.location -%}{{ venue.location }},{%- endif %}
     {{ venue.date | date : "%B %Y" }}
     {%- if venue.links %}
     (

@@ -6,8 +6,21 @@ layout: default
   <small>{{ page.date | date : "%B %d %Y"}}</small>
 </div>
 
+{% capture venues_list %}
+  {% for venue in page.venues %}
+    {%- if venue.cancelled != true -%}
+      {%- if venue.links.video -%}
+      <a href="{{ venue.links.video }}">{{ venue.venue }}</a>
+      {%- else -%}
+      {{ venue.venue }}
+      {%- endif -%}
+      {%- if forloop.last == false %}, {% endif%}
+    {%- endif %}
+  {%- endfor -%}
+{% endcapture %}
+
 <h5>
-    This is a text version of a talk I gave at {{ page.venues | map: "venue" | array_to_sentence_string }}.
+    This is a text version of a talk I gave at {{ venues_list }}.
 </h5>
 
 {% include anchor_headings.html html=content anchorBody="#" anchorClass="anchor" %}

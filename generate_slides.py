@@ -16,15 +16,14 @@ asset_dir = sys.argv[1]
 slides = range(1, len(glob.glob(asset_dir + '/*.png')) + 1)
 
 template = Template("""---
-layout : post
+layout : transcript
 category : talks
 title : 'TITLE'
-tags : []
-publish : false
+date :
+venues :
+image : assets/images/.../...png
 description : 'DESCRIPTION'
 ---
-
-##### This is a text version of a talk I gave at LOCATION.
 
 <div class="slides">
 <table>
