@@ -4,7 +4,7 @@ category : talks
 title : 'Static Typing in Python'
 date : 2020-03-19 00:00:00 -0600
 venues:
-  - date: 2019-10-10 00:00:00 -0600
+  - date: 2020-04-22 00:00:00 -0600
     venue: "PyCon US 2020"
     venue_url: "https://us.pycon.org/2020/schedule/presentation/96/"
     location: Pittsburgh, PA
