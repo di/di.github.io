@@ -707,7 +707,7 @@ description : 'A discussion about a highly controversial proposed change to Pyth
     </p>
     <ul>
       <li>
-        Github: <a href="https://github.com/di"><code>@di</code></a>
+        GitHub: <a href="https://github.com/di"><code>@di</code></a>
       </li>
       <li>
         Twitter: <a href="https://twitter.com/di_codes"><code>@di_codes</code></a>

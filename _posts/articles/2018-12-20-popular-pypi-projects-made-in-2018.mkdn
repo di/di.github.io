@@ -219,8 +219,8 @@ year, when [PyPI added support for Markdown project descriptions][4], we
 initially only supported the "[CommonMark][9]" format, because there was a
 parser and renderer already available as a Python project.
 
-In order to support the more widely used "Github-flavored Markdown" (GFM), Thea
-Flowers created [`cmarkgfm`][], which provides a Python binds for [Github's fork of
+In order to support the more widely used "GitHub-flavored Markdown" (GFM), Thea
+Flowers created [`cmarkgfm`][], which provides a Python binds for [GitHub's fork of
 `cmark`][10]. This project was added as a dependency of [`readme-renderer`][],
 which is widely used by project maintainers to check their project's descriptions.
 
