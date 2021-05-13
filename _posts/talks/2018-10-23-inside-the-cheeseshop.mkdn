@@ -1175,7 +1175,7 @@ description : 'This talk identifies the key tools in the Python Packaging ecosys
     </p>
     <ul>
       <li>
-        Github: <a href="https://github.com/di"><code>@di</code></a>
+        GitHub: <a href="https://github.com/di"><code>@di</code></a>
       </li>
       <li>
         Twitter: <a href="https://twitter.com/di_codes"><code>@di_codes</code></a>

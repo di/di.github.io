@@ -22,7 +22,7 @@ PyPI:
 * First commit: [October 2002][firstcommit]
 * Funding: Less than $0.5MM in grants ([MOSS][moss], [OTF][otf]), and all in the last year
 * Employees: [A small fraction of a single employee][ernest], plus a handful of volunteers
-* Status: Basically [a Github repo](https://github.com/pypa/warehouse), ["Kubernetes,
+* Status: Basically [a GitHub repo](https://github.com/pypa/warehouse), ["Kubernetes,
   deployed via a little weirdware"][weirdware], [an amazing
   CDN](https://www.fastly.com/) and a Slack channel
 

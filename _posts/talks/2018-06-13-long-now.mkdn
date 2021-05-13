@@ -392,7 +392,7 @@ description : 'A discussion on principles of designing software to have longevit
     </p>
     <p>
       I also spent a lot of time thinking about how I responded to users on
-      Github, making sure that not only was I answering their immediate
+      GitHub, making sure that not only was I answering their immediate
       question, but providing enough context and background for any future
       visitors to that issue or pull request, for them to understand it as
       well.
