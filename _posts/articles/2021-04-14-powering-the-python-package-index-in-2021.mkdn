@@ -46,7 +46,7 @@ Since 2016, not only has PyPI grown significantly, but we've also doubled down o
 
 The majority of traffic to PyPI goes through Fastly, and via their caching we're able to prevent more than 96% of the incoming traffic from ever reaching our backends, which means we need less compute infrastructure. Their global network of data centers ensures that most requests are quickly served locally to you. And in addition, since most requests to PyPI are read-only, whenever we have downtime, it doesn't have as large of an effect because we're able to serve most of the site out of the cache rather than giving the end user an error.
 
-Fastly gives us a 100% discount on our bill, which at the time of writing would be more than $1.8M (yes, millon) per month.
+Fastly gives us a 100% discount on our bill, which at the time of writing would be more than $1.8M (yes, million) per month.
 
 **Google Cloud**<br>
 PyPI has used Google Cloud to [host our public datasets via BigQuery](https://console.cloud.google.com/marketplace/product/gcp-public-data-pypi/pypi) for a while now, but in 2020 we moved our file storage from AWS S3 to Google Cloud Storage to take advantage of the [CDN Interconnect discounts](https://cloud.google.com/network-connectivity/docs/cdn-interconnect) offered by Fastly and Google Cloud.
