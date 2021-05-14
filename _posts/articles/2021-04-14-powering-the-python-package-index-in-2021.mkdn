@@ -39,14 +39,14 @@ That said, one thing that hasn't changed much is that much (if not all) of the o
 
 ### Companies / Services
 
-Since 2016, not only has PyPI grown significantly, but we've also doubled down on our efforts to push as much operations & infrastructure onto external, managed services as we can. In 2016, Donald estimated that our in-kind donations of infrastructure totalled $35K per month. Today, I would estimate that this has grown to more than $1.5M per month, largely dominated by one sponsor...
+Since 2016, not only has PyPI grown significantly, but we've also doubled down on our efforts to push as much operations & infrastructure onto external, managed services as we can. In 2016, Donald estimated that our in-kind donations of infrastructure totalled $35K per month. Today, I would estimate that this has grown to more than $1.8M per month, largely dominated by one sponsor...
 
 **Fastly**<br>
 [Fastly](https://www.fastly.com/open-source) remains PyPI's secret scaling sauce. The global content delivery network provided by Fastly provides one of the single largest reduction in operations effort that we have, and helps make PyPI fast and reliable.
 
 The majority of traffic to PyPI goes through Fastly, and via their caching we're able to prevent more than 96% of the incoming traffic from ever reaching our backends, which means we need less compute infrastructure. Their global network of data centers ensures that most requests are quickly served locally to you. And in addition, since most requests to PyPI are read-only, whenever we have downtime, it doesn't have as large of an effect because we're able to serve most of the site out of the cache rather than giving the end user an error.
 
-Fastly gives us a 100% discount on our bill, which at the time of writing would be more than $1.5M (yes, millon) per month.
+Fastly gives us a 100% discount on our bill, which at the time of writing would be more than $1.8M (yes, millon) per month.
 
 **Google Cloud**<br>
 PyPI has used Google Cloud to [host our public datasets via BigQuery](https://console.cloud.google.com/marketplace/product/gcp-public-data-pypi/pypi) for a while now, but in 2020 we moved our file storage from AWS S3 to Google Cloud Storage to take advantage of the [CDN Interconnect discounts](https://cloud.google.com/network-connectivity/docs/cdn-interconnect) offered by Fastly and Google Cloud.
@@ -108,21 +108,34 @@ When Donald wrote his original post, our CDN was serving about 12 terabytes of d
 Since then, we've grown a bit. I'll just let these graphs speak for themselves:
 
 <center><small><i>
-Bytes transferred per day:
+Requests served per day (<a href="https://pypi.org">pypi.org</a>):
+</i></small></center>
+<a href="/assets/images/powering_pypi/pypi-requests-april-2021.png">
+<img style="width: 100%" src="/assets/images/powering_pypi/pypi-requests-april-2021.png">
+</a>
+
+<center><small><i>
+Bytes transferred per day (<a href="https://pypi.org">pypi.org</a>):
 </i></small></center>
 <a href="/assets/images/powering_pypi/pypi-bytes-april-2021.png">
   <img style="width: 100%" src="/assets/images/powering_pypi/pypi-bytes-april-2021.png">
 </a>
 
 <center><small><i>
-Requests served per day:
+Requests served per day (<a href="https://files.pythonhosted.org">files.pythonhosted.org</a>):
 </i></small></center>
-<a href="/assets/images/powering_pypi/pypi-requests-april-2021.png">
-<img style="width: 100%" src="/assets/images/powering_pypi/pypi-requests-april-2021.png">
+<a href="/assets/images/powering_pypi/files-requests-april-2021.png">
+<img style="width: 100%" src="/assets/images/powering_pypi/files-requests-april-2021.png">
 </a>
 
+<center><small><i>
+Bytes transferred per day (<a href="https://files.pythonhosted.org">files.pythonhosted.org</a>):
+</i></small></center>
+<a href="/assets/images/powering_pypi/files-bytes-april-2021.png">
+  <img style="width: 100%" src="/assets/images/powering_pypi/files-bytes-april-2021.png">
+</a>
 
-The "maximum" here is per-day, so this means that at the peak (which was the day I made these graphs) PyPI served more than 55 terabytes over more than 1.7 billion requests. And as you can see, it doesn't quite look like linear growth either!
+The "maximum" here is per-day, so this means that at the peak (which was the day I made these graphs) PyPI served nearly 900 terabytes over more than 2 billion requests per day. And as you can see, it doesn't quite look like linear growth either!
 
 These graphs start in April 2018 because that's when we rolled out the PyPI rewrite, which is notable because even with all this growth, PyPI has actually become even more reliable than it was before.
 
