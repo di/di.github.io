@@ -1,8 +1,8 @@
 ---
 layout : post
 category : articles
-title : ! "Powering the Python Package Index in 2021"
-description : What does it take to power PyPI in this current day and age?
+title : ! "What does it take to power the Python Package Index?"
+description : The time, money and services it takes to power PyPI in 2021
 image: assets/images/powering_pypi/powering_pypi.png
 tags : [python, pypi, packaging]
 ---
