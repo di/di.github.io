@@ -15,94 +15,8 @@ One thing definitely remains the same: The Python Package Index ([PyPI](https://
 
 Who—and what—keeps PyPI running is also still fairly opaque to its users. Many don't realize that unlike other registries for similar language ecosystems, PyPI is a project supported by the Python Software Foundation (a [501(c)(3) non-profit](https://en.wikipedia.org/wiki/501(c)(3)_organization)) and almost entirely volunteer-led or maintained.
 
-### People
-The biggest delta here from five years ago is that we have a much larger team than three people, and that as a result much less falls directly on Donald's shoulders. We still have three "core" people, but we have many more people that have the commit bit, moderator privileges, or both:
-
-* PyPI maintainers/administrators:
-  * [Donald Stufft](https://twitter.com/dstufft)
-  * [Ee W Durbin III](https://twitter.com/ewdurbin)
-  * [Dustin Ingram](https://twitter.com/di_codes) (me)
-* PyPI moderators:
-  * [Yeray Diaz](https://twitter.com/yera_ee)
-  * [Jason Madden](https://twitter.com/ossmkitty)
-  * [Joachim Jablon](https://twitter.com/Ewjoachim)
-  * [Pradyun Gedam](https://twitter.com/pradyunsg)
-  * [Thea Flowers](https://twitter.com/theavalkyrie)
-* PyPI committers
-  * [Nicole Harris](https://twitter.com/nlhkabu)
-  * [Sumana Harihareswara](https://twitter.com/brainwane)
-  * [Alex Gaynor](https://twitter.com/alex_gaynor)
-
-This is a good thing! Not only because it reduces the demand on a single person, but also because it's no longer Donald's full-time job to work on PyPI, so this workload needs to be spread amongst many people.
-
-That said, one thing that hasn't changed much is that much (if not all) of the operations / infrastructure / on-call work is handled by Ee. While they're now employed full-time by the PSF as the Director of Infrastructure, making this part of their job description, the rest of the team doesn't play as large of a role here (and Ee's time is split between PyPI and the rest of the PSF's infrastructure and programs).
-
-### Companies / Services
-
-Since 2016, not only has PyPI grown significantly, but we've also doubled down on our efforts to push as much operations & infrastructure onto external, managed services as we can. In 2016, Donald estimated that our in-kind donations of infrastructure totalled $35K per month. Today, I would estimate that this has grown to more than $1.8M per month, largely dominated by one sponsor...
-
-**Fastly**<br>
-[Fastly](https://www.fastly.com/open-source) remains PyPI's secret scaling sauce. The global content delivery network provided by Fastly provides one of the single largest reduction in operations effort that we have, and helps make PyPI fast and reliable.
-
-The majority of traffic to PyPI goes through Fastly, and via their caching we're able to prevent more than 96% of the incoming traffic from ever reaching our backends, which means we need less compute infrastructure. Their global network of data centers ensures that most requests are quickly served locally to you. And in addition, since most requests to PyPI are read-only, whenever we have downtime, it doesn't have as large of an effect because we're able to serve most of the site out of the cache rather than giving the end user an error.
-
-Fastly gives us a 100% discount on our bill, which at the time of writing would be more than $1.8M (yes, million) per month.
-
-**Google Cloud**<br>
-PyPI has used Google Cloud to [host our public datasets via BigQuery](https://console.cloud.google.com/marketplace/product/gcp-public-data-pypi/pypi) for a while now, but in 2020 we moved our file storage from AWS S3 to Google Cloud Storage to take advantage of the [CDN Interconnect discounts](https://cloud.google.com/network-connectivity/docs/cdn-interconnect) offered by Fastly and Google Cloud.
-
-At the end of the day, PyPI is just a glorified file storage service. While actual storage costs were roughly the same between providers, the bandwidth between S3 and our CDN had been consuming a significant portion of our compute credits provided by Amazon. Moving to Google Cloud Storage allowed us to reuse these credits for other infrastructure.
-
-Google Cloud currently covers our entire bill, which is approximately $10K per month.
-
-**Amazon Web Services**<br>
-While we no longer use S3 for file storage, PyPI still uses AWS for compute, data storage (Postgres, Redis, Elasticsearch), message queuing and email delivery.
-
-The support provided by AWS to the PSF has been a core part of operating PyPI since we relaunched it with an all new codebase in March 2018.
-
-AWS has provided a stable and extensible platform for our Kubernetes-based deployment on Amazon EC2, while products like Amazon RDS, Amazon ElastiCache, Amazon Elasticsearch Service, Amazon SQS, Amazon SNS, and Amazon Route 53 have made managing the services behind PyPI possible with such a small team.
-
-Amazon provides us with [a batch of promotional credits earmarked for open source projects](https://aws.amazon.com/blogs/opensource/aws-promotional-credits-open-source-projects/) every year and we consume about $7,000 worth per month.
-
-**Others**<br>
-Many others help keep PyPI running but aren't on the critical path of serving a request:
-
-* Statuspage.io: managed status page
-* Sentry: error reporting and logging
-* Datadog: monitoring and dashboards like our [Public PyPI Dashboard](https://p.datadoghq.com/sb/7dc8b3250-85dcf667bd)
-* Digicert: EV certificates
-* Pingdom: monitoring
-
-### Monetary
-
-One of the biggest changes to PyPI in the last five years is the amount of funding we've been able to direct towards it. As Donald mentioned in his original post, between donated infrastructure and volunteer support, PyPI doesn't actually need much in terms of cash to keep running day to day.
-
-However, that just keeps us up and running—it doesn't help us make changes or improvements. There's only so much we can expect of volunteers; we generally can't expect them to be able to land large features independently in a short amount of time. And while the PSF is able to provide some funding for costs here and there (and pay the salaries of folks like Ee that help support it), they generally don't have the cash to fund large feature development like this as well.
-
-Starting in 2017, we began applying for grants to support PyPI development work. This endeavor was largely led by Sumana Harihareswara, and it's an understatement to say she helped: I don't think any funding would have been directed towards PyPI if she hadn't initially gotten the ball rolling.
-
-It's also been wildly successful, in my opinion: at the time of writing, more than $750K has been directed at PyPI development specifically, and nearly $2M has been directed at Python packaging projects in general (including PyPI), including [a recent $800K grant from the NSF](https://discuss.python.org/t/new-packaging-security-funding-nyu/7792/).
-
-This funding has allowed us to hire contractors (including developers, project managers, and UI/UX designers) to make some key infrastructure improvements. The core maintainer team provides oversight for design, architecture, code review, etc, while the contractor team works full-time to land the feature(s).
-
-Some projects that we've been able to fund:
-
-**Full-stack rewrite of PyPI**<br>
-With $170,000 of funding from [Mozilla Open Source Support](https://www.mozilla.org/en-US/moss/), we hired a team who took "Warehouse" (the reimplementation that Donald had been working on for a while), put the final touches on it to make it feature-complete, actually made it "PyPI", and decommissioned the old infrastructure.
-
-**Localization, internationalization, API tokens and 2FA**<br>
-With $76,000 of funding from the [Open Tech Fund](https://www.opentech.fund/), we hired contractors to add API tokens, two-factor authentication (2FA) via WebAuthN, and make PyPI localizable by integrating it with Weblate. As of writing, more than 3% of PyPI accounts have 2FA enabled, and PyPI has been fully translated by volunteer translators into 11 languages, including Esperanto!
-
-**Malware Detection & The Update Framework**<br>
-With $100,000 of funding from Facebook, we hired contractors to implement PEP 458, which integrates The Update Framework (TUF) into PyPI, providing the ability to securely sign and verify signatures of distributions on PyPI. In addition, contractors implemented a prototype malware detection system for PyPI.
-
-**Foundational Tool Improvements & Productionized Malware Detection**<br>
-With $154,000 from Google, we'll hire contractors to make general tooling improvements where necessary, and turn the prototype malware detection into a production-grade system. (This project is in-progress.)
-
-**Support Staff**<br>
-With $250,000 from Bloomberg, we'll [hire a project manager for PyPI and other packaging projects](https://pyfound.blogspot.com/2021/04/the-psf-is-hiring-python-packaging.html) over the next two-year period to oversee improvements and added functionality that will benefit all users, while helping to develop the Python Package Index (PyPI) into a sustainable service to fund additional work in the ecosystem.
-
 ### Growth
+
 When Donald wrote his original post, our CDN was serving about 12 terabytes of data across 100 million requests per day.
 
 Since then, we've grown a bit. I'll just let these graphs speak for themselves:
@@ -138,6 +52,93 @@ Bytes transferred per day (<a href="https://files.pythonhosted.org">files.python
 The "maximum" here is per-day, so this means that at the peak (which was the day I made these graphs) PyPI served nearly 900 terabytes over more than 2 billion requests per day. And as you can see, it doesn't quite look like linear growth either!
 
 These graphs start in April 2018 because that's when we rolled out the PyPI rewrite, which is notable because even with all this growth, PyPI has actually become even more reliable than it was before.
+
+### Companies / Services
+
+Since 2016, not only has PyPI grown significantly, but we've also doubled down on our efforts to push as much operations & infrastructure onto external, managed services as we can. In 2016, Donald estimated that our in-kind donations of infrastructure totalled $35K per month. **Today, the estimated cost of third-party services to keep PyPI running has grown to more than $1.8M per month**. This is largely dominated by one sponsor...
+
+**Fastly**<br>
+[Fastly](https://www.fastly.com/open-source) remains PyPI's secret scaling sauce. The global content delivery network provided by Fastly provides one of the single largest reduction in operations effort that we have, and helps make PyPI fast and reliable.
+
+The majority of traffic to PyPI goes through Fastly, and via their caching we're able to prevent more than 96% of the incoming traffic from ever reaching our backends, which means we need less compute infrastructure. Their global network of data centers ensures that most requests are quickly served locally to you. And in addition, since most requests to PyPI are read-only, whenever we have downtime, it doesn't have as large of an effect because we're able to serve most of the site out of the cache rather than giving the end user an error.
+
+Fastly gives us a 100% discount on our bill, which at the time of writing would be more than $1.8M (yes, million) per month.
+
+**Google Cloud**<br>
+PyPI has used Google Cloud to [host our public datasets via BigQuery](https://console.cloud.google.com/marketplace/product/gcp-public-data-pypi/pypi) for a while now, but in 2020 we moved our file storage from AWS S3 to Google Cloud Storage to take advantage of the [CDN Interconnect discounts](https://cloud.google.com/network-connectivity/docs/cdn-interconnect) offered by Fastly and Google Cloud.
+
+At the end of the day, PyPI is just a glorified file storage service. While actual storage costs were roughly the same between providers, the bandwidth between S3 and our CDN had been consuming a significant portion of our compute credits provided by Amazon. Moving to Google Cloud Storage allowed us to reuse these credits for other infrastructure.
+
+Google Cloud currently covers our entire bill, which is approximately $10K per month.
+
+**Amazon Web Services**<br>
+While we no longer use S3 for file storage, PyPI still uses AWS for compute, data storage (Postgres, Redis, Elasticsearch), message queuing and email delivery.
+
+The support provided by AWS to the PSF has been a core part of operating PyPI since we relaunched it with an all new codebase in March 2018.
+
+AWS has provided a stable and extensible platform for our Kubernetes-based deployment on Amazon EC2, while products like Amazon RDS, Amazon ElastiCache, Amazon Elasticsearch Service, Amazon SQS, Amazon SNS, and Amazon Route 53 have made managing the services behind PyPI possible with such a small team.
+
+Amazon provides us with [a batch of promotional credits earmarked for open source projects](https://aws.amazon.com/blogs/opensource/aws-promotional-credits-open-source-projects/) every year and we consume about $7,000 worth per month.
+
+**Others**<br>
+Many others help keep PyPI running but aren't on the critical path of serving a request:
+
+* Statuspage.io: managed status page
+* Sentry: error reporting and logging
+* Datadog: monitoring and dashboards like our [Public PyPI Dashboard](https://p.datadoghq.com/sb/7dc8b3250-85dcf667bd)
+* Digicert: EV certificates
+* Pingdom: monitoring
+
+### Project funding
+
+One of the biggest changes to PyPI in the last five years is the amount of funding we've been able to direct towards it. As Donald mentioned in his original post, between donated infrastructure and volunteer support, PyPI doesn't actually need much in terms of cash to keep running day to day.
+
+However, that just keeps us up and running—it doesn't help us make changes or improvements. There's only so much we can expect of volunteers; we generally can't expect them to be able to land large features independently in a short amount of time. And while the PSF is able to provide some funding for costs here and there (and pay the salaries of folks like Ee that help support it), they generally don't have the cash to fund large feature development like this as well.
+
+Starting in 2017, we began applying for grants to support PyPI development work. This endeavor was largely led by Sumana Harihareswara, and it's an understatement to say she helped: I don't think any funding would have been directed towards PyPI if she hadn't initially gotten the ball rolling.
+
+It's also been wildly successful, in my opinion: at the time of writing, more than $750K has been directed at PyPI development specifically, and nearly $2M has been directed at Python packaging projects in general (including PyPI), including [a recent $800K grant from the NSF](https://discuss.python.org/t/new-packaging-security-funding-nyu/7792/).
+
+This funding has allowed us to hire contractors (including developers, project managers, and UI/UX designers) to make some key infrastructure improvements. The core maintainer team provides oversight for design, architecture, code review, etc, while the contractor team works full-time to land the feature(s).
+
+Some projects that we've been able to fund:
+
+**Full-stack rewrite of PyPI**<br>
+With $170,000 of funding from [Mozilla Open Source Support](https://www.mozilla.org/en-US/moss/), we hired a team who took "Warehouse" (the reimplementation that Donald had been working on for a while), put the final touches on it to make it feature-complete, actually made it "PyPI", and decommissioned the old infrastructure.
+
+**Localization, internationalization, API tokens and 2FA**<br>
+With $76,000 of funding from the [Open Tech Fund](https://www.opentech.fund/), we hired contractors to add API tokens, two-factor authentication (2FA) via WebAuthN, and make PyPI localizable by integrating it with Weblate. As of writing, more than 3% of PyPI accounts have 2FA enabled, and PyPI has been fully translated by volunteer translators into 11 languages, including Esperanto!
+
+**Malware Detection & The Update Framework**<br>
+With $100,000 of funding from Facebook, we hired contractors to implement PEP 458, which integrates The Update Framework (TUF) into PyPI, providing the ability to securely sign and verify signatures of distributions on PyPI. In addition, contractors implemented a prototype malware detection system for PyPI.
+
+**Foundational Tool Improvements & Productionized Malware Detection**<br>
+With $154,000 from Google, we'll hire contractors to make general tooling improvements where necessary, and turn the prototype malware detection into a production-grade system. (This project is in-progress.)
+
+**Support Staff**<br>
+With $250,000 from Bloomberg, we'll [hire a project manager for PyPI and other packaging projects](https://pyfound.blogspot.com/2021/04/the-psf-is-hiring-python-packaging.html) over the next two-year period to oversee improvements and added functionality that will benefit all users, while helping to develop the Python Package Index (PyPI) into a sustainable service to fund additional work in the ecosystem.
+
+### People
+The biggest delta here from five years ago is that we have a much larger team than three people, and that as a result much less falls directly on Donald's shoulders. We still have three "core" people, but we have many more people that have the commit bit, moderator privileges, or both:
+
+* PyPI maintainers/administrators:
+  * [Donald Stufft](https://twitter.com/dstufft)
+  * [Ee W Durbin III](https://twitter.com/ewdurbin)
+  * [Dustin Ingram](https://twitter.com/di_codes) (me)
+* PyPI moderators:
+  * [Yeray Diaz](https://twitter.com/yera_ee)
+  * [Jason Madden](https://twitter.com/ossmkitty)
+  * [Joachim Jablon](https://twitter.com/Ewjoachim)
+  * [Pradyun Gedam](https://twitter.com/pradyunsg)
+  * [Thea Flowers](https://twitter.com/theavalkyrie)
+* PyPI committers
+  * [Nicole Harris](https://twitter.com/nlhkabu)
+  * [Sumana Harihareswara](https://twitter.com/brainwane)
+  * [Alex Gaynor](https://twitter.com/alex_gaynor)
+
+This is a good thing! Not only because it reduces the demand on a single person, but also because it's no longer Donald's full-time job to work on PyPI, so this workload needs to be spread amongst many people.
+
+That said, one thing that hasn't changed much is that much (if not all) of the operations / infrastructure / on-call work is handled by Ee. While they're now employed full-time by the PSF as the Director of Infrastructure, making this part of their job description, the rest of the team doesn't play as large of a role here (and Ee's time is split between PyPI and the rest of the PSF's infrastructure and programs).
 
 ### Next steps and how you can help
 
