@@ -6,10 +6,8 @@ title : Dustin Ingram
 ## About
 I'm Dustin (aka [@di](https://github.com/di/)), a Developer Advocate at Google,
 focused on supporting the Python community on Google Cloud. I'm also a director
-of the [Python Software Foundation](https://www.python.org/psf/), maintainer of
-[PyPI](https://pypi.org), organizer for the [PyTexas](https://pytexas.org)
-conference and have a master's degree in Computer Science from [Drexel
-University](http://drexel.edu).
+of the [Python Software Foundation](https://www.python.org/psf/), and
+maintainer of [PyPI](https://pypi.org).
 
 ## Writing
 <ul>
