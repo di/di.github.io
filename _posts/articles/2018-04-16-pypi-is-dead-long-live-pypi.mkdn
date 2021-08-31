@@ -30,7 +30,7 @@ them for all their hard work:
   been a pretty janky looking website into something that is clean, beautiful,
   organized, user-tested and accessible;
 
-* [Ernest W. Durbin III](https://github.com/ewdurbin/), for doing a tremendous
+* [Ee Durbin](https://github.com/ewdurbin/), for doing a tremendous
   amount of behind-the-scenes infrastructure work, and tracking down nasty
   queries and memory leaks;
 
