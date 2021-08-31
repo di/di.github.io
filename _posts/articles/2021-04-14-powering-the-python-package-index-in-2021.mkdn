@@ -123,7 +123,7 @@ The biggest delta here from five years ago is that we have a much larger team th
 
 * PyPI maintainers/administrators:
   * [Donald Stufft](https://twitter.com/dstufft)
-  * [Ee W Durbin III](https://twitter.com/ewdurbin)
+  * [Ee Durbin](https://twitter.com/ewdurbin)
   * [Dustin Ingram](https://twitter.com/di_codes) (me)
 * PyPI moderators:
   * [Yeray Diaz](https://twitter.com/yera_ee)
@@ -152,4 +152,4 @@ If you're an individual, you can join as a volunteer contributor (we maintain [a
 
 Perhaps most importantly: you can raise awareness about how PyPI is powered and how others can help by sharing this post. Thanks!
 
-_Thanks to Ee W. Durbin III, Sumana Harihareswara, Pradyun Gedam, Jason Madden and Joachim Jablon for reviewing this post_.
+_Thanks to Ee Durbin, Sumana Harihareswara, Pradyun Gedam, Jason Madden and Joachim Jablon for reviewing this post_.

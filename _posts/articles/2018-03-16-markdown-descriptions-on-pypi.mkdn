@@ -111,8 +111,8 @@ and reviews, to Tres Seaver, [Sumana
 Harihareswara](https://twitter.com/brainwane) and [Jason R.
 Coombs](https://twitter.com/jaraco) for reviewing, testing and releasing pull
 requests, and the entire PyPI team including [Nicole
-Harris](https://twitter.com/nlhkabu), [Ernest W. Durbin
-III](https://twitter.com/ewdurbin) and [Donald
+Harris](https://twitter.com/nlhkabu), [Ee Durbin
+](https://twitter.com/ewdurbin) and [Donald
 Stufft](https://twitter.com/dstufft) for being amazing teammates.
 
 ### Follow me
