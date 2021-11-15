@@ -1,3 +1,32 @@
+- title: "PyPI & Supply Chain Security"
+  date: 2021-11-09 00:00:00 -0600
+  venues:
+
+  - date: 2021-10-11 00:00:00 -0600
+    venue: "SupplyChainSecurityCon 2021"
+    venue_url: "https://supplychainsecurityconna21.sched.com/event/n012/pypi-supply-chain-security-dustin-ingram-python-software-foundation"
+    location: Remote
+    links:
+      video: "https://www.youtube.com/watch?v=ODVqY_GNkS8"
+
+  - date: 2021-11-09 00:00:00 -0600
+    venue: "PackagingCon 2021"
+    venue_url: "https://pretalx.com/packagingcon-2021/talk/GVV7PU/"
+    location: Remote
+    links:
+      video: "https://www.youtube.com/watch?v=4zxMU00D35g&t=5345s"
+
+- title: "Secure Software Supply Chains for Python"
+  date: 2021-05-15 00:00:00 -0600
+  venues:
+
+  - date: 2021-05-15 00:00:00 -0600
+    venue: "PyCon US 2021"
+    venue_url: "https://us.pycon.org/2021/schedule/presentation/82/"
+    location: Remote
+    links:
+      video: "https://www.youtube.com/watch?v=VWWgkF-0cDQ"
+
 - title: "Modern Development Environments for Pythonistas"
   date: 2019-08-30 00:00:00 -0600
   venues:
