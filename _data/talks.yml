@@ -1,3 +1,12 @@
+- title: "Securing the Open Source Software Supply Chain"
+  date: 2022-04-30 00:00:00 -0600
+  venues:
+
+  - date: 2022-04-30 00:00:00 -0600
+    venue: "PyCon US 2022"
+    venue_url: "https://us.pycon.org/2022/schedule/presentation/84/"
+    location: Salt Lake City, UT
+
 - title: "PyPI & Supply Chain Security"
   date: 2021-11-09 00:00:00 -0600
   venues:
