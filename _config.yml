@@ -19,3 +19,5 @@ analytics :
 # Plugins
 plugins:
   - jekyll-redirect-from
+
+include: [".well-known"]
