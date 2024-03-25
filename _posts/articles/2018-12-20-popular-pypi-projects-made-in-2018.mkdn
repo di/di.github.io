@@ -333,9 +333,8 @@ growing investment in Python][6] in general.
 
 These are just a few of the projects I found particularly interesting,
 innovative, or useful. If you want to dive deeper, you can run [this BigQuery
-query][1] to get the full list of new projects in 2018, ordered by downloads,
-and if you have questions or comments, [come and chat with me on
-Twitter](https://twitter.com/di_codes). Happy hacking!
+query][1] to get the full list of new projects in 2018, ordered by downloads.
+Happy hacking!
 
 
 [0]: https://bigquery.cloud.google.com/dataset/the-psf:pypi

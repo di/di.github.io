@@ -47,7 +47,7 @@ award](http://pyfound.blogspot.com/2017/11/the-psf-awarded-moss-grant-pypi.html)
 
 ### Stay tuned
 
-Follow me on Twitter ([@di_codes](https://twitter.com/di_codes)) to stay tuned
+Follow PyPI on Twitter ([@pypi](https://twitter.com/pypi)) to stay tuned
 for some upcoming retrospective articles about the project, including:
 
 * Choosing a front-end JS framework for PyPI

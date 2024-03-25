@@ -120,4 +120,4 @@ If you want to stay up to date with all the latest PyPI changes, you can follow
 me:
 
 * <https://github.com/di>
-* <https://twitter.com/di_codes>
+* <https://di.social>

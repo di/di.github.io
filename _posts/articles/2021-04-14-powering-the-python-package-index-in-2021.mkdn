@@ -124,7 +124,7 @@ The biggest delta here from five years ago is that we have a much larger team th
 * PyPI maintainers/administrators:
   * [Donald Stufft](https://twitter.com/dstufft)
   * [Ee Durbin](https://twitter.com/ewdurbin)
-  * [Dustin Ingram](https://twitter.com/di_codes) (me)
+  * [Dustin Ingram](https://di.social) (me)
 * PyPI moderators:
   * [Yeray Diaz](https://twitter.com/yera_ee)
   * [Jason Madden](https://twitter.com/ossmkitty)
@@ -148,7 +148,7 @@ The team maintains [`FUNDABLES.md`](https://github.com/psf/fundable-packaging-im
 
 Many of them would probably also make you or your coworkers' jobs easier in some way! If your employer is able to provide funding, the simplest thing to do is to [become a sponsor of the PSF](https://www.python.org/psf/sponsorship/). If there's a specific feature you want to see exist, you can also make a directed donation to fund this work by contacting [sponsors@python.org](mailto:sponsors@python.org).
 
-If you're an individual, you can join as a volunteer contributor (we maintain [a list of good first issues](https://github.com/pypa/warehouse/labels/good%20first%20issue)) or [make an individual donation to the PSF](https://donate.pypi.org/). Either would likely [qualify you as a voting PSF member as well](https://twitter.com/di_codes/status/1372395038815162370)!
+If you're an individual, you can join as a volunteer contributor (we maintain [a list of good first issues](https://github.com/pypa/warehouse/labels/good%20first%20issue)) or [make an individual donation to the PSF](https://donate.pypi.org/). Either would likely [qualify you as a voting PSF member as well](https://web.archive.org/web/20210318035142/https://twitter.com/di_codes/status/1372395038815162370)!
 
 Perhaps most importantly: you can raise awareness about how PyPI is powered and how others can help by sharing this post. Thanks!
 
