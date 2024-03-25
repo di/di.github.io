@@ -16,9 +16,6 @@ Foundation](https://www.python.org/psf/), and maintainer of
   {% for post in site.categories['articles'] %}
     {% assign combined = combined | push: post %}
   {% endfor %}
-  {% for external in site.data.external %}
-    {% assign combined = combined | push: external %}
-  {% endfor %}
   {% assign sorted = combined | sort: 'date' | reverse %}
 
   {% for post in sorted limit:4 %}
