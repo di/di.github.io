@@ -20,4 +20,4 @@ analytics :
 plugins:
   - jekyll-redirect-from
 
-include: [".well-known"]
+include: [".well-known", "_health"]
