@@ -1,0 +1,245 @@
+---
+blog: blog
+date: 2016-12-12 00:00 UTC
+modified: 2016-12-12 00:00 UTC
+title: Pin All Dependencies (& let pip sort ’em out)
+headline: "<strong>Pin All Dependencies</strong> (& let pip sort ’em out)"
+author: dustin-ingram
+tags: Code
+thumb: pins_700x700.jpg
+summary: "Dustin Ingram discusses dependency pinning, when it's appropriate, why it’s a good idea, and how to do it."
+embeds:
+promo: code_quality_alt1
+---
+
+There are significant advantages to explicitly declaring versions of your
+dependencies, both to the quality of your software, your developers, and the
+open source community which makes up your software ecosystem.
+
+In this post, I'll discuss what dependency pinning is, when it is appropriate
+to pin your dependencies, why it's a good idea, and how you should do it. I'll
+be focusing on the Python ecosystem, but it's likely that the same principles
+apply to your ecosystem as well.[^1]
+
+# What is dependency pinning?
+
+Dependency pinning is explicitly specifying the _exact_ version of a dependency.
+
+That means instead of your `requirements.txt` looking like this:
+
+```
+requests
+setuptools
+simplejson
+six
+```
+
+You have this:
+
+```
+requests==2.11.1
+setuptools==28.0.0
+simplejson==3.8.2
+six==1.10.0
+```
+
+Note that none of the following are considered to be pinned dependencies,
+simply because they all specify a _range_ of possible versions:
+
+```
+requests>2.0.0
+setuptools!=28.0.0
+simplejson~=3.8.0
+six>=1.10.0,<=1.11.0
+```
+
+# Why should you pin your dependencies?
+
+There are two main scenarios which dependency pinning will help you avoid. I've
+seen both of these cause time-consuming and costly problems in the past, which
+would have been easily avoided with dependency pinning:
+
+## Scenario #1: A broken new version
+
+Most often, the issue that arises from not pinning your dependencies is when
+a maintainer releases a new version of some package that either has known
+breaking changes that you are unaware of, or has unknown (or just incompatible)
+changes that you haven't tested your software against.
+
+If you haven't pinned your dependencies, the next time you go to deploy your
+software you'll get an automatic upgrade to the latest version, which will
+break your software if it has breaking changes.
+
+## Scenario #2: An insecure or incompatible old version
+
+Ideally, when you deploy your software, you are creating a new environment
+from scratch and rebuilding it based on the dependencies you've specified every
+time. If you haven't pinned your dependencies, this would leave you with the
+possibility of the first scenario, but that's all.
+
+However, this is not the case for many software projects. Keeping around an
+environment across multiple deployments is bad enough, but if this is combined
+with simply running `pip install` instead of `pip install --upgrade` upon a new
+build, this can result in an old version of a dependency hanging around longer
+than it should, which can rear it's ugly head when it turns out that this
+version has a security issue, or that it's incompatible with some new
+dependency that you're introducing.
+
+# When should you pin a dependency?
+
+Any dependencies which are required to run your software should be pinned.
+
+Since packages published to package managers like PyPI are immutable,[^2]
+this means you're guaranteed to have a safe, repeatable build every time you
+deploy your software, even as new versions of your dependencies are released.
+
+# When should you _not_ pin a dependency?
+
+There are two distinct instances when it is not appropriate or necessary to pin
+the dependencies for your software:
+
+## Instance #1: Your software is a third-party module
+
+If you are authoring an open-source, third-party module which itself will be a
+dependency for someone else's software, you should not pin your dependencies in
+your `setup.py` file. From the [Python Packaging docs on requirements][4]:
+
+> It is not considered best practice to use `install_requires` to pin
+> dependencies to specific versions, or to specify sub-dependencies (i.e.
+> dependencies of your dependencies). This is overly-restrictive, and prevents
+> the user from gaining the benefit of dependency upgrades.
+
+Instead you should specify a range which includes any potential future version
+of a dependency, or no range at all.
+
+## Instance #2: Your software has dependencies that are not deployed
+
+Any dependencies that are not going to be deployed along with your application
+shouldn't be pinned. This means that any dependency used for local
+development, testing, or continuous integration only doesn't really need a
+specific version specified.[^3]
+
+A good best-practice that I follow is splitting your requirements up depending
+on what they're used for:
+
+```
+$ ls requirements/
+main.txt  test.txt  lint.txt  development.txt
+```
+
+Here, only the `main.txt` dependencies are pinned, and everything else is
+un-pinned.
+
+This means that your `requirements.txt` file looks like this:
+
+```txt
+-r requirements/main.txt
+```
+
+This is used when you `pip install requirements.txt` in production, and only
+installs pinned dependencies.
+
+And the `requirements/development.txt` file looks like:
+
+```txt
+-r main.txt
+-r test.txt
+-r lint.txt
+```
+
+So when you're setting up your development environment locally, you just have
+to do `pip install -r requirements/development.txt` to install everything you
+need, including pinned and non-pinned dependencies.
+
+This leads to a small problem though...
+
+# Out of date dependencies in local development environments
+
+Now that you're pinning all your main dependencies, a small problem is that
+your developer's locally installed packages might quickly become out of date.
+Usually this won't create any problems if all your dependencies are perfectly
+forwards-compatible. However, in practice, this isn't always the case, and
+when one developer updates the pin for a given dependency, tests might start
+failing locally for another developer.
+
+There are a couple possible solutions to this problem:
+
+* **Automatically update local dependencies**:
+  This would either update local dependencies on some kind of Git hook when
+  they change, or check for updates before every run of the test suite.
+* **Make sure developers manually update dependencies**:
+  This would mean that every developer is keeping an eye on new PRs, and knows
+  when they need to update, and then actually does update their dependencies.
+* **Just let the tests fail**:
+  If we don't do anything, any dependency change that isn't forwards-compatible
+  will break the build, and the developer can just figure it out.
+
+Personally I'm not really satisfied with these approaches because they all have
+one or more of the following downsides:
+
+* It slows down a `git pull` or a run of the test suite significantly.
+* It magically changes local dependencies, which could be unexpected or
+  downright irksome if you're trying to specifically test some version of a
+  dependency.
+* It depends on developers fastidiously monitoring every change.
+* It wastes the developer's time with cryptic error messages.
+
+To address this, I created a `py.test` plugin called [pytest-reqs][1], which
+checks your requirements files for specific versions, and compares those
+versions with the installed libraries in your local environment, failing your
+test suite if any are invalid or out of date.[^4]<sup>,</sup>[^5]
+
+# Out of date dependencies in your requirements files
+
+The final piece to the puzzle is actually keeping your pinned dependencies up
+to date. Because we're all good developers (read: lazy), ideally this would be
+automated. Luckily, a number of services have your back:
+
+* <https://pyup.io/> (Python only)
+* <https://requires.io/> (Python only)
+* <https://gemnasium.com/> (Multi-ecosystem)
+
+All of these will auto-detect pinned dependencies in your repository, as well
+as keep an eye on new releases to PyPI, and will issue a pull request (with
+varying degrees of context) against your repository.
+
+The main advantages to using one of these services are:
+
+* You immediately get new fresh-baked delicious dependencies delivered right to
+  your Git repo.
+* Assuming you have some form of continuous integration running, you'll know
+  right away if you have some work to do to upgrade a specific dependency.
+* Alternatively, you'll also know right away if you can upgrade seamlessly to
+  a fancy new version.
+* If a new version of a dependency breaks your build, and it's actually a bug
+  in the new release, you get to be the person who brings it to the
+  maintainer's attention![^6]
+
+# Momentum in the ecosystem
+
+The one extra advantage to pinning dependencies is that it moves the ecosystem
+as a whole forward. This isn't a direct advantage to you as a developer, but
+eventually you get dividends on this investment: the more people that are
+living out on the bleeding edge, the more feedback software authors get on
+latest versions, the more pressure they feel to fix bugs and incompatibilities,
+and the entire community benefits as a result.
+
+_Thanks to Patrick Smith for reading drafts of this post._
+
+[^1]: [Or have already been applied to your ecosystem for you][2].
+[^2]: [Unless you're using NPM][3].
+[^3]: Unless absolutely necessary. It's still possible that you might need to
+  add some specifiers if a particular version breaks the build, but you
+  shouldn't need to pin them.
+[^4]: This also has the nice added bonus of acting as a linter for your
+  requirements files!
+[^5]: Ironically, this package currently depends on undocumented internal APIs
+  of `pip` (Sorry, Donald) and will probably break someday and leave me
+  scrambling to fix it. At least no one will be depending on it in prod (I
+  hope).
+[^6]: Or if you're _really_ cool, you can just make a pull request instead.
+
+[1]: https://github.com/di/pytest-reqs/
+[2]: http://bundler.io/v1.3/rationale.html
+[3]: http://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm
+[4]: https://packaging.python.org/discussions/install-requires-vs-requirements/#install-requires

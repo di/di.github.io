@@ -1,0 +1,216 @@
+---
+blog: blog
+date: 2016-07-01 00:00 UTC
+modified: 2016-10-20 00:00 UTC
+title: Swiss Train Deployments
+headline: 'Swiss Train <strong>Deployments</strong>'
+author: dustin-ingram
+tags: DevOps
+thumb: darjeeling_limited_thumb.jpg
+image:
+summary: A new deployment philosophy based on Yehuda Katz's talk 'Stability without Stagnation.'
+embeds:
+promo:
+---
+
+About five years ago, I was traveling around Europe and arrived in Switzerland
+to spend a few days with some family friends. The first night, my host offered
+to show me his office in downtown Bern the next day, and I accepted.
+
+The next morning, as we were walking from his house to a light rail station
+nearby, I saw the downtown train heading into the station. Thinking that we
+could probably catch it if we hustled, I started to pick up my pace. He reached
+out, stopped me, and said:
+
+<%= pull_quote('The Swiss don’t run for trains.') %>
+
+As we walked towards the station, we watched the train that we could have
+caught pull in, stop, and pull away. We sat there for about 12 minutes,
+chatting, until the next one arrived, and continued our journey.
+
+This thought has always stuck with me as sort of a personal philosophy. The
+idea is that life is already moving pretty fast, and there's no need to
+rush it any more.
+
+But on top of that, have you ever _seen_ anyone run for a train?
+
+<%= blog_image('darjeeling_limited.jpg','Running for the Darjeeling Limited','', :left) %>
+
+They inevitably look like an idiot.
+
+# Stability Without Stagnation
+
+In April, I was at [Philly ETE](http://phillyemergingtech.com), and one of the
+best talks there was by [Yehuda Katz](http://yehudakatz.com/).
+
+In his talk, he described a deployment process which enables rapid development,
+but still provides a stable platform for the people using your technology. He
+called his philosophy, "Stability without Stagnation." The philosophy boiled
+down to two things.
+
+## 1. Ship Regularly
+
+Yehuda's talk was based on experiences shipping [Ember](http://emberjs.com/),
+in which they had three release channels:
+
+  * Canary
+  * Beta
+  * Release
+
+Each of these channels are essentially tagged branches within the source of the
+codebase, and each balance new features with stability. In the Canary
+channel, you get new features as soon as possible, but zero guarantees about
+the reliability of the release. In the Beta channel, you get features that
+are older, but with some bugs shook out. And in the Release channel, the
+features are a mature age, and you get [SemVer](http://semver.org/)-based
+backwards-compatibility guarantees.
+
+Ember also uses a six-week release cycle. Each of the above
+channels would cut a release every six weeks, regardless of how many features
+have been shipped, meaning it's possible (but not likely) for them to not have
+any new features at all.
+
+Here's a diagram:
+
+<%= blog_image('sws_1.jpg','Original SWS Flow','Original SWS Flow',:left) %>
+
+A given feature is deployed to each channel, in order, one release after
+another, and flows down from the Canary channel to the Release channel one
+release at a time.
+
+# 2. Have Multiple "Speeds"
+
+Yehuda gave credit to the [Rust](https://www.rust-lang.org/) deploy process for
+most of the inspiration for Ember's process, but one could see that this in
+turn was inspired by browsers such as Chrome and Firefox (e.g., "canary"
+builds) and major open-source projects such as Apache, Postgres, and Linux.
+
+So when the Ember team felt that their users needed an even _more_ stable
+platform to build against, they adopted the idea of a Long Term Service (LTS)
+release channel, a common practice in the Linux community, which would be every
+fourth release, or every 24 weeks.
+
+If the six-week releases are happening too quickly, the LTS release is
+guaranteed to exist and be stable for a longer window of time. Also, you get
+bugfixes for the entirety of the LTS release, and breaking changes (even to
+private APIs) are first deprecated in a previous LTS release.
+
+Here's the updated diagram:
+
+<%= blog_image('sws_2.jpg','SWS Flow with LTS','',:left) %>
+
+(Side note: if the thought of making your release process conform to this
+diagram frightens you, you're doing it wrong! All of these releases should be
+automated!)
+
+# From Ember to You
+
+Obviously, we are not all writing open-source software with lots of
+contributors, users, and in an early stage of development with lots of features to
+ship. But there are direct parallels to all kinds of common development
+processes, and benefits, as well.
+
+## Benefits to Maintainers (i.e., Management)
+
+Maintainers don't feel any rush to ship a feature for a given release. If
+they miss one, there's another one in six weeks. This doesn't mean that
+development doesn't happen, it just means that it's not rushed and hurried,
+which invariably leads to errors. This also eliminates the management
+mentality of "ship this feature ASAP because we don't know when we'll release
+next!", because they _will_ know when the next release will be.
+
+## Benefits to Contributors (i.e., the Geeks Writing the Code)
+
+The benefit to contributors is that they can predict when their feature will be
+released and what the process is. This also provides a fixed, known window for
+bug fixes, etc. The ability to know when a feature will be shipped helps with
+ownership for both closed and open-source development.
+
+## Benefits to Add-On Authors & Developers (i.e., the Users)
+
+End users, which Yehuda splits into add-on authors and developers, can make a
+decision about their risk tolerance easily and build against an API that they
+know won't change unexpectedly, or changes within what they consider to be a
+reasonable amount.
+
+# A Realization
+
+Yehuda summed that all up by saying that everyone can just "catch the next
+train."
+
+<%= blog_image('yehuda.jpg','Yehuda Katz at Philly ETE 2016','', :left) %>
+
+That's actually a shot from Yehuda's talk, and it made me have a realization about the real reason the Swiss don’t run for trains -- it’s not because they want to take it easy. Nor is it because they’re concerned about their image.
+
+The Swiss don't run for trains because *they know there's another
+one coming*. And because they have that knowledge, they have the added benefit
+of not stressing about catching trains, and not looking dumb while catching
+them.
+
+<%= blog_image('crowded.jpg','Crowded train platform','', :left) %>
+
+It made me wonder why we run for trains here in Philly. Maybe because we're running
+late, but it's probably because we don't know when the next one is going to
+come. We can't fix SEPTA, but we can fix our own deploy processes.
+
+# Swiss Train Deployments
+
+I don't expect this to catch on, but it's what I'm going to call it to myself,
+and around anyone reading this.
+
+There's a few basic requirements you should already have:
+
+  * You need a Version Control System that lets you have branches and tags, or
+    some equivalent. You probably already have this!
+  * You need some kind of automation around deployment (and probably testing
+    too).
+  * Features to ship!
+
+Then, you just need to do the following:
+
+  * Ship each channel regularly.
+  * Automate releases!
+
+This takes the "when?" out of releases! No more "when will x ship?", which is
+easy when the only determinant is time. Automation takes out the "who?", and
+both remove a lot of uncertainty and stress!
+
+# Breaking Things
+
+<%= blog_image('movefast1.jpg','Move fast and break things','', :left) %>
+This might seem counter-intuitive with the mantra of big organizations like
+Facebook telling us to "move fast and break things."
+
+
+But Yehuda said they fell into the same trap:
+
+> We ourselves fell into the trap of believing the "move fast and break things"
+> mantra. We thought that if our competitors had a feature we didn't, our users
+> would leave en masse. In fact, it was our instability that alienated early
+> adopters. We got a bad reputation for it. People criticized us because they
+> felt burned. Users don't migrate over night. You have a much larger window
+> than you think (although not infinite).
+
+Basically, it's easy to do what Facebook says you should -- they're a big,
+successful company! But doing that causes you to be paranoid about losing users, which,
+paradoxically, causes you to lose users! Stability is far more important.
+
+Even Facebook eventually changed their tune:
+<%= blog_image('movefast2.jpg','Move fast with stable infra','', :left) %>
+
+This is not photoshopped! It's really their new motto. It's not as sexy, but it
+works better if you're a developer.
+
+# Two Simple Rules
+
+So what is "Stability without Stagnation" really about? It's a philosophy, but
+it's also about developing a process which keeps you from getting stuck
+without innovating. Additionally, it gives you a stable foundation to build
+higher and faster on. I'd sum it up with two simple rules:
+
+  1. Don't make your users run for a release.
+  2. Let them decide how fast to get from feature A to feature B.
+
+That's all! Enjoy the ride!
+
+_Thanks to Patrick Smith for reading drafts of this post._

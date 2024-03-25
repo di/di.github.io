@@ -1,0 +1,158 @@
+---
+blog: blog
+date: 2016-06-16 00:00 UTC
+modified: 2016-06-16 00:00 UTC
+title: On Doing It Yourself
+headline: 'On Doing It <strong>Yourself</strong>'
+author: dustin-ingram
+tags: Code Quality
+thumb: diy_700x700.png
+image:
+summary: A short essay on the value of doing things the hard way.
+embeds:
+promo: code_quality
+---
+
+<%= pull_quote(
+    '...In programming there is a wide-spread 1st order theory that one '\
+    'shouldn’t build one’s own tools, languages, and especially operating '\
+    'systems. This is true—an incredible amount of time and energy has gone '\
+    'down these ratholes. On the 2nd hand, if you can build your own tools, '\
+    'languages and operating systems, then you absolutely should because the '\
+    'leverage that can be obtained (and often the time not wasted in trying '\
+    'to fix other people’s not quite right tools) can be incredible.',
+    'Alan Kay, <a href="http://www.vpri.org/pdf/m2004001_power.pdf">The '\
+    'Power of the Context</a>'
+)%>
+
+I spent the other night talking with a close friend of mine about his new job
+and some of the work he's been doing. He explained to me that a recent project
+of his was to find a way to plot some data using JavaScript and HTML5. Nothing
+incredibly complex, just simple line graphs with some customization. However,
+as he proudly explained, his solution was to create the entire thing from
+scratch—every line of code, every piece of CSS.
+
+The programmer in me had an immediate knee-jerk reaction to this. Why reinvent
+the wheel when plenty of other people have done it before you?
+[Creating](https://d3js.org/)
+[charts](https://developers.google.com/chart/)
+[and](http://gionkunz.github.io/chartist-js/)
+[graphs](http://n3-charts.github.io/line-chart/)
+[with](http://opensource.addepar.com/ember-charts/)
+[JavaScript](https://github.com/joewalnes/smoothie/)
+[and](http://www.zingchart.com/)
+[HTML5](http://www.highcharts.com/)
+[is](https://www.fusioncharts.com/)
+[a](http://www.flotcharts.org/)
+[solved](https://www.amcharts.com/)
+[problem](http://www.chartjs.org/)—it's been done many times before. Why
+waste your time creating another solution, especially one that's
+bound to be less flexible or have more flaws than an existing solution?
+
+My initial attempt to solve this problem would be to:
+
+  1. find a couple of existing libraries that were created to solve this
+     problem;
+  2. check out a few examples, read some documentation for each, and generally
+     get a feel for how each is implemented; and,
+  3. maybe try a proof-of-concept for one or two, and then settle on what best
+     fits my needs.
+
+To me, the amount of time I would need to invest to create something even
+remotely comparable would outweigh the amount of time it would take to find an
+existing solution, modify it to suit my needs, or even *scrap an existing
+solution for another one*. It seemed ludicrous to me do anything else.
+
+## A realization
+The more I thought about this, the more I realized the value in doing it his
+way. Aside from the intrinsic knowledge gained by re-implementing a system (of
+which the value has been shown over and over again), the real benefit is this:
+
+**If no one ever builds anything new, we never get anything new.**
+
+We see this all the time. Take
+[Bootstrap](https://github.com/twitter/bootstrap), for example. Did we need
+another front-end framework? Most would say we didn't. Is it the best we've got
+now?  Definitely—can you even name any of it's predecessors? What about
+[Netflix](https://github.com/Netflix/)? It seems as if nearly every service
+they create is homebrewed specifically for their own needs. Could they have
+become what they are today just by using commercial, off-the-shelf options?
+Maybe, but I would argue probably not. Off-the-shelf solutions are, by their
+very nature, generic. They're built to be general-purpose and usable by a wide
+audience. A custom solution will often solve a particular problem better, but
+it will require more effort. Using off-the-shelf solutions usually involve
+managing dependencies rather than managing code. As far as time spent, neither
+situation is inherently better.
+
+## The problem
+Here's the problem with all of this. Take a look at [this
+article](http://web.archive.org/web/20130825065152/http://blog.framebase.io/post/43973262180/the-best-programmers-are-the-quickest-to-google),
+which was once featured on the front page of
+[HN](https://news.ycombinator.com/), titled, "The best programmers are the
+quickest to Google." The focus is basically that all the relevant, most
+granular pieces of whatever project you're building have already been written,
+and all you have to do is search Google for it. Here's an excerpt:
+
+> If you need to implement something in code and it’s not cutting edge
+> technology, Google it first. If someone else hasn’t already done it yet,
+> you’re either Googling it wrong or way off in what you’re trying to
+> accomplish.
+
+The issue here is the idea that we'll always be good with what we've got. If
+this mindset permeates us as developers (and some might say it already has),
+we're just rearranging deck chairs on the Titanic. [Everything is a
+remix](https://vimeo.com/14912890). Nobody will create anything new, ever.
+
+Fortunately, there are some of us that reject this, that realize that the long
+term educational benefit, and net creativity this fosters within our community,
+outweighs the costs of doing it the hard way. These are the people that will
+change the game. These are the people which will create the tools of the
+future.
+
+<a id="update"></a>
+## Update: Alan Kay's Response
+During a recent [HN AMA](https://news.ycombinator.com/item?id=11939851),
+I was able to ask [Alan Kay](https://en.wikipedia.org/wiki/Alan_Kay) himself
+about the paradox between choosing when to DIY. Specifically I asked him "How
+does one decide when to DIY, and when to use what's already been built?"
+
+His response:
+
+> This is a tough question. (And always has been in a sense, because every era
+> has had projects where the tool building has sunk the project into a black
+> hole.)
+>
+> It really helped at [Parc](https://en.wikipedia.org/wiki/PARC_(company)) to
+> work with real geniuses like [Chuck
+> Thacker](https://en.wikipedia.org/wiki/Charles_P._Thacker) and
+> [Dan Ingalls](https://en.wikipedia.org/wiki/Daniel_Henry_Holmes_Ingalls,_Jr.)
+> (and quite a few more). There is a very thin boundary between
+> making the 2nd order work vs getting wiped out by the effort.
+>
+> Another perspective on this is to think about "not getting caught by
+> dependencies" -- what if there were really good independent module systems --
+> perhaps aided by hardware -- that allowed both worlds to work together (so
+> one doesn't get buried under "useful patches", etc.)
+>
+> One of my favorite things to watch at Parc was how well Dan Ingalls was able
+> to bootstrap a new system out of an old one by really using what objects are
+> good for, and especially where the new system was even much better at
+> facilitating the next bootstrap.
+>
+> I'm not a big [Unix](https://en.wikipedia.org/wiki/Unix) fan -- it was too
+> late on the scene for the level of ideas that it had -- but if you take the
+> cultural history it came from, there were several things they tried to do
+> that were admirable -- including really having a tiny kernel and using Unix
+> processes for all systems building (this was a very useful version of "OOP"
+> -- you just couldn't have small objects because of the way processes were
+> implemented). It was quite sad to see how this pretty nice mix and match
+> approach gradually decayed into huge loads and dependencies. Part of this was
+> that the rather good idea of parsing non-command messages in each process --
+> we used this in the first
+> [Smalltalk](https://en.wikipedia.org/wiki/Smalltalk) at Parc -- became much
+> too ad hoc because there was not a strong attempt to intertwine a real
+> language around the message structures (this very same thing happened with
+> http -- just think of what this could have been if anyone had been noticing
+> ...)
+
+_Thanks to Brian Duggan, Dan McClory, and Patrick Smith for reading drafts of this post._

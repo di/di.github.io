@@ -1,0 +1,207 @@
+---
+layout : post
+category : articles
+title: ! "Verifying GitHub Commits with Keybase.io"
+description : The time, money and services it takes to power PyPI in 2021
+image: assets/images/octocat_checklist_700x700.jpg
+tags : [code]
+summary: 'Learn what a "verified commit" is in Git, and how you can verify your commits in GitHub using keys from your Keybase.io account.'
+
+---
+
+We'll learn what a "verified commit" is in Git, and how you can verify your
+commits in GitHub using keys from your Keybase.io account.
+
+Have you ever seen a "verified" commit on GitHub? Chances are you haven't. It
+looks something like this:
+
+![A GitHub commit with a "Verified" box next to it'](/assets/verifying-github-commits-with-keybase/verified_commit.png)
+
+A "verified" commit is a commit which has been signed with a [GPG][1] key that
+GitHub has been told about. [Git itself has supported signing commits with a
+GPG key for a while][2], but GitHub only recently added this feature, which
+makes it quick and easy to see if a commit has been verified.
+
+This feature prevents impersonating another user's commits. For example, if
+Linus Torvalds used it, you could easily tell that [this commit has been
+forged.][3]
+
+# Create a Keybase.io Account
+
+[At PromptWorks](/), we love using [Keybase.io][4] to easily share encrypted data,
+manage our public keys, and verify our online identities. In addition to these
+great features, we can now use it to verify our commits on GitHub as well.
+
+Keybase is currently invite only, but once you are able to get ahold of an
+invite, accept the invitation and follow along:
+
+![A prompt to accept a Keybase invitation](/assets/verifying-github-commits-with-keybase/1_invitation.png)
+
+The main email for your account should be an address you have control of, if
+possible. Pick a good password!
+
+![Creating a Keybase account with an email, username and password](/assets/verifying-github-commits-with-keybase/2_create_account.png)
+
+Your new profile should look like this, with nothing added to it:
+
+![An empty Keybase profile, with a link that says "Add a PGP key"](/assets/verifying-github-commits-with-keybase/3_new_profile.png)
+
+Next, we'll add a new PGP key:
+
+![Beginning the adventure to establish a new public key](/assets/verifying-github-commits-with-keybase/4_add_public_key.png)
+
+We'll generate a new public key rather than use one you might already have for
+two reasons:
+
+1. Keybase will generate a nice long private key for you with the latest
+   version of OpenPGP.
+2. We're going to add an additional email to your key, which is possible with
+   an existing key, but not as easy.
+
+Now, Keybase will do some math:
+
+![Keybase informing us that it will find a 4096 bit keypair](/assets/verifying-github-commits-with-keybase/5_keypair.png)
+
+**Here's the important part:** when adding email addresses to the key, be sure
+to add an additional email, `<username>@users.noreply.github.com`, where
+`<username>` is your GitHub username:
+
+![Adding a username and multiple emails to a Keybase public key](6_emails.png)
+
+Next, Keybase will generate two candidate primes to use to generate your key:
+
+![Keybase searching for candidate primes](/assets/verifying-github-commits-with-keybase/8_candidate_primes.png)
+
+When it's finished, Keybase will display the public key that it has generated
+for you:
+
+![The public key that Keybase has generated for us, as well as the option to host an encrypted private key](/assets/verifying-github-commits-with-keybase/9_generated.png)
+
+You should see the 64-bit fingerprint of your key is now on your profile page:
+
+![A Keybase profile showing a public key](/assets/verifying-github-commits-with-keybase/10_profile_with_public_key.png)
+
+Next to it is an edit link. Click this, and choose "Export my private key
+from Keybase":
+
+![Choosing to export a private key from Keybase](/assets/verifying-github-commits-with-keybase/12_export_key_pair.png)
+
+You should be presented with the following screen prompting you for your
+password:
+
+![Keybase warning us that we are exporting our private key](/assets/verifying-github-commits-with-keybase/13_export_key_pair.png)
+
+Finally, it will give you a textbox with your entire private key in it. Copy
+this into a file on your local machine named `keybase_private.asc`.
+
+# Configuring GPG
+
+The next step will be informing GPG about your new keypair.
+
+If you're on macOS, you can install the `gpg` utility as follows:
+
+```
+$ brew install gpg
+==> Downloading https://homebrew.bintray.com/bottles/gnupg2-2.0.30_2.sierra.bottle.1.tar.gz
+############################################################## 100.0%
+==> Pouring gnupg2-2.0.30_2.sierra.bottle.1.tar.gz
+==> Using the sandbox
+🍺  /usr/local/Cellar/gnupg2/2.0.30_2: 91 files, 3.7M
+```
+
+Next, we will import our Keybase keypair (which we previously exported from
+Keybase and stored in the file called `keybase_private.asc`) into `gpg`:
+
+```
+$ gpg --import keybase_private.asc
+gpg: key 93D2B8D4: secret key imported
+gpg: key 93D2B8D4: public key "Dustin Ingram <dustingram@keybase.io>" imported
+gpg: Total number processed: 1
+gpg:               imported: 1  (RSA: 1)
+gpg:       secret keys read: 1
+gpg:   secret keys imported: 1
+```
+
+We can ensure that our keypair has both of the email addresses we configured
+for it:
+
+```
+$ gpg --list-secret-keys --keyid-format LONG
+/Users/di/.gnupg/secring.gpg
+----------------------------
+sec   4096R/93D2B8D4930A5E39 2015-04-23 [expires: 2025-04-20]
+uid                          Dustin Ingram <dustin@promptworks.com>
+uid                          Dustin Ingram <di@users.noreply.github.com>
+ssb   4096R/E4651763864F3522 2015-04-23
+```
+
+Finally, be sure to remove your private key from your local machine:
+
+```
+$ rm keybase_private.asc
+```
+
+# Configuring Git
+
+The next step will be configuring Git locally.
+
+First, we must tell Git to use the key we added to GPG in the previous step
+to sign commits. The key ID here is entire value after `4096R/` in the above
+command:
+
+```
+$ git config --global user.signingkey 93D2B8D4930A5E39
+```
+
+Next, we tell Git to globally sign every commit with this key:
+
+```
+$ git config --global commit.gpgsign true
+```
+
+Lastly, if you haven't already done this, you can tell Git to use your
+`@users.noreply.github.com` email address, which you added to your key:
+
+```
+$ git config --global user.email "<username>@users.noreply.github.com"
+```
+
+# Configuring GitHub
+
+The last step is telling GitHub about your public key.
+
+First, navigate to `https://keybase.io/<username>/key.asc`, and copy the entire
+key:
+
+![A public key at keybase.io in plaintext](/assets/verifying-github-commits-with-keybase/14_public_key.png)
+
+Then, navigate to <https://github.com/settings/keys> and scroll down to GPG
+keys:
+
+![A Github account with no GPG keys associated with it](/assets/verifying-github-commits-with-keybase/15_no_keys.png)
+
+Click "New GPG key":
+
+![Adding a new public GPG key to GitHub](/assets/verifying-github-commits-with-keybase/16_new_key.png)
+
+After clicking "Add GPG key", it should look like this:
+
+![A GitHub account with a GPG key associate with it](/assets/verifying-github-commits-with-keybase/17_key_added.png)
+
+# Verify your commit is verified
+
+After performing these steps, the next commit you make should look like this:
+
+![A GitHub commit with a "Verified" box next to it](/assets/verifying-github-commits-with-keybase/verified_commit.png)
+
+# Further reading
+
+* <https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work>
+* <https://help.github.com/articles/associating-an-email-with-your-gpg-key/>
+* <https://keybase.io/docs/crypto/overview>
+
+
+[1]: https://en.wikipedia.org/wiki/GNU_Privacy_Guard
+[2]: https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work
+[3]: https://github.com/amoffat/masquerade/commit/9b0562595cc479ac8696110cb0a2d33f8f2b7d29
+[4]: https://keybase.io

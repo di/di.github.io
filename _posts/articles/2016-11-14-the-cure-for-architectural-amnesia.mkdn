@@ -1,0 +1,288 @@
+---
+blog: blog
+date: 2016-11-14 00:00 UTC
+modified: 2016-11-14 00:00 UTC
+title: The Cure for Architectural Amnesia
+headline: 'The Cure for <strong>Architectural Amnesia</strong>'
+author: dustin-ingram
+tags: Code
+summary: "How often do you find yourself introducing your codebase to a new
+teammate, and you can't quite remember why you did something one way, but
+you're <i>really</i> sure there was a good reason for it?"
+thumb: but_why.jpg
+embeds:
+promo: code_quality_alt1
+---
+
+How often do you find yourself introducing your codebase to a new teammate, and
+you can't quite remember why you did something one way, but you're _really_
+sure there was a good reason for it?
+
+Or perhaps you're trying to explain the architecture of your software, and the
+best you can come up with is, "Well, that's the way it's always been, I guess?"
+
+An architectural decision record provides that history by acting as a
+collection of architecturally significant decisions, in a succinct, structured
+format, which describes exactly how something changed at a given point in time.
+They provide a way to understand how and why an architecture has evolved as it
+has grown.
+
+# How do _you_ make architectural decisions?
+
+Here is a common scenario when it comes to making architectural decisions.
+
+First, somebody proposes a new idea. If you're lucky, this is written down
+somewhere, and shown to your team, but maybe it's just shouted out in a meeting
+instead. After some discussion, somebody else takes the general consensus in
+order to distill down all the input from your team to determine the preferred
+approach to the problem.
+
+Next, someone else implements it. Often the person proposing the idea is not
+the same person that implements it, especially if the idea is so large that one
+person cannot actually implement it on their own.
+
+And finally, after the changes get approved and merged, you're done![^1]
+
+This process leaves your team with the potential for architectural amnesia,
+because there is nothing which records the decision that was _actually_ made,
+and furthermore, nothing to refer to when trying to understand or remember why
+that decision was made. This means that you're leaving any future developer
+with the following options when they look at your architecture:
+
+They can either:
+
+* Say: "Well, I don't understand it, but the author seems pretty smart, so I'll
+  do what they did."
+* Say: "Well, I don't understand it, but the author seems pretty dumb, so I'll
+  do something different than what they did."
+* Hopelessly wander through outdated docs, old emails and chat archives for a
+  while, and then just choose one of the above.
+
+None of these leave you or your teammates in a good place to continue making
+significant architectural decisions.
+
+# What about RFCs? RFCs are great!
+
+Some teams might say, "We don't need anything else because we already have a
+[Request For Comments][2] process, just like the Internet Engineering Task
+Force!"
+
+First of all, if you're using an RFC process internally, I'm sure you're not
+creating anything nearly as meticulous or detailed as the IETF.[^2] But that's
+ok! If you're currently using RFCs in your workflow, you should keep doing
+that, because RFCs are great.
+
+* **RFCs are a venue to propose a change.**
+  RFCs are an appropriate venue for proposing a change to your architecture.
+  It's a great way to collect ideas from all of your team members in a
+  centralized place, and it designates the _right_ place to do it.
+* **RFCs are designed to collect input.**
+  RFCs are a great means to collect input on a proposed change. Heck, it's even
+  _in the name_. The goal of an RFC is to collect the feedback on your proposal
+  from anyone and everyone who may be interested in it.
+* **RFCs let you propose multiple ideas.**
+  RFCs are a way to propose multiple alternate, possibly incompatible, ideas.
+  This lets you lob a couple ideas out there, and see what gets shot down by
+  your teammates, or what stands up to the flak.
+
+# RFCs are also terrible.
+
+However, if you're familiar with the RFC process, you also know that RFCs are
+terrible as well:
+
+* **RFCs are not historical records!**
+  You can't refer back to an RFC as a historical record, because it wasn't
+  designed to be one. It's a proposal for a change plus comments on that
+  change, and doesn't accurately represent what has _actually_ changed.[^3]
+* **RFCs never get "finished."**
+  Often, an RFC provides just enough ideas and discussion for someone to start
+  implementation of a new idea. Once this happens, rarely is it necessary to
+  go back and "finish" the RFC.
+* **RFCs are usually huge.**
+  Because unless you're the IETF, it's probably not necessary to distill your
+  idea down into something succinct---instead, it's better to get all your
+  flakey ideas out, so your teammates can know exactly what you're thinking.
+  But this has a downside, because...
+
+# Huge docs are terrible.
+
+Any document, be it an RFC or something else, becomes more terrible the larger
+it gets. This is due to the transitive property of docs:
+
+1. Docs that are huge are harder to read.
+2. Docs that are hard to read are harder to update.
+3. Docs that are hard to update are usually out of date.
+4. Docs that are out of date are terrible.
+
+Q.E.D., huge docs are terrible.[^4]
+
+# There must be a better way...
+
+* We need to record decisions, not ideas.
+* We need to be consistent.
+* We need to keep it simple.
+
+The solution is...
+
+# Architecture Decision Records
+
+This is for a change to your architecture only. This is not for trivialities
+which, while they might create lots of work or changes to code or process,
+don't actually change the architecture, such as, "We are going to start using
+tabs instead of spaces."
+
+Significant architectural changes may not necessarily be user-facing at all...
+(but they might be). Usually, they solve a problem with or improve some aspect
+of the architecture.
+
+Also, these are meant to be historical records! Especially for disparate
+teams. And they will _never change_ once created (with one small exception),
+but can be superseded.
+
+# How-To
+
+Great, so you've decided that you want to make your very first Architecture
+Decision Record. I'll walk you through the steps you should follow.
+
+First, create the file! Name it something like `001-adopting-python3.md`.
+You'll want these to be sequential, of course.
+
+Next, give it a title, which should be short and to the point:
+
+```markdown
+# Title
+ADR-001: Adopting Python 3
+```
+
+These should be short enough to fit in a commit message.
+
+Next, even though our record should be short, we should give a summary. For
+example:
+
+```markdown
+# Summary
+We decided to upgrade from Python 2 to Python 3 to support Unicode
+better.
+```
+
+This should be super short and concise---maybe even 140 characters or less.
+
+Next, the context describes the state of the system when the decision was made.
+It also records other external forces that come into play:
+
+```markdown
+# Context
+We are currently using Python 2 everywhere. The users want to start
+sending us Unicode characters in the API.
+```
+
+This should eventually become out of date, but still be contextually relevant!
+Without this context, the decision record might not make sense when reviewed in
+hindsight. And usually the implementation of this particular architectural
+decision will make the context out of date---but this is fine!
+
+Next, the decision is made up of full sentences, in the active voice:
+
+```markdown
+# Decision
+We will migrate to Python 3 for services X, Y and Z.
+```
+
+After this, the next section should list all consequences (not just the
+benefits) to the decision, including what could go wrong.
+
+```markdown
+# Consequences
+We will be able to handle Unicode characters, but we might have to
+provide backwards-compatible support for some dependencies that
+haven't been ported to Python 3 yet.
+```
+
+Finally the status section should only be one of the following:
+
+* Proposed
+* Accepted
+* Deprecated
+* Superseded
+
+The last two are the only time when a decision record should be modified after
+creation (unless something is found to be factually wrong in the record).
+Furthermore, in the case of "superseded," it may be useful to provide a link to
+the decision record which supersedes it:
+
+```markdown
+# Status
+Superseded by [ADR-002](/adrs/002-going-back-to-python-2.md)
+```
+
+# Put it under version control
+
+Finally, either start a new repository just for your decision records, or make
+a directory in another repository, such as `./docs/adrs/`, so they're easy
+to see all at once:
+
+```
+$ ls adrs
+001-adoptiong-python-3.md
+002-going-back-to-python-2.md
+003-saying-screw-it-and-rewriting-the-whole-thing-in-visual-basic.md
+```
+
+You should put your decision records up for review like any other code change,
+so your teammates can check them for accuracy!
+
+Once merged, your records should live in version control for perpetuity, and
+serve as a point of reference for future decisions and new developers.
+
+# Choosing what to record
+
+One concern I've heard with regards to decision records is that it's difficult
+to know what changes are significant enough to record.
+
+Obviously, we can't record every single little change that we make to our
+architecture. Some things are truly small and discrete enough to actually be
+obvious.
+
+My recommendation is if you find yourself weighing two or more options, doing
+research and extending into an unknown domain, or feel the need to inform your
+teammates of the change, then that is when a decision record is most relevant.
+
+# Choosing when to record
+
+Another concern is when to write the decision record. Just like the code you
+need to write, it should be started when the implementation of the change is
+started, and should be the last step in implementing the change.[^5]
+
+# Further reading:
+
+The main inspiration for this article is this [2011 post by Michael Nygard][3].
+For another "flavor" of thought about decision records, you can also read [Yan
+Pritzker's interpretation][4].
+
+_Thanks to Mike Nicholaides, Patrick Smith, Andrew Croce, and Ryan Hinkel for
+reading drafts of this post._
+
+[^1]: Yeah, just kidding, [software is never done][1].
+
+[^2]: I write RFCs myself sometimes, and they pale in comparison.
+
+[^3]: This is true for the IETF's RFC's as well! If I write an RFC tomorrow to
+  [intertwine a real language around the message structures of HTTP][5], and
+  it gets accepted, it still doesn't reflect what folks are _actually_ using on
+  the internet--thus, not a historical record.
+
+[^4]: Obviously, having a huge _quantity_ of docs is not terrible---large
+  systems beget lots of documentation. What I mean is that large _individual_
+  docs (like actual separate files) are hard to maintain. (And this goes
+  for source code as well, y'know...)
+
+[^5]: This is a good argument for putting your decision records in the same
+  repository as your code, because then they can live in the same pull request
+  as the changes which are required for your implementation. This doesn't
+  really scale across multiple repositories, however.
+
+[1]: /blog/why-cant-we-tell-when-software-is-done
+[2]: https://en.wikipedia.org/wiki/Request_for_Comments
+[3]: http://thinkrelevance.com/blog/2011/11/15/documenting-architecture-decisions
+[4]: https://product.reverb.com/documenting-architecture-decisions-the-reverb-way-a3563bb24bd0
+[5]: https://news.ycombinator.com/item?id=11940433
