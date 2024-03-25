@@ -6,9 +6,11 @@ title : Dustin Ingram
 ## About
 I'm Dustin (aka [@di](https://github.com/di/)), an engineer on Google's Open
 Source Security Team, focused on on improving the security of open-source
-software that Google (and the rest of the world) relies on. I'm also a director of the [Python Software
-Foundation](https://www.python.org/psf/), and maintainer of
-[PyPI](https://pypi.org).
+software that Google (and the rest of the world) relies on.
+
+I'm also a maintainer of [The Python Package Index](https://pypi.org) and a
+[Python Software Foundation Fellow](https://www.python.org/psf/fellows).
+
 
 ## Writing
 <ul>
