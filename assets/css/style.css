@@ -72,6 +72,10 @@ img.slide {
   border: 1px solid #eee;
 }
 
+img.image {
+  width: 100%;
+}
+
 .slides {
   width: 800px;
   margin-left: -110px;
